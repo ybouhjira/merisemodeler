@@ -12,6 +12,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        MainWindow.cpp
+        MainWindow.cpp \
+        McdUi.cpp \
+        ModelUi.cpp
 
-HEADERS  += MainWindow.h
+HEADERS  += MainWindow.h \
+    ModelUi.h \
+    McdUi.h
