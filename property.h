@@ -22,6 +22,7 @@ public:
              bool obligatory=false,
              QString const & check="",
              QString const &defaultValue="");
+
     /**
      * @brief Destructs the property
      */

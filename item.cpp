@@ -1,8 +1,8 @@
 #include "item.h"
 
 Item::Item(QString const & name)
+    : m_name(name)
 {
-   m_name = name;
 }
 
 Item::~Item()

@@ -1,8 +1,8 @@
 #include "type.h"
 
 Type::Type(QString const &name)
+    :m_name(name)
 {
-    m_name = name;
 }
 Type::~Type()
 {

@@ -1,10 +1,10 @@
 #include "property.h"
 Property::Property(QString name, bool obligatory, QString check, QString defaultVal)
+    : m_name(new QString(name))
+    , m_obligatory(obligatory)
+    , m_check(check)
+    , m_defaultValue(defaultVal)
 {
-    m_name = new QString(name);
-    m_obligatory = obligatory;
-    m_check = check;
-    m_defaultValue = defaultVal;
 }
 Property::~Property()
 {
