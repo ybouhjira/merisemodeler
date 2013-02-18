@@ -1,4 +1,4 @@
-#include "ModelUi.h"
+#include "modelui.h"
 
 // Qt
 #include <QGraphicsView>

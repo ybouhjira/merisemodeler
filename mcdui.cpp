@@ -1,4 +1,4 @@
-#include "McdUi.h"
+#include "mcdui.h"
 
 // Qt
 #include <QToolBar>

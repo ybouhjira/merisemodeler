@@ -1,5 +1,5 @@
-#include "MainWindow.h"
-#include "McdUi.h"
+#include "mainwindow.h"
+#include "mcdui.h"
 
 //Qt
 #include <QMenuBar>
