@@ -5,19 +5,29 @@
 class QGraphicsView;
 
 /**
- * @brief This is The base class for Merise Models User Interfaces
- * It's subclasses QMainWindow to provide a UI with a QGraphicsView as it's
- * central widget and a QToolBar for the tools
- */
+  * @brief ModelUi et la class de l'interface graphique qui permet d'éditer
+  * les modèles mcd
+  */
 class ModelUi : public QMainWindow
 {
-// METHODS =====================================================================
+// METHODS
 protected:
+    /**
+      * @brief Constructeur
+      * @param parent Widget parent
+      */
     explicit ModelUi(QWidget *parent = 0);
 
-// ATTRIBUTS ===================================================================
+// ATTRIBUTS
 protected:
+    /**
+      * @brief Le widget qui affiche le MCD
+      */
     QGraphicsView *m_graphicsView;
+
+    /**
+      * @brief Barre d'outils
+      */
     QToolBar *m_toolBar;
 };
 
