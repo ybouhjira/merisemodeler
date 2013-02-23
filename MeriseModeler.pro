@@ -31,7 +31,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     modelui.h \
     mcdui.h \
-    value.h \
     uniqueconstraint.h \
     type.h \
     property.h \

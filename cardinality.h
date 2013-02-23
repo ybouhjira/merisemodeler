@@ -2,8 +2,6 @@
 #define CARDINALITY_H
 
 #include "entity.h"
-#include "value.h"
-
 
 /**
  * @brief La classe cardinalité décris sert à compter le nombre minimum et
@@ -12,59 +10,82 @@
  */
 class Cardinality
 {
-    //METHODS
+    // TYPES
+    /**
+     * @brief Enumération des valeurs que peut prendre une cardinalité
+     */
+    enum Value {
+        Zero, //< 0
+        One, //< 1
+        N  //< n
+    };
+
+    // METHODS
 public:
 
-
     /**
-     * @brief Construire une cardinalité
-     * @param max
-     * @param min
+     * @brief Constructeur
+     * @param max Valeur maximum
+     * @param min Valeur minimum
      */
-    Cardinality(value max,value min);
+    Cardinality(Value max, Value min);
 
     /**
-     * @brief Destruction d'une cardinalité
+     * @brief Destructeur
      */
     virtual ~Cardinality();
 
+    // Accesseur et mutateurs
     /**
-     * @brief retourne la valeur maximum de la cardinalité
+     * @brief Accesseur
+     * @return Valeur maximum
      */
-    value max();
+    Value max();
 
     /**
-     * @brief retourne la valeur minimum de la cardinalité
+     * @brief Accesseur
+     * @return Valeur minimum
      */
-    value min();
+    Value min();
 
     /**
-     * @brief modifier la valeur maximum de la cardinalité
+     * @brief Mutateur
+     * @param max Valeur maximum
      */
-    void setMax(value Value);
+    void setMax(Value max);
 
     /**
-     * @brief Modifier la valeur minimum de la cardinalité
+     * @brief Mutateur
+     * @param min Valeur minimum
      */
-    void setMin(value Value);
+    void setMin(Value min);
 
     /**
-     * @brief retourne l'entité reliée avec la cardinalité
+     * @brief Accesseur
+     * @return L'entité
      */
     Entity* entity();
 
     /**
-     * @brief modifier l'entité reliée avec la cardinalité
+     * @brief Mutateur
+     * @param entity L'entité
      */
     void setEntity(Entity* entity);
 
-
     //ATTRIBUTS
 private:
-    value m_max;
-    value m_min;
+    /**
+     * @brief Valeur maximum
+     */
+    Value m_max;
+    /**
+     * @brief Valeur minimum
+     */
+    Value m_min;
+    /**
+     * @brief entité
+     */
     Entity *m_entity;
-
 };
 
 #endif // CARDINALITY_H
