@@ -2,7 +2,7 @@
 #define NUMERIQUETYPE_H
 
 #include <QString>
-#include <maxsizetype.h>
+#include "maxsizetype.h"
 
 class NumeriqueType : public MaxSizeType
 {

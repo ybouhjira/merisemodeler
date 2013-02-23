@@ -1,7 +1,7 @@
 #include "numeriquetype.h"
 
 NumeriqueType::NumeriqueType(QString const &name,int length,int precision)
-    : maxSizeType(length,name)
+    : MaxSizeType(length,name)
     , m_precision(precision)
 {
 }

@@ -1,7 +1,7 @@
 #ifndef MULTIPROPERTYCONSTRAINT_H
 #define MULTIPROPERTYCONSTRAINT_H
 
-#include <property.h>
+#include "property.h"
 #include <QString>
 #include <QList>
 
@@ -13,7 +13,7 @@ public:
      * @brief Constructs a MultiPropertyConstraint
      * @param name : name of the constraint
      */
-    MultiPropertyConstraint(QList<Property*> properties);
+    MultiPropertyConstraint(QList<Property *> properties);
 
     /**
      * @brief Destructs a MultiPropertyConstraint

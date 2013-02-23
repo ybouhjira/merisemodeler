@@ -1,7 +1,7 @@
 #ifndef ENUMTYPE_H
 #define ENUMTYPE_H
 
-#include <type.h>
+#include "type.h"
 #include <QString>
 #include <QList>
 
@@ -13,7 +13,7 @@ public:
      * @param values : the values of the enumeration
      * @param name : name of the EnumType
      */
-    EnumType(QList<QString>* values,QString const &name);
+    EnumType(QList<QString> values, QString const &name);
 
     /**
      * @brief Destructs the EnumType
@@ -41,7 +41,7 @@ public:
     /**
      * @brief return the value at the position index
      */
-    QString* valueAt(int index);
+    QString valueAt(int index);
 
     /**
      * @brief returns the index of the value passed by parameter
@@ -51,11 +51,11 @@ public:
     /**
      * @brief returns a list of the values of the EnumType
      */
-    QList<QString>* values();
+    QList<QString> values();
 
 
 private:
-    QList<QString*> m_values;
+    QList<QString> m_values;
 };
 
 #endif // ENUMTYPE_H

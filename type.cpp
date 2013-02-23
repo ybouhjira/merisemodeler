@@ -6,9 +6,8 @@ Type::Type(QString const &name)
 }
 Type::~Type()
 {
-
 }
-QString Type::type()
+QString Type::name() const
 {
     return m_name;
 }

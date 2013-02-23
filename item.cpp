@@ -7,8 +7,8 @@ Item::Item(QString const & name)
 
 Item::~Item()
 {
-    for(Property* Pte : m_properties)
-        delete Pte;
+    for(int i=0;i<m_properties.length();i++)
+        delete m_properties.at(i);
 }
 
 QString Item::name() const
@@ -16,19 +16,19 @@ QString Item::name() const
     return m_name;
 }
 
-void Item::setName(const QString &name) const
+void Item::setName(QString const &name)
 {
     m_name = name;
 }
 
 void Item::addProperty(Property *property)
 {
-    m_properties->append(property);
+    m_properties.append(property);
 }
 
 void Item::removeProperty(int index)
 {
-    m_properties->removeAt(index);
+    m_properties.removeAt(index);
 }
 
 void Item::removeProperty(Property *property)

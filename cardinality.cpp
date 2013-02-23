@@ -11,11 +11,11 @@ Cardinality::~Cardinality()
 }
 value Cardinality::max()
 {
-    return max;
+    return m_max;
 }
 value Cardinality::min()
 {
-    return min;
+    return m_min;
 }
 void Cardinality::setMax(value Value)
 {

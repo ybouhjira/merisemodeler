@@ -1,11 +1,11 @@
 #include "enumtype.h"
 
-EnumType::EnumType(QList<QString> *values, const QString &name)
+EnumType::EnumType(QList<QString> values, const QString &name)
     : Type(name)
-    , m_values(new QList<QString*>(values))
+    , m_values(values)
 {
 }
-EnumType::~Type()
+EnumType::~EnumType()
 {
 }
 
@@ -25,11 +25,11 @@ int EnumType::indexOf(const QString &value)
 {
     return m_values.indexOf(value);
 }
-QString* EnumType::valueAt(int index)
+QString EnumType::valueAt(int index)
 {
     return m_values.at(index);
 }
-QList<QString*> EnumType::values()
+QList<QString> EnumType::values()
 {
     return m_values;
 }

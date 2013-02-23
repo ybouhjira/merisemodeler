@@ -1,5 +1,6 @@
 #include "identifier.h"
 
-Identifier::Identifier()
+Identifier::Identifier(QList<Property*> properties)
+    : MultiPropertyConstraint(properties)
 {
 }

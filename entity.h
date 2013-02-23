@@ -1,86 +1,95 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <item.h>
-#include <uniqueconstraint.h>
-#include <identifier.h>
+#include "item.h"
+#include "uniqueconstraint.h"
+#include "identifier.h"
 #include <QList>
 #include <QString>
 
+/**
+ * @brief La classe entité est la représentation d'un élément matériel ou
+ * immatériel ayant un rôle dans le système que l'on désire décrire.
+ */
 class Entity : public Item
 {
+    //METHODS
 public:
     /**
-     * @brief Constructs an Entity
-     * @param name : name of the entity
+     * @brief Construire une entité
+     * @param name : nom de l'entité
      * @param uniqueConstraints : unique Constraints
-     * @param Identifier : identifier of the entity
+     * @param Identifier : identifiant de l'entité
      */
     Entity(QString const &name
-           , QList<Entity*> parents = QList<Entity*>()
-           , auto uniqueConstraints = QList<UniqueConstraint*>()
-           , Identifier * identifier);
+           , Identifier * identifier
+           , QList<Entity*> parents
+           , QList<UniqueConstraint*> uniqueConstraints
+           );
 
     /**
-     * @brief Desctructs an entity
+     * @brief Desctruction d'une entité
      */
     virtual ~Entity();
 
     /**
-     * @brief Add a parent to the entity
+     * @brief Ajouter un parent a l'entité
      */
     void addParent(Entity *parent);
 
     /**
-     * @brief removes a parent
+     * @brief Supprimer un parent
      */
     void removeParent(int index);
 
     /**
-     * @brief removes a parent
+     * @brief Supprimer un parent
      */
     void removeParent(Entity* parent);
 
     /**
-     * @brief returns a list of the parents ofthe entity
+     * @brief retourne une liste des parents de l'entité
      */
     QList<Entity*> parents();
 
     /**
-     * @brief returns the list of the unique Constraints of the entity
+     * @brief retourne une liste des contraints uniques de l'entité
      */
     QList<UniqueConstraint*> uniqueConstraints();
 
     /**
-     * @brief returns the identifier of the entity
+     * @brief retourne l'identifiant de l'entité
      */
     Identifier* identifier();
 
     /**
-     * @brief Modifies the identifier of the entity
+     * @brief Modifier l'identifiant de l'entité
      */
     void setIdentifier(Identifier* identifier);
 
     /**
-     * @brief add an Unique Constraint to the entity
+     * @brief ajouter une contrainte unique a l'entité
      */
     void addUniqueConstraint(UniqueConstraint* uniqueConstraint);
 
     /**
-     * @brief remove an Unique Constraint
+     * @brief Supprimer une contrainte unique
      */
     void removeUniqueConstraint(int index);
 
     /**
-     * @brief remove an Unique Constraint
+     * @brief Supprimer une contrainte unique
      */
     void removeUniqueConstraint(UniqueConstraint* uniqueConstraint);
 
 
+
+    //ATTRIBUTS
 private:
+    Identifier *m_identifier;
     QList<Entity*> m_parents;
     QList<UniqueConstraint*> m_uniqueConstraints;
-    Identifier *m_identifier;
+
 
 };
 

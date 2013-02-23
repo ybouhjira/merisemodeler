@@ -1,20 +1,41 @@
 #include "association.h"
 
-Association::Association(const QString &name, Entity *entities)
+Association::Association(const QString &name
+                         , Cardinality *cardinality
+                         , Entity *entity1
+                         , Entity *entity2)
     : Item(name)
-{
-    for(int i=0;i<2;i++)
-        m_entities[i] = entities[i];
-}
-Association::~Association()
+    , m_cardinality(cardinality)
+    , m_entity1(entity1)
+    , m_entity2(entity2)
 {
 }
 
-void Association::setEntity(int index, Entity *entity)
+Association::~Association()
+{}
+
+Entity* Association::entity1()
 {
-    m_entities[index] = entity;
+    return m_entity1;
 }
-Entity* Association::entities()
+Entity* Association::entity2()
 {
-    return m_entities;
+    return m_entity2;
 }
+void Association::setEntity1(Entity *entity)
+{
+    m_entity1 = entity;
+}
+void Association::setEntity2(Entity *entity)
+{
+    m_entity2 = entity;
+}
+Cardinality* Association::cardinality()
+{
+    return m_cardinality;
+}
+void Association::setCardinality(Cardinality *cardinality)
+{
+    m_cardinality = cardinality;
+}
+

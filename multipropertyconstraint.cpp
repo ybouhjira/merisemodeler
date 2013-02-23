@@ -1,8 +1,12 @@
 #include "multipropertyconstraint.h"
 
 MultiPropertyConstraint::MultiPropertyConstraint(QList<Property *> properties)
-    : m_properties(new QList<Property*>(properties))
+
 {
+    for(int i= 0 ;i<properties.length();i++)
+    {
+        m_properties.append(properties.at(i));
+    }
 }
 MultiPropertyConstraint::~MultiPropertyConstraint()
 {

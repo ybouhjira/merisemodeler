@@ -1,25 +1,23 @@
 #include "entity.h"
 
 Entity::Entity(QString const &name
+               , Identifier * identifier
                , QList<Entity*> parents = QList<Entity*>()
-               , auto uniqueConstraints = QList<UniqueConstraint*>()
-               , Identifier * identifier)
+        , QList<UniqueConstraint *> uniqueConstraints = QList<UniqueConstraint*>()
+        )
     : Item(name)
-    , m_parents(new QList<Entity*>(parents))
-    , m_uniqueConstraints(new QList<UniqueConstraint*>(uniqueConstraints))
-    , m_identifier(new Identifier(identifier))
+    , m_identifier(identifier)
+    , m_parents(parents)
+    , m_uniqueConstraints(uniqueConstraints)
+
 {
 }
-Entity::~Item()
+Entity::~Entity()
 {
 }
 void Entity::addParent(Entity *parent)
 {
     m_parents.append(parent);
-}
-void Entity::addProperty(Property *property)
-{
-    m_properties.append(property);
 }
 void Entity::addUniqueConstraint(UniqueConstraint *uniqueConstraint)
 {
@@ -39,10 +37,7 @@ QList<UniqueConstraint*> Entity::uniqueConstraints()
 {
     return m_uniqueConstraints;
 }
-QList<Property*> Entity::properties()
-{
-    return m_properties;
-}
+
 Identifier* Entity::identifier()
 {
     return m_identifier;
@@ -56,17 +51,10 @@ void Entity::removeParent(int index)
 {
     m_parents.removeAt(index);
 }
-void Entity::removeProperty(int index)
-{
-    m_properties.removeAt(index);
-}
-void Entity::removeProperty(Property *property)
-{
-    m_properties.removeOne(property);
-}
+
 void Entity::removeUniqueConstraint(int index)
 {
-    m_uniqueConstraints.removeOne(index);
+    m_uniqueConstraints.removeAt(index);
 }
 void Entity::removeUniqueConstraint(UniqueConstraint *uniqueConstraint)
 {

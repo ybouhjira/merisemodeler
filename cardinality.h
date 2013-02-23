@@ -1,60 +1,62 @@
 #ifndef CARDINALITY_H
 #define CARDINALITY_H
 
-#include <entity.h>
-#include <association.h>
+#include "entity.h"
+#include "value.h"
 
+
+/**
+ * @brief La classe cardinalité décris sert à compter le nombre minimum et
+ * maximum de possibilités que chaque classe contient dans la relation liant
+ * 2 ou plusieurs objets.
+ */
 class Cardinality
 {
     //METHODS
 public:
-    /**
-     * @brief enumeration of the different values of a cardinality
-     */
-    enum value{One,Zero,N};
+
 
     /**
-     * @brief Constructs a cardinality
+     * @brief Construire une cardinalité
      * @param max
      * @param min
      */
     Cardinality(value max,value min);
 
     /**
-     * @brief Destructs a Cardinality
+     * @brief Destruction d'une cardinalité
      */
     virtual ~Cardinality();
 
     /**
-     * @brief returns the max value of the cardinality
+     * @brief retourne la valeur maximum de la cardinalité
      */
     value max();
 
     /**
-     * @brief returns the min value of the cardinality
+     * @brief retourne la valeur minimum de la cardinalité
      */
     value min();
 
     /**
-     * @brief modifies the max value of the cardinality
+     * @brief modifier la valeur maximum de la cardinalité
      */
     void setMax(value Value);
 
     /**
-     * @brief Modifies th Min value of the cardinality
+     * @brief Modifier la valeur minimum de la cardinalité
      */
     void setMin(value Value);
 
     /**
-     * @brief returns the entity related to the cardinality
+     * @brief retourne l'entité reliée avec la cardinalité
      */
     Entity* entity();
 
     /**
-     * @brief Modifies the entity
+     * @brief modifier l'entité reliée avec la cardinalité
      */
     void setEntity(Entity* entity);
-
 
 
     //ATTRIBUTS

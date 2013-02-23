@@ -2,7 +2,7 @@
 #define PROPERTY_H
 
 #include <QString>
-#include <type.h>
+#include "type.h"
 
 class Property
 {
@@ -18,9 +18,9 @@ public:
      * @param type : type of the attribut
      */
     Property(QString const &name,
-             Type *type,
+             Type type,
              bool obligatory=false,
-             QString const & check="",
+             QString const &check="",
              QString const &defaultValue="");
 
     /**
@@ -71,20 +71,21 @@ public:
     /**
      * @brief returns the type of the property
      */
-    Type* type();
+    Type type();
 
     /**
      * @brief Modifies the type of the property
      */
-    void setType(Type* type);
+    void setType(Type type);
 
     //ATTRIBUTS
 private:
     QString m_name;
+    Type m_type;
     bool m_obligatory;
     QString m_check;
     QString m_defaultValue;
-    Type *m_type;
+
 };
 
 #endif // PROPERTY_H

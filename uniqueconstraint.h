@@ -1,13 +1,15 @@
 #ifndef UNIQUECONSTRAINT_H
 #define UNIQUECONSTRAINT_H
 
+#include "multipropertyconstraint.h"
+
 class UniqueConstraint : public MultiPropertyConstraint
 {
 public:
     /**
      * @brief Constructs an Unique Constraint
      */
-    UniqueConstraint();
+    UniqueConstraint(QList<Property*> properties);
 
     /**
      * @brief Destructs an Unique Constraint

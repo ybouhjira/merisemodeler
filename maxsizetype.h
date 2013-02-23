@@ -2,9 +2,9 @@
 #define MAXSIZETYPE_H
 
 #include <QString>
-#include <type.h>
+#include "type.h"
 
-class MaxSizeType : public type
+class MaxSizeType : public Type
 {
 //METHODS
 public:

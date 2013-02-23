@@ -12,7 +12,7 @@ public:
     /**
      * @brief returns the name of the type
      */
-    QString name();
+    QString name() const;
 
     /**
      * @brief Modifies the name of the property
@@ -20,7 +20,6 @@ public:
      */
     void setName(QString const &name);
 
-protected:
     /**
      * @brief Constructs a type of a property
      * @param name : name of the type

@@ -1,6 +1,11 @@
 #include "property.h"
-Property::Property(QString name, bool obligatory, QString check, QString defaultVal)
-    : m_name(new QString(name))
+Property::Property(QString const &name
+                   ,Type type
+                   , bool obligatory
+                   , QString const &check
+                   , QString const &defaultVal)
+    : m_name(name)
+    , m_type(type)
     , m_obligatory(obligatory)
     , m_check(check)
     , m_defaultValue(defaultVal)
@@ -8,13 +13,13 @@ Property::Property(QString name, bool obligatory, QString check, QString default
 }
 Property::~Property()
 {
-    delete m_type;
+
 }
 QString Property::name()
 {
-    return name;
+    return m_name;
 }
-void Property::setName(QString const &Name)
+void Property::setName(QString const &name)
 {
     m_name = name;
 }
@@ -42,11 +47,11 @@ void Property::setDefaultValue(QString const &DefaultValue)
 {
     m_defaultValue = DefaultValue;
 }
-Type* Property::Type()
+Type Property::type()
 {
     return m_type;
 }
-void Property::setType(Type *T)
+void Property::setType(Type T)
 {
     m_type = T;
 }

@@ -1,5 +1,6 @@
 #include "uniqueconstraint.h"
 
-UniqueConstraint::UniqueConstraint()
+UniqueConstraint::UniqueConstraint(QList<Property *> properties)
+    :MultiPropertyConstraint(properties)
 {
 }
