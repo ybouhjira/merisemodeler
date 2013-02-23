@@ -37,8 +37,19 @@ public:
      */
     Entity* entity() const ;
 
-private :
     // ATTRIBUTS
+private :
+    // static
+    /**
+     * @brief Largeur par default
+     */
+    static const int DEFAULT_WIDTH = 100;
+    /**
+     * @brief Hauteur par default
+     */
+    static const int DEFAULT_HEIGHT = 100;
+
+    // non static
     /**
      * @brief Entité representée par cet element
      */

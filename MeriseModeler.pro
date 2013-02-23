@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     enumtype.cpp \
     entity.cpp \
     cardinality.cpp \
-    association.cpp
+    association.cpp \
+    graphicentity.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -42,7 +43,8 @@ HEADERS  += mainwindow.h \
     enumtype.h \
     entity.h \
     cardinality.h \
-    association.h
+    association.h \
+    graphicentity.h
 mainwindow.cpp \
 mcdui.cpp \
 modelui.cpp

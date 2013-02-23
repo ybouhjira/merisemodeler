@@ -6,6 +6,7 @@ GraphicEntity::GraphicEntity(Entity *entity, QGraphicsItem *parent) :
   , m_entity(entity)
 {
     setAcceptHoverEvents(true);
+    setRect(QRectF(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT));
 }
 
 void GraphicEntity::paint
