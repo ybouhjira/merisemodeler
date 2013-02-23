@@ -18,10 +18,12 @@ SOURCES += main.cpp \
     testmainwindow.cpp \
     ../modelui.cpp \
     ../mcdui.cpp \
-    ../mainwindow.cpp
+    ../mainwindow.cpp \
+    testmcdui.cpp
 
 HEADERS += AutoTest.h \
     testmainwindow.h \
     ../modelui.h \
     ../mcdui.h \
-    ../mainwindow.h
+    ../mainwindow.h \
+    testmcdui.h
