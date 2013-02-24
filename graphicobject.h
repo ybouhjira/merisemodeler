@@ -11,8 +11,15 @@
  */
 class GraphicObject : public QGraphicsObject
 {
+    Q_OBJECT
 protected:
-    virtual ~GraphicObject() = 0;
+    /**
+      * @brief Constructeur
+      * @param parent Element parent
+      */
+    GraphicObject(QGraphicsItem* parent) ;
+    /** @brief Destructeur */
+    virtual ~GraphicObject() ;
 };
 
 #endif // GRAPHICOBJECT_H

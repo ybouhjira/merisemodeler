@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     cardinality.cpp \
     association.cpp \
     graphicentity.cpp \
-    graphicobject.cpp
+    graphicobject.cpp \
+    graphicroundedrectobject.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -46,5 +47,6 @@ HEADERS  += mainwindow.h \
     cardinality.h \
     association.h \
     graphicentity.h \
-    graphicobject.h
+    graphicobject.h \
+    graphicroundedrectobject.h
 
