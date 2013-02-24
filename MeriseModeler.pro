@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     entity.cpp \
     cardinality.cpp \
     association.cpp \
-    graphicentity.cpp
+    graphicentity.cpp \
+    graphicobject.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -44,20 +45,6 @@ HEADERS  += mainwindow.h \
     entity.h \
     cardinality.h \
     association.h \
-    graphicentity.h
-mainwindow.cpp \
-mcdui.cpp \
-modelui.cpp
+    graphicentity.h \
+    graphicobject.h
 
-HEADERS  += mainwindow.h \
-modelui.h \
-mcdui.h
-MainWindow.cpp \
-McdUi.cpp \
-ModelUi.cpp \
-resizehandler.cpp
-
-HEADERS  += MainWindow.h \
-ModelUi.h \
-McdUi.h \
-resizehandler.h
