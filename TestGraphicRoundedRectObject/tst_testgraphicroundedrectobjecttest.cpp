@@ -29,10 +29,6 @@ void TestGraphicRoundedRectObject::paint()
     view.resize(600,400);
     scene.addItem(new GraphicRoundedRectObject(0, 0, 400, 150, radius));
     view.setRenderHint(QPainter::Antialiasing, true);
-    //qDebug("\n=========================================================\n"
-    //       " PAINTING TEST FOR GraphicRoundedRectObject with radius %f \n"
-    //       "=========================================================\n",
-    //       radius);
     view.show();
     QTest::qWait(1000);
 }
