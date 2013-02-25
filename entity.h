@@ -23,8 +23,8 @@ public:
      */
     Entity(QString const &name
            , Identifier * identifier
-           , QList<Entity*> parents
-           , QList<UniqueConstraint*> uniqueConstraints
+           , QList<Entity*> parents = QList<Entity*>()
+           , QList<UniqueConstraint*> uniqueConstraints = QList<UniqueConstraint*>()
            );
 
     /**

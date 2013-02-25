@@ -2,8 +2,8 @@
 
 Entity::Entity(QString const &name
                , Identifier * identifier
-               , QList<Entity*> parents = QList<Entity*>()
-        , QList<UniqueConstraint *> uniqueConstraints = QList<UniqueConstraint*>()
+               , QList<Entity*> parents
+        , QList<UniqueConstraint *> uniqueConstraints
         )
     : Item(name)
     , m_identifier(identifier)
