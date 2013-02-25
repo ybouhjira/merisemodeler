@@ -14,7 +14,7 @@ public:
      * @brief returns the name of the item
      * @return QString
      */
-    QString name()const;
+    QString name() const;
 
     /**
      * @brief Modifies the name of the item
@@ -39,6 +39,12 @@ public:
      * @param property : pointer of the property
      */
     void removeProperty(Property* property);
+
+    /**
+     * @brief Accesseur
+     * @return Les properiétés
+     */
+    QList<Property*> properties();
 
 protected:
     /**

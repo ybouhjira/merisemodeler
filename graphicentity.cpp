@@ -1,17 +1,51 @@
 #include "graphicentity.h"
 #include "entity.h"
+//Qt
+#include <QPainter>
+#include <QFontMetrics>
 
-GraphicEntity::GraphicEntity(Entity *entity, QGraphicsItem *parent) :
-    QGraphicsRectItem(parent)
+GraphicEntity::GraphicEntity(
+        Entity *entity,
+        qreal x,
+        qreal y,
+        qreal width,
+        qreal height,
+        QGraphicsItem *parent) :
+    GraphicRoundedRectObject(x, y, width, height, 0, parent)
   , m_entity(entity)
 {
-    setAcceptHoverEvents(true);
-    setRect(QRectF(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT));
 }
 
 void GraphicEntity::paint
 (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-    QGraphicsRectItem::paint(painter, option, widget);
+    GraphicRoundedRectObject::paint(painter, option, widget);
+
+    // Couper la region déssinée
+    painter->setClipRect(boundingRect());
+
+    // Declaration de variables
+    QFontMetrics fontMetrics = painter->fontMetrics();
+    const qreal padding = 5 ;
+    qreal descent = padding + fontMetrics.descent();
+    qreal fontHeight = fontMetrics.height();
+
+
+    // Erire le nom de l'entité
+    QString name = m_entity->name() ;
+    qreal x = width() / 2 - padding / 2  - fontMetrics.width(name) / 2 ;
+    qreal y = padding + fontHeight;
+    painter->drawText(x, y, name);
+
+    // Tracer un trait
+    qreal lineY = fontHeight + 2 * padding + descent;
+    painter->drawLine(0, lineY, width(), lineY);
+
+    // Ecrire les entité
+    QList<Property*> properties = m_entity->properties();
+    for(int i=0, size=properties.size(); i<size; i++) {
+        qreal pHeight = lineY + (padding + fontHeight)*(i + 1);
+        painter->drawText(padding, pHeight, properties[i]->name());
+    }
 }
 
 void GraphicEntity::setEntity(Entity *entity) {

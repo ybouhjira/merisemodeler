@@ -1,2 +1,3 @@
 *-build-Desktop_Qt_5*/
 *.pro.user
+*.o

@@ -1,24 +1,34 @@
 #ifndef GRAPHICENTITY_H
 #define GRAPHICENTITY_H
 
+#include "graphicroundedrectobject.h"
 class Entity;
-// Qt
-#include <QGraphicsRectItem>
 
-class GraphicEntity : public QGraphicsRectItem
+class GraphicEntity : public GraphicRoundedRectObject
 {
     // METHODES
 public:
     /**
-     * @brief GraphicEntity
-     * @param entity entité representée
+     * @brief Constructeur
+     * @param entity L'entité representée
+     * @param x Abssice
+     * @param y Ordonnée
+     * @param width Largeur
+     * @param height Hauteur
      * @param parent Element parent
      */
-    GraphicEntity(Entity *entity, QGraphicsItem *parent = 0);
+    GraphicEntity(
+            Entity *entity,
+            qreal x = 0,
+            qreal y = 0,
+            qreal width = DEFAULT_WIDTH,
+            qreal height = DEFAULT_HEIGHT,
+            QGraphicsItem *parent = 0
+            );
 
     // Methodes reimplementés
     /**
-     * @brief redefinition de GraphicsRectItem::paint
+     * @reimp
      */
     void paint(QPainter *painter,
                const QStyleOptionGraphicsItem *option,
@@ -54,9 +64,6 @@ private :
      * @brief Entité representée par cet element
      */
     Entity *m_entity;
-
-
-    friend class TestGraphicEntity;
 };
 
 #endif // GRAPHICENTITY_H

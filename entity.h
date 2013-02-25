@@ -82,8 +82,6 @@ public:
      */
     void removeUniqueConstraint(UniqueConstraint* uniqueConstraint);
 
-
-
     //ATTRIBUTS
 private:
     Identifier *m_identifier;
