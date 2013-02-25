@@ -16,6 +16,7 @@ GraphicRoundedRectObject::GraphicRoundedRectObject(
 {
     setX(x);
     setY(y);
+    setFlag(QGraphicsItem::ItemIsMovable);
 }
 
 GraphicRoundedRectObject::~GraphicRoundedRectObject() {
@@ -31,12 +32,11 @@ qreal GraphicRoundedRectObject::radius() const {
 
 void GraphicRoundedRectObject::paint
 (QPainter *painter, const QStyleOptionGraphicsItem *, QWidget*) {
-    painter->drawRoundedRect(x(), y(),m_width, m_height, m_radius, m_radius );
-
+    painter->drawRoundedRect(0, 0,m_width, m_height, m_radius, m_radius );
 }
 
 QRectF GraphicRoundedRectObject::boundingRect() const {
-    return QRectF(x(), y(), m_width, m_height);
+    return QRectF(0, 0, m_width, m_height);
 }
 
 qreal GraphicRoundedRectObject::height() const {

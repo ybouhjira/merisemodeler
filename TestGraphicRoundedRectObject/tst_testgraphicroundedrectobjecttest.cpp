@@ -15,6 +15,7 @@ public:
 private Q_SLOTS:
     void paint();
     void paint_data();
+    void dragAndDrop();
 };
 
 TestGraphicRoundedRectObject::TestGraphicRoundedRectObject()
@@ -39,6 +40,19 @@ void TestGraphicRoundedRectObject::paint_data()
     for(int i=0; i<100; i+=10){
         QTest::newRow(QString::number(i).toStdString().c_str()) << (qreal) i;
     }
+}
+
+void TestGraphicRoundedRectObject::dragAndDrop() {
+    auto *rd = new GraphicRoundedRectObject(0, 0, 400, 150, 10);
+    QGraphicsScene scene;
+    QGraphicsView view(&scene);
+    scene.addItem(rd);
+    qDebug("\n=========================================================\n"
+           "              TESTING DRAG AND DROP                        \n"
+           "===========================================================\n");
+    rd->setFlag(QGraphicsItem::ItemIsMovable);
+    view.show();
+    QTest::qWait(60000);
 }
 
 QTEST_MAIN(TestGraphicRoundedRectObject)
