@@ -3,7 +3,6 @@
 
 #include "item.h"
 #include "uniqueconstraint.h"
-#include "identifier.h"
 #include <QList>
 #include <QString>
 
@@ -22,7 +21,6 @@ public:
      * @param Identifier : identifiant de l'entité
      */
     Entity(QString const &name
-           , Identifier * identifier
            , QList<Entity*> parents = QList<Entity*>()
            , QList<UniqueConstraint*> uniqueConstraints = QList<UniqueConstraint*>()
            );
@@ -58,16 +56,6 @@ public:
     QList<UniqueConstraint*> uniqueConstraints();
 
     /**
-     * @brief retourne l'identifiant de l'entité
-     */
-    Identifier* identifier();
-
-    /**
-     * @brief Modifier l'identifiant de l'entité
-     */
-    void setIdentifier(Identifier* identifier);
-
-    /**
      * @brief ajouter une contrainte unique a l'entité
      */
     void addUniqueConstraint(UniqueConstraint* uniqueConstraint);
@@ -86,10 +74,8 @@ public:
 
     //ATTRIBUTS
 private:
-    Identifier *m_identifier;
     QList<Entity*> m_parents;
     QList<UniqueConstraint*> m_uniqueConstraints;
-
 
 };
 

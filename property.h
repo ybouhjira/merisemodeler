@@ -21,7 +21,8 @@ public:
              Type type,
              bool obligatory=false,
              QString const &check="",
-             QString const &defaultValue="");
+             QString const &defaultValue="",
+             bool identifiant=false);
 
     /**
      * @brief Destructs the property
@@ -44,10 +45,20 @@ public:
     bool obligatory();
 
     /**
-     * @brief Modifies the obligatory attribute
+     * @brief Modifier the obligatory attribute
      */
     void setObligatory(bool);
 
+    /**
+     * @brief Accesseur de l'attribut identifiant
+     * @return
+     */
+    bool identifiant();
+
+    /**
+     * @brief Modifier m_identifier
+     */
+    void setIdentifiant();
     /**
      * @brief returns the check condition
      */
@@ -83,6 +94,7 @@ private:
     QString m_name;
     Type m_type;
     bool m_obligatory;
+    bool m_identifiant;
     QString m_check;
     QString m_defaultValue;
 

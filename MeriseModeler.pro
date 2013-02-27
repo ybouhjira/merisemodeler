@@ -19,10 +19,8 @@ SOURCES += main.cpp\
     type.cpp \
     property.cpp \
     numeriquetype.cpp \
-    multipropertyconstraint.cpp \
     maxsizetype.cpp \
     item.cpp \
-    identifier.cpp \
     enumtype.cpp \
     entity.cpp \
     cardinality.cpp \
@@ -35,10 +33,8 @@ HEADERS  += mainwindow.h \
     type.h \
     property.h \
     numeriquetype.h \
-    multipropertyconstraint.h \
     maxsizetype.h \
     item.h \
-    identifier.h \
     enumtype.h \
     entity.h \
     cardinality.h \

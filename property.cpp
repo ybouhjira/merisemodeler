@@ -1,14 +1,16 @@
 #include "property.h"
 Property::Property(QString const &name
-                   ,Type type
+                   , Type type
                    , bool obligatory
                    , QString const &check
-                   , QString const &defaultVal)
+                   , QString const &defaultVal
+                   , bool identifiant)
     : m_name(name)
     , m_type(type)
     , m_obligatory(obligatory)
     , m_check(check)
     , m_defaultValue(defaultVal)
+    , m_identifiant(identifiant)
 {
 }
 Property::~Property()
