@@ -1,24 +1,32 @@
-#include "graphicentity.h"
-#include "entity.h"
-//Qt
+#include "graphicassociation.h"
+#include "association.h"
+// Qt
 #include <QPainter>
-#include <QFontMetrics>
 
-GraphicEntity::GraphicEntity(
-        Entity *entity,
+qreal const GraphicAssociation::RADIUS = 25;
+qreal const GraphicAssociation::DEFAULT_WIDTH = 100;
+qreal const GraphicAssociation::DEFAULT_HEIGHT = 100;
+
+GraphicAssociation::GraphicAssociation (
+        Association *association,
         qreal x,
         qreal y,
         qreal width,
         qreal height,
-        QGraphicsItem *parent) :
-    GraphicRoundedRectObject(x, y, width, height, 0, parent)
-  , m_entity(entity)
+        qreal radius,
+        QGraphicsItem* parent
+        )
+    : GraphicRoundedRectObject(x, y, width, height, radius, parent)
+    , m_association(association)
 {
     setFlag(QGraphicsItem::ItemIsMovable);
 }
 
-void GraphicEntity::paint
-(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+void GraphicAssociation::paint(
+        QPainter *painter,
+        const QStyleOptionGraphicsItem *option,
+        QWidget *widget)
+{
     GraphicRoundedRectObject::paint(painter, option, widget);
 
     // Couper la region déssinée
@@ -32,7 +40,7 @@ void GraphicEntity::paint
 
 
     // Erire le nom de l'entité
-    QString name = m_entity->name() ;
+    QString name = m_association->name() ;
     qreal x = width() / 2 - padding / 2  - fontMetrics.width(name) / 2 ;
     qreal y = padding + fontHeight;
     painter->drawText(x, y, name);
@@ -41,18 +49,10 @@ void GraphicEntity::paint
     qreal lineY = fontHeight + 2 * padding + descent;
     painter->drawLine(0, lineY, width(), lineY);
 
-    // Ecrire les proprietes
-    QList<Property*> properties = m_entity->properties();
+    // Ecrire les entité
+    QList<Property*> properties = m_association->properties();
     for(int i=0, size=properties.size(); i<size; i++) {
         qreal pHeight = lineY + (padding + fontHeight)*(i + 1);
         painter->drawText(padding, pHeight, properties[i]->name());
     }
-}
-
-void GraphicEntity::setEntity(Entity *entity) {
-    m_entity = entity;
-}
-
-Entity* GraphicEntity::entity() const {
-    return m_entity;
 }

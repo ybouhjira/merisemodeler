@@ -6,14 +6,14 @@
 
 QT       += testlib widgets
 
-TARGET = tst_testgraphicentitytest
+TARGET = tst_testgraphicassociationtest
 CONFIG   += console c++11
 CONFIG   -= app_bundle
 
 TEMPLATE = app
 
 
-SOURCES += tst_testgraphicentitytest.cpp \
+SOURCES += tst_testgraphicassociationtest.cpp \
     ../uniqueconstraint.cpp \
     ../type.cpp \
     ../resizehandler.cpp \
@@ -33,8 +33,6 @@ SOURCES += tst_testgraphicentitytest.cpp \
     ../entity.cpp \
     ../cardinality.cpp \
     ../association.cpp \
-    ../graphicstyle.cpp \
-    ../graphicresizehandel.cpp \
     ../graphicassociation.cpp
 
 HEADERS += \
@@ -57,13 +55,7 @@ HEADERS += \
     ../entity.h \
     ../cardinality.h \
     ../association.h \
-    ../graphicstyle.h \
-    ../graphicresizehandel.h \
     ../graphicassociation.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
-
-OTHER_FILES += \
-    ../MeriseModeler.pro.user \
-    ../MeriseModeler.pro
 
