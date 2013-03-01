@@ -1,5 +1,7 @@
 #include "graphicentity.h"
 #include "entity.h"
+#include "graphicresizehandelsgroup.h"
+
 //Qt
 #include <QPainter>
 #include <QFontMetrics>
@@ -13,6 +15,7 @@ GraphicEntity::GraphicEntity(
         QGraphicsItem *parent) :
     GraphicRoundedRectObject(x, y, width, height, 0, parent)
   , m_entity(entity)
+  , m_handels(new GraphicResizeHandelsGroup(this))
 {
     setFlag(QGraphicsItem::ItemIsMovable);
 }
@@ -29,7 +32,6 @@ void GraphicEntity::paint
     const qreal padding = 5 ;
     qreal descent = padding + fontMetrics.descent();
     qreal fontHeight = fontMetrics.height();
-
 
     // Erire le nom de l'entité
     QString name = m_entity->name() ;

@@ -46,7 +46,7 @@ void TestGraphicEntityTest::show()
     view.setGeometry(10,10,1000,600);
     view.show();
 
-    QTest::qWait(5000);
+    QTest::qWait(50000);
 }
 
 void TestGraphicEntityTest::show_data() {

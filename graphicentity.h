@@ -3,6 +3,7 @@
 
 #include "graphicroundedrectobject.h"
 class Entity;
+class GraphicResizeHandelsGroup;
 
 class GraphicEntity : public GraphicRoundedRectObject
 {
@@ -64,6 +65,8 @@ private :
      * @brief Entité representée par cet element
      */
     Entity *m_entity;
+
+    GraphicResizeHandelsGroup *m_handels;
 };
 
 #endif // GRAPHICENTITY_H

@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     graphicroundedrectobject.cpp \
     graphicassociation.cpp \
     graphicresizehandel.cpp \
-    graphicstyle.cpp
+    graphicstyle.cpp \
+    graphicresizehandelsgroup.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -54,5 +55,6 @@ HEADERS  += mainwindow.h \
     graphicroundedrectobject.h \
     graphicassociation.h \
     graphicresizehandel.h \
-    graphicstyle.h
+    graphicstyle.h \
+    graphicresizehandelsgroup.h
 
