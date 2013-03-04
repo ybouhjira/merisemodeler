@@ -16,7 +16,7 @@ GraphicAssociation::GraphicAssociation (
         qreal radius,
         QGraphicsItem* parent
         )
-    : GraphicRoundedRectObject(x, y, width, height, radius, parent)
+    : GraphicResizableRoundedRectObject(x, y, width, height, radius, parent)
     , m_association(association)
 {
     setFlag(QGraphicsItem::ItemIsMovable);

@@ -33,7 +33,11 @@ SOURCES += tst_testgraphicassociationtest.cpp \
     ../entity.cpp \
     ../cardinality.cpp \
     ../association.cpp \
-    ../graphicassociation.cpp
+    ../graphicassociation.cpp \
+    ../graphicstyle.cpp \
+    ../graphicresizehandelsgroup.cpp \
+    ../graphicresizehandel.cpp \
+    ../graphicresizableroundedrectobject.cpp
 
 HEADERS += \
     ../uniqueconstraint.h \
@@ -55,7 +59,11 @@ HEADERS += \
     ../entity.h \
     ../cardinality.h \
     ../association.h \
-    ../graphicassociation.h
+    ../graphicassociation.h \
+    ../graphicstyle.h \
+    ../graphicresizehandelsgroup.h \
+    ../graphicresizehandel.h \
+    ../graphicresizableroundedrectobject.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 

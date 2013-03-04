@@ -1,10 +1,10 @@
 #ifndef GRAPHICASSOCIATION_H
 #define GRAPHICASSOCIATION_H
 
-#include "graphicroundedrectobject.h"
+#include "graphicresizableroundedrectobject.h"
 class Association;
 
-class GraphicAssociation : public GraphicRoundedRectObject
+class GraphicAssociation : public GraphicResizableRoundedRectObject
 {
     // METHODES
 public:
