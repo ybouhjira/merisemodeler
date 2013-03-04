@@ -23,6 +23,9 @@ GraphicStyle* GraphicObject::style() const {
 void GraphicObject::paint(QPainter *painter,
                           const QStyleOptionGraphicsItem *,
                           QWidget *) {
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->setRenderHint(QPainter::TextAntialiasing);
+
     painter->setPen(m_style->pen());
     painter->setFont(m_style->font());
     painter->setBrush(m_style->brush());

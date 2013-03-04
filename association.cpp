@@ -12,28 +12,34 @@ Association::Association(const QString &name
 }
 
 Association::~Association()
-{}
+{
+}
 
 Entity* Association::entity1()
 {
     return m_entity1;
 }
+
 Entity* Association::entity2()
 {
     return m_entity2;
 }
+
 void Association::setEntity1(Entity *entity)
 {
     m_entity1 = entity;
 }
+
 void Association::setEntity2(Entity *entity)
 {
     m_entity2 = entity;
 }
+
 Cardinality* Association::cardinality()
 {
     return m_cardinality;
 }
+
 void Association::setCardinality(Cardinality *cardinality)
 {
     m_cardinality = cardinality;

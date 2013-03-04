@@ -4,7 +4,11 @@ GraphicStyle* GraphicStyle::m_defaultStyle = nullptr;
 
 GraphicStyle* GraphicStyle::getDefaultStyle() {
     if(m_defaultStyle == nullptr)
-        m_defaultStyle = new GraphicStyle();
+        m_defaultStyle = new GraphicStyle(
+                    QBrush(Qt::white),
+                    QPen(QBrush(Qt::black), 1 ),
+                    QFont("Arial")
+                    );
     return m_defaultStyle;
 }
 
