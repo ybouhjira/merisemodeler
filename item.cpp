@@ -35,3 +35,7 @@ void Item::removeProperty(Property *property)
 {
     m_properties.removeOne(property);
 }
+
+QList<Property*> Item::properties() {
+    return m_properties;
+}

@@ -70,8 +70,6 @@ public:
      */
     void removeUniqueConstraint(UniqueConstraint* uniqueConstraint);
 
-
-
     //ATTRIBUTS
 private:
     QList<Entity*> m_parents;

@@ -10,6 +10,7 @@
  */
 class Cardinality
 {
+public:
     // TYPES
     /**
      * @brief Enumération des valeurs que peut prendre une cardinalité

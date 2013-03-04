@@ -24,7 +24,15 @@ SOURCES += main.cpp\
     enumtype.cpp \
     entity.cpp \
     cardinality.cpp \
-    association.cpp
+    association.cpp \
+    graphicentity.cpp \
+    graphicobject.cpp \
+    graphicroundedrectobject.cpp \
+    graphicassociation.cpp \
+    graphicresizehandel.cpp \
+    graphicstyle.cpp \
+    graphicresizehandelsgroup.cpp \
+    graphicresizableroundedrectobject.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -38,4 +46,13 @@ HEADERS  += mainwindow.h \
     enumtype.h \
     entity.h \
     cardinality.h \
-    association.h
+    association.h \
+    graphicentity.h \
+    graphicobject.h \
+    graphicroundedrectobject.h \
+    graphicassociation.h \
+    graphicresizehandel.h \
+    graphicstyle.h \
+    graphicresizehandelsgroup.h \
+    graphicresizableroundedrectobject.h
+
