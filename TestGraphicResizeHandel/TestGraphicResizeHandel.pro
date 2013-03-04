@@ -36,7 +36,8 @@ SOURCES += tst_testgraphicresizehandeltest.cpp \
     ../enumtype.cpp \
     ../entity.cpp \
     ../cardinality.cpp \
-    ../association.cpp
+    ../association.cpp \
+    ../graphicresizehandelsgroup.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 HEADERS += \
@@ -61,4 +62,5 @@ HEADERS += \
     ../enumtype.h \
     ../entity.h \
     ../cardinality.h \
-    ../association.h
+    ../association.h \
+    ../graphicresizehandelsgroup.h

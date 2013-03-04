@@ -36,7 +36,8 @@ SOURCES += tst_testgraphicentitytest.cpp \
     ../graphicstyle.cpp \
     ../graphicresizehandel.cpp \
     ../graphicassociation.cpp \
-    ../graphicresizehandelsgroup.cpp
+    ../graphicresizehandelsgroup.cpp\
+    ../graphicresizableroundedrectobject.cpp
 
 HEADERS += \
     ../uniqueconstraint.h \
@@ -61,11 +62,8 @@ HEADERS += \
     ../graphicstyle.h \
     ../graphicresizehandel.h \
     ../graphicassociation.h \
-    ../graphicresizehandelsgroup.h
+    ../graphicresizehandelsgroup.h \
+    ../graphicresizableroundedrectobject.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
-
-OTHER_FILES += \
-    ../MeriseModeler.pro.user \
-    ../MeriseModeler.pro
 

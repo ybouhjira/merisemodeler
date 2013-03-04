@@ -17,6 +17,10 @@ GraphicResizeHandelsGroup::GraphicResizeHandelsGroup(
     m_topRight = new GraphicResizeHandel(w, 0, Qt::SizeFDiagCursor, this);
     m_bottomLeft = new GraphicResizeHandel(0, h, Qt::SizeFDiagCursor, this);
     m_bottomRight = new GraphicResizeHandel(w, h, Qt::SizeBDiagCursor, this);
+
+    // Connections
+
+    connect(m_top, SIGNAL(xChanged()), this, SLOT(topMoved()));
 }
 
 
@@ -24,4 +28,21 @@ void GraphicResizeHandelsGroup::paint(QPainter *,
                                       const QStyleOptionGraphicsItem *,
                                       QWidget *) {
 
+}
+
+void GraphicResizeHandelsGroup::topMoved() {
+    m_top->setFlag(QGraphicsItem::ItemIsMovable, false);
+    // Static cast
+    auto parent = static_cast<GraphicRoundedRectObject*>(parentItem());
+
+    // Trouver Y de m_top dans la scene
+    qreal y = parent->mapToParent(m_top->pos()).y();
+
+    // Redimensioner
+    parent->setHeight(parent->height() + parent->y() - y);
+
+    // Changer la position
+    parent->setY(y);
+    m_top->setY(0);
+    m_top->setFlag(QGraphicsItem::ItemIsMovable, true);
 }

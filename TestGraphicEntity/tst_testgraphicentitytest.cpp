@@ -26,7 +26,7 @@ void TestGraphicEntityTest::show()
 {
     QFETCH(qreal, width);
 
-    QGraphicsScene scene;
+    QGraphicsScene scene(0, 0, 1000,1000);
     QGraphicsView view(&scene);
 
     Entity ent(
@@ -41,9 +41,9 @@ void TestGraphicEntityTest::show()
     ent.addProperty(new Property("e-mail",Type("CHAR")));
     ent.addProperty(new Property("phone",Type("CHAR")));
 
-    GraphicEntity entity(&ent,0,0,width);
+    GraphicEntity entity(&ent,200,200,width);
     scene.addItem(&entity);
-    view.setGeometry(10,10,1000,600);
+    view.setGeometry(50,50,888,600);
     view.show();
 
     QTest::qWait(50000);

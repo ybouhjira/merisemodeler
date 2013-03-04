@@ -1,11 +1,17 @@
 #ifndef GRAPHICENTITY_H
 #define GRAPHICENTITY_H
 
-#include "graphicroundedrectobject.h"
+#include "graphicresizableroundedrectobject.h"
 class Entity;
 class GraphicResizeHandelsGroup;
 
-class GraphicEntity : public GraphicRoundedRectObject
+// Qt
+class QCursor;
+
+/**
+ * @brief Representation graphique d'une entité
+ */
+class GraphicEntity : public GraphicResizableRoundedRectObject
 {
     // METHODES
 public:
@@ -24,7 +30,7 @@ public:
             qreal y = 0,
             qreal width = DEFAULT_WIDTH,
             qreal height = DEFAULT_HEIGHT,
-            QGraphicsItem *parent = 0
+            QGraphicsItem *parent = nullptr
             );
 
     // Methodes reimplementés
@@ -50,6 +56,9 @@ public:
 
     // ATTRIBUTS
 private :
+
+    bool m_resizing = false;
+
     // static
     /**
      * @brief Largeur par default
@@ -66,7 +75,7 @@ private :
      */
     Entity *m_entity;
 
-    GraphicResizeHandelsGroup *m_handels;
+    //GraphicResizeHandelsGroup *m_handels;
 };
 
 #endif // GRAPHICENTITY_H

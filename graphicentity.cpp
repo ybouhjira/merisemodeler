@@ -5,6 +5,8 @@
 //Qt
 #include <QPainter>
 #include <QFontMetrics>
+#include <QGraphicsSceneMouseEvent>
+#include <QCursor>
 
 GraphicEntity::GraphicEntity(
         Entity *entity,
@@ -13,11 +15,10 @@ GraphicEntity::GraphicEntity(
         qreal width,
         qreal height,
         QGraphicsItem *parent) :
-    GraphicRoundedRectObject(x, y, width, height, 0, parent)
+    GraphicResizableRoundedRectObject(x, y, width, height, 0, parent)
   , m_entity(entity)
-  , m_handels(new GraphicResizeHandelsGroup(this))
 {
-    setFlag(QGraphicsItem::ItemIsMovable);
+
 }
 
 void GraphicEntity::paint
@@ -58,3 +59,5 @@ void GraphicEntity::setEntity(Entity *entity) {
 Entity* GraphicEntity::entity() const {
     return m_entity;
 }
+
+

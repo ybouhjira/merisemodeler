@@ -26,8 +26,8 @@ public:
                const QStyleOptionGraphicsItem *,
                QWidget *) final override;
     
-signals:
-
+private slots:
+    void topMoved();
     
     // ATTRIBUTS
 private:
