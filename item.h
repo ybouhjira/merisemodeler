@@ -1,12 +1,16 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-#include <QString>
-#include <QList>
 #include "property.h"
 
-class Item
+// Qt
+#include <QString>
+#include <QList>
+#include <QObject>
+
+class Item : public QObject
 {
+    Q_OBJECT
     //METHODS
 public:
 
@@ -46,17 +50,17 @@ public:
      */
     QList<Property*> properties();
 
+    /**
+     * @brief Destroys the item
+     */
+    virtual ~Item();
+
 protected:
     /**
      * @brief Constructs an item with a name
      * @param Name : name of the item
      */
     Item(QString const &Name);
-
-    /**
-     * @brief Destroys the item
-     */
-    virtual ~Item();
 
     //ATTRIBUTS
 private:

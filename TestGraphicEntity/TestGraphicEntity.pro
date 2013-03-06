@@ -16,7 +16,6 @@ TEMPLATE = app
 SOURCES += tst_testgraphicentitytest.cpp \
     ../uniqueconstraint.cpp \
     ../type.cpp \
-    ../resizehandler.cpp \
     ../property.cpp \
     ../numeriquetype.cpp \
     ../multipropertyconstraint.cpp \
@@ -34,15 +33,15 @@ SOURCES += tst_testgraphicentitytest.cpp \
     ../cardinality.cpp \
     ../association.cpp \
     ../graphicstyle.cpp \
-    ../graphicresizehandel.cpp \
     ../graphicassociation.cpp \
-    ../graphicresizehandelsgroup.cpp\
-    ../graphicresizableroundedrectobject.cpp
+    ../graphicresizableroundedrectobject.cpp \
+    ../modelstabwidget.cpp \
+    ../mcdmodel.cpp \
+    ../mcdgraphicsscene.cpp
 
 HEADERS += \
     ../uniqueconstraint.h \
     ../type.h \
-    ../resizehandler.h \
     ../property.h \
     ../numeriquetype.h \
     ../multipropertyconstraint.h \
@@ -60,10 +59,13 @@ HEADERS += \
     ../cardinality.h \
     ../association.h \
     ../graphicstyle.h \
-    ../graphicresizehandel.h \
     ../graphicassociation.h \
-    ../graphicresizehandelsgroup.h \
-    ../graphicresizableroundedrectobject.h
+    ../graphicresizableroundedrectobject.h \
+    ../modelstabwidget.h \
+    ../mcdmodel.h \
+    ../mcdgraphicsscene.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
+
+OTHER_FILES +=
 

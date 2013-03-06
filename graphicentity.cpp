@@ -1,6 +1,5 @@
 #include "graphicentity.h"
 #include "entity.h"
-#include "graphicresizehandelsgroup.h"
 
 //Qt
 #include <QPainter>

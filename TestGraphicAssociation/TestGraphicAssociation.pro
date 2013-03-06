@@ -16,7 +16,6 @@ TEMPLATE = app
 SOURCES += tst_testgraphicassociationtest.cpp \
     ../uniqueconstraint.cpp \
     ../type.cpp \
-    ../resizehandler.cpp \
     ../property.cpp \
     ../numeriquetype.cpp \
     ../multipropertyconstraint.cpp \
@@ -35,14 +34,11 @@ SOURCES += tst_testgraphicassociationtest.cpp \
     ../association.cpp \
     ../graphicassociation.cpp \
     ../graphicstyle.cpp \
-    ../graphicresizehandelsgroup.cpp \
-    ../graphicresizehandel.cpp \
     ../graphicresizableroundedrectobject.cpp
 
 HEADERS += \
     ../uniqueconstraint.h \
     ../type.h \
-    ../resizehandler.h \
     ../property.h \
     ../numeriquetype.h \
     ../multipropertyconstraint.h \

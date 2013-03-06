@@ -31,9 +31,6 @@ void TestGraphicEntityTest::show()
 
     Entity ent(
                 "MyEntity"
-                ,nullptr
-                ,QList<Entity*>()
-                ,QList<UniqueConstraint*>()
                 );
 
     ent.addProperty(new Property("name",Type("CHAR")));

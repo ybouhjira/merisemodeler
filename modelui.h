@@ -10,7 +10,7 @@ class QGraphicsView;
   */
 class ModelUi : public QMainWindow
 {
-// METHODS
+    // METHODS
 protected:
     /**
       * @brief Constructeur
@@ -18,10 +18,15 @@ protected:
       */
     explicit ModelUi(QWidget *parent = 0);
 
-// ATTRIBUTS
+    /**
+     * @brief Destructeur
+     */
+    virtual ~ModelUi();
+
+    // ATTRIBUTS
 protected:
     /**
-      * @brief Le widget qui affiche le MCD
+      * @brief Le widget qui affiche le diagram
       */
     QGraphicsView *m_graphicsView;
 

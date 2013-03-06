@@ -29,10 +29,11 @@ SOURCES += main.cpp\
     graphicobject.cpp \
     graphicroundedrectobject.cpp \
     graphicassociation.cpp \
-    graphicresizehandel.cpp \
     graphicstyle.cpp \
-    graphicresizehandelsgroup.cpp \
-    graphicresizableroundedrectobject.cpp
+    graphicresizableroundedrectobject.cpp \
+    mcdmodel.cpp \
+    mcdgraphicsscene.cpp \
+    modelstabwidget.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -51,8 +52,9 @@ HEADERS  += mainwindow.h \
     graphicobject.h \
     graphicroundedrectobject.h \
     graphicassociation.h \
-    graphicresizehandel.h \
     graphicstyle.h \
-    graphicresizehandelsgroup.h \
-    graphicresizableroundedrectobject.h
+    graphicresizableroundedrectobject.h \
+    mcdmodel.h \
+    mcdgraphicsscene.h \
+    modelstabwidget.h
 

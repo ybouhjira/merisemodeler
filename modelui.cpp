@@ -12,3 +12,6 @@ ModelUi::ModelUi(QWidget *parent) :
     setCentralWidget(m_graphicsView);
     addToolBar(Qt::LeftToolBarArea, m_toolBar);
 }
+
+ModelUi::~ModelUi() {
+}

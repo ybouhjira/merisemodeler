@@ -4,61 +4,68 @@
 #include <QString>
 #include "type.h"
 
+/**
+ * @brief La classe property represente une propriété ou colonne
+ */
 class Property
 {
     //METHODS
 public:
     /**
-     * @brief Constructs a property
-     * @param name : name of the property
-     * @param obligatory : This attribute holds whether this property is
-     * obligatory or not.
-     * @param check : check condition
-     * @param defaultValue : a default Value of an attribut
-     * @param type : type of the attribut
+     * @brief Constructeur
+     * @param name Nom
+     * @param obligatory Indique que la propriété doit avoir une valeur
+     * @param check Condition que la valeur de cette propriété doit admettre
+     * @param defaultValue Valeur par default
+     * @param type Type
      */
     Property(QString const &name,
              Type type,
-             bool obligatory=false,
-             QString const &check="",
-             QString const &defaultValue="",
-             bool identifiant=false);
+             bool obligatory = false,
+             QString const &check = "",
+             QString const &defaultValue = "",
+             bool identifiant = false);
 
     /**
-     * @brief Destructs the property
+     * @brief Destructeur
      */
     virtual ~Property();
 
     /**
-     * @brief returns the name of the property
+     * @brief Accesseur
+     * @return Nom
      */
     QString name();
 
     /**
-     * @brief Modifies the name of the property
+     * @brief Mutateur
+     * @param name Nom
      */
     void setName(QString const &name);
 
     /**
-     * @brief returns if the property is obligatory or not
+     * @brief Accesseur
+     * @return Valeur est obligatoire
      */
     bool obligatory();
 
     /**
-     * @brief Modifier the obligatory attribute
+     * @brief Mutateur
+     * @param Valeur est obligatoire
      */
-    void setObligatory(bool);
+    void setObligatory(bool obligatory);
 
     /**
-     * @brief Accesseur de l'attribut identifiant
-     * @return
+     * @brief Accesseur
+     * @return Identifiant
      */
     bool identifiant();
 
     /**
-     * @brief Modifier m_identifier
+     * @brief
      */
     void setIdentifiant();
+
     /**
      * @brief returns the check condition
      */
@@ -91,12 +98,35 @@ public:
 
     //ATTRIBUTS
 private:
+    /**
+     * @brief Nom
+     */
     QString m_name;
+
+    /**
+     * @brief Type
+     */
     Type m_type;
+
+    /**
+     * @brief Obligatoire
+     */
     bool m_obligatory;
-    bool m_identifiant;
-    QString m_check;
+
+    /**
+     * @brief Valeur par default
+     */
     QString m_defaultValue;
+
+    /**
+     * @brief Est un identifiant
+     */
+    bool m_identifiant;
+
+    /**
+     * @brief Condition
+     */
+    QString m_check;
 
 };
 
