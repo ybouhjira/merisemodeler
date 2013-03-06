@@ -19,9 +19,10 @@ public:
      * @brief Définit le model actuel de McdGraphicsScene
      */
     enum Mode {
-        Add,       //! Mode d'ajout
-        Remove,    //! Mode de supression
-        None       //! Rien
+        AddEntity,       //! Mode d'ajout d'une entité
+        AddAssociation,  //! Mode d'ajout d'une association
+        Remove,          //! Mode de supression
+        None             //! Rien
     };
 
     // METHODES
