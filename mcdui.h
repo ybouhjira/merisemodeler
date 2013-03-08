@@ -32,6 +32,12 @@ public slots:
      */
     void setModel(McdModel* mcd) ;
 
+private slots:
+    /**
+     * @brief Appelé lorsque le bouton Entity est cliqué
+     */
+    void addEntity() const ;
+
 signals:
     void modelChanged(McdModel*) ;
 private:
@@ -55,17 +61,17 @@ private:
     /**
      * @brief QAction qui ajoute une entité
      */
-    QAction *m_addEntityAction;
+    QAction *m_entityAction;
 
     /**
       * @brief QAction qui ajoute une Associations
       */
-    QAction *m_addAssociationAction;
+    QAction *m_associationAction;
 
     /**
       * @brief QAction qui Ajoute un relation d'hériatge entre deux entités
       */
-    QAction *m_addInheritanceAction;
+    QAction *m_inheritanceAction;
 
 };
 

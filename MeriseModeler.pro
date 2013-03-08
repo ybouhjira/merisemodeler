@@ -56,5 +56,5 @@ HEADERS  += mainwindow.h \
     graphicresizableroundedrectobject.h \
     mcdmodel.h \
     mcdgraphicsscene.h \
-    modelstabwidget.h
+    modelstabwidget.h \
 

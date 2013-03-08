@@ -3,6 +3,7 @@
 
 class Item;
 class McdGraphicsScene;
+class Entity;
 
 // Qt
 #include <QObject>
@@ -61,7 +62,7 @@ public slots:
     /**
      * @brief createNewEntity
      */
-    void createNewEntity();
+    Entity *createNewEntity();
 
 signals:
     /**

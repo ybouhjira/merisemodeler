@@ -46,6 +46,12 @@ public:
      */
     Mode mode() const;
 
+protected:
+    /**
+     * @reimp
+     */
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
 public slots:
     /**
      * @brief Mutateur

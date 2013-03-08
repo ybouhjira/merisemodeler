@@ -45,11 +45,12 @@ McdGraphicsScene* McdModel::scene() const {
     return m_scene;
 }
 
-void McdModel::createNewEntity() {
+Entity* McdModel::createNewEntity() {
+    // AJOUT DANS LE MODEL
     QString entityName = tr("Entity");
 
     // Recherche de noms similaires
-    while(bool similarName = true) {
+    for(bool similarName = true; similarName;) {
         // Iterer sur tous les elements
         int i;
         for (i = 0; i < m_items.size() ; ++i) {
@@ -65,6 +66,8 @@ void McdModel::createNewEntity() {
             similarName = false;
         }
     }
+    Entity *entity = new Entity(entityName) ;
+    m_items.append(entity);
 
-    m_items.append(new Entity(entityName));
+    return entity;
 }

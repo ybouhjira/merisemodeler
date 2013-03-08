@@ -20,14 +20,17 @@ McdUi* McdUi::getInstance() {
 McdUi::McdUi(QWidget *parent)
     : ModelUi(parent)
     , m_model(new McdModel(this))
-    , m_addEntityAction(new QAction(QIcon(":/entity"),tr("Entity"),this))
-    , m_addAssociationAction(new QAction(QIcon(":/assoc"),tr("Association"),this))
-    , m_addInheritanceAction(new QAction(QIcon(":/inherit"),tr("Inheritance"),this))
+    , m_entityAction(new QAction(QIcon(":/entity"),tr("Entity"),this))
+    , m_associationAction(new QAction(QIcon(":/assoc"),tr("Association"),this))
+    , m_inheritanceAction(new QAction(QIcon(":/inherit"),tr("Inheritance"),this))
 {
-    m_toolBar->addAction(m_addEntityAction);
-    m_toolBar->addAction(m_addAssociationAction);
+    m_toolBar->addAction(m_entityAction);
+    m_toolBar->addAction(m_associationAction);
     m_toolBar->addSeparator();
-    m_toolBar->addAction(m_addInheritanceAction);
+    m_toolBar->addAction(m_inheritanceAction);
+
+    // Connections
+    connect(m_entityAction, SIGNAL(triggered()), this, SLOT(addEntity()) );
 }
 
 void McdUi::setModel(McdModel *mcd) {
@@ -38,4 +41,8 @@ void McdUi::setModel(McdModel *mcd) {
 
 McdModel* McdUi::model() const {
     return m_model ;
+}
+
+void McdUi::addEntity() const {
+    m_model->scene()->setMode(McdGraphicsScene::AddEntity);
 }
