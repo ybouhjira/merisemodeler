@@ -31,6 +31,8 @@ McdUi::McdUi(QWidget *parent)
 
     // Connections
     connect(m_entityAction, SIGNAL(triggered()), this, SLOT(addEntity()) );
+    connect(m_associationAction, SIGNAL(triggered()),
+            this, SLOT(addAssociation()) );
 }
 
 void McdUi::setModel(McdModel *mcd) {
@@ -45,4 +47,8 @@ McdModel* McdUi::model() const {
 
 void McdUi::addEntity() const {
     m_model->scene()->setMode(McdGraphicsScene::AddEntity);
+}
+
+void McdUi::addAssociation() const {
+    m_model->scene()->setMode(McdGraphicsScene::AddAssociation);
 }

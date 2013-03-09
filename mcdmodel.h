@@ -4,6 +4,7 @@
 class Item;
 class McdGraphicsScene;
 class Entity;
+class Association;
 
 // Qt
 #include <QObject>
@@ -60,9 +61,22 @@ public slots:
     void removeItem(int index);
 
     /**
-     * @brief createNewEntity
+     * @brief Crée une nouvelle entité et l'ajoute au model.
+     * cette entité sera nommée Entity, si le model contient un elemnt du
+     * meme nom. Alors un siffix numerique sera ajouté au nom de l'entité,
+     * exemple : Entity1, Entity2, ... etc
+     * @return L'entité creée
      */
-    Entity *createNewEntity();
+    Entity* createEntity();
+
+    /**
+     * @brief Crée une association nommée Association et l'ajoute au model.
+     * si ce nom existe déja une suffix numérique sera ajouté.
+     * @param first Entité liée avec cette association
+     * @param second Entité liée avec cette association
+     * @return L'association creée
+     */
+    Association* createAssociation(Entity* first, Entity* second);
 
 signals:
     /**

@@ -1,7 +1,9 @@
 #include "mcdmodel.h"
 #include "item.h"
 #include "entity.h"
+#include "association.h"
 #include "mcdgraphicsscene.h"
+#include "associationlink.h"
 
 // Qt
 #include <QRegularExpression>
@@ -46,7 +48,7 @@ McdGraphicsScene* McdModel::scene() const {
     return m_scene;
 }
 
-Entity* McdModel::createNewEntity() {
+Entity* McdModel::createEntity() {
     QString entityName = tr("Entity");
     QString nameSuffix = "" ;
 
@@ -65,4 +67,25 @@ Entity* McdModel::createNewEntity() {
     Entity *entity = new Entity(entityName + nameSuffix) ;
     m_items.append(entity);
     return entity;
+}
+
+Association* McdModel::createAssociation(Entity *first, Entity *second) {
+    QString assocName = tr("Association");
+    QString nameSuffix = "";
+
+    QListIterator<Item*> iterator(m_items);
+    while(iterator.hasNext()) {
+        while(iterator.hasNext()) {
+            if(iterator.next()->name()  == assocName + nameSuffix) {
+                nameSuffix = QString::number(nameSuffix.toInt() + 1);
+                iterator.toFront();
+                break;
+            }
+        }
+    }
+
+    QString name = assocName + nameSuffix ;
+    Association *association = new Association(name, first, second);
+    addItem(association);
+    return association;
 }

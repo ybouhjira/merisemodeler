@@ -34,9 +34,16 @@ public slots:
 
 private slots:
     /**
-     * @brief Appelé lorsque le bouton Entity est cliqué
+     * @brief Appelé lorsque le bouton Entity est cliqué, met la scene en Mode
+     * McdModelScene::AddEntity
      */
     void addEntity() const ;
+
+    /**
+     * @brief Appelé lorsque le bouton Association est cliqué, met la scene
+     * en Mode McdModelScene::AddAssociation
+     */
+    void addAssociation() const ;
 
 signals:
     void modelChanged(McdModel*) ;

@@ -5,7 +5,7 @@
 
 qreal const GraphicAssociation::RADIUS = 25;
 qreal const GraphicAssociation::DEFAULT_WIDTH = 100;
-qreal const GraphicAssociation::DEFAULT_HEIGHT = 100;
+qreal const GraphicAssociation::DEFAULT_HEIGHT = 50;
 
 GraphicAssociation::GraphicAssociation (
         Association *association,
@@ -46,13 +46,15 @@ void GraphicAssociation::paint(
     painter->drawText(x, y, name);
 
     // Tracer un trait
-    qreal lineY = fontHeight + 2 * padding + descent;
-    painter->drawLine(0, lineY, width(), lineY);
+    if(!m_association->properties().empty()) {
+        qreal lineY = fontHeight + 2 * padding + descent;
+        painter->drawLine(0, lineY, width(), lineY);
 
-    // Ecrire les entité
-    QList<Property*> properties = m_association->properties();
-    for(int i=0, size=properties.size(); i<size; i++) {
-        qreal pHeight = lineY + (padding + fontHeight)*(i + 1);
-        painter->drawText(padding, pHeight, properties[i]->name());
+        // Ecrire les entité
+        QList<Property*> properties = m_association->properties();
+        for(int i=0, size=properties.size(); i<size; i++) {
+            qreal pHeight = lineY + (padding + fontHeight)*(i + 1);
+            painter->drawText(padding, pHeight, properties[i]->name());
+        }
     }
 }
