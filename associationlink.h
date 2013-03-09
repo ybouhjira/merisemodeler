@@ -1,21 +1,21 @@
 #ifndef CARDINALITY_H
 #define CARDINALITY_H
 
-#include "entity.h"
+class Entity;
 
 /**
- * @brief La classe cardinalité décris sert à compter le nombre minimum et
- * maximum de possibilités que chaque classe contient dans la relation liant
- * 2 ou plusieurs objets.
+ * @brief Cette classe représente un lien uniderictionel entre une association
+ * et un entité. elle contient les cardinalité minimum et maximum, et un
+ * pointeur vers l'entité ciblé
  */
-class Cardinality
+class AssociationLink
 {
 public:
     // TYPES
     /**
      * @brief Enumération des valeurs que peut prendre une cardinalité
      */
-    enum Value {
+    enum Cardinality {
         Zero, //< 0
         One, //< 1
         N  //< n
@@ -29,37 +29,37 @@ public:
      * @param max Valeur maximum
      * @param min Valeur minimum
      */
-    Cardinality(Value max, Value min);
+    AssociationLink(Entity* entity, Cardinality max, Cardinality min);
 
     /**
      * @brief Destructeur
      */
-    virtual ~Cardinality();
+    virtual ~AssociationLink();
 
     // Accesseur et mutateurs
     /**
      * @brief Accesseur
      * @return Valeur maximum
      */
-    Value max();
+    Cardinality max();
 
     /**
      * @brief Accesseur
      * @return Valeur minimum
      */
-    Value min();
+    Cardinality min();
 
     /**
      * @brief Mutateur
      * @param max Valeur maximum
      */
-    void setMax(Value max);
+    void setMax(Cardinality max);
 
     /**
      * @brief Mutateur
      * @param min Valeur minimum
      */
-    void setMin(Value min);
+    void setMin(Cardinality min);
 
     /**
      * @brief Accesseur
@@ -78,11 +78,13 @@ private:
     /**
      * @brief Valeur maximum
      */
-    Value m_max;
+    Cardinality m_max;
+
     /**
      * @brief Valeur minimum
      */
-    Value m_min;
+    Cardinality m_min;
+
     /**
      * @brief entité
      */

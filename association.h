@@ -1,10 +1,17 @@
 #ifndef ASSOCIATION_H
 #define ASSOCIATION_H
 
-#include <QString>
-#include <QList>
-#include "entity.h"
-#include "cardinality.h"
+
+#include "item.h"
+#include "associationlink.h"
+class Entity;
+
+// Qt
+#include <QPair>
+class QString;
+
+// TYPEDEFS
+typedef QPair<AssociationLink*, AssociationLink*> AssociationLinkPair;
 
 /**
  * @brief La classe Association decris le lien sémantique entre 2 entités
@@ -13,66 +20,62 @@ class Association : public Item
 {
 public:
     /**
-     * @brief Construire un objet Association avec un nom et tableau des entités
-     * @param name : nom de l'association
+     * @brief Constructeur
+     * @param name nom de l'association
+     * @param links un objet de type QPair contenant deux liens entre cette
+     * association et deux entités.
      */
-    Association(QString const &name
-                ,Cardinality* cardinality
-                ,Entity* entity1
-                ,Entity* entity2);
+    Association(
+            QString const &name
+            ,QPair<AssociationLink*, AssociationLink*> links);
 
     /**
-     * @brief Destruction de l'association
+     * @overload Association()
+     * @brief Construit liée à deux entité avec des cardinalité
+     * @param name Nom de l'association
+     * @param first Entité 1
+     * @param second Entité 2
+     * @param firstMin cardinalité minimum pour l'entité first
+     * @param firstMax cardinalité maximum pour l'entité first
+     * @param secondMin cardinalité minimum pour l'entité second
+     * @param secondMax cardinalité maximum pour l'entité second
+     */
+    Association(
+            QString const &name,
+            Entity *first,
+            Entity *second,
+            AssociationLink::Cardinality firstMin = AssociationLink::Zero,
+            AssociationLink::Cardinality firstMax = AssociationLink::N,
+            AssociationLink::Cardinality secondMin = AssociationLink::Zero,
+            AssociationLink::Cardinality secondMax = AssociationLink::N);
+
+    /**
+     * @brief Destructeur
      */
     virtual ~Association();
 
+    // Accesseurs et mutateurs
     /**
-     * @brief modifier une entité
-     * @param index : position de l'entité
-     * @param entity
+     * @brief Accesseur
+     * @return Liens
      */
-
-    /**
-     * @brief Modificateur de l'entité 1
-     * @param entity
-     */
-    void setEntity1(Entity* entity);
+    QPair<AssociationLink*, AssociationLink*> links() const ;
 
     /**
-     * @brief Modificateur de l'entité 2
-     * @param entity
+     * @brief Change le prmier lien
      */
-    void setEntity2(Entity* entity);
+    void setFirstLink(AssociationLink* firstLink);
 
     /**
-     * @brief Accesseur de l'entité 1
-     * @return
+     * @brief Change le deuxième lien
      */
-    Entity* entity1();
-
-    /**
-     * @brief Accesseur de l'entité 2
-     * @return
-     */
-    Entity* entity2();
-
-   /**
-    * @brief retourne la cardinalté
-    */
-   Cardinality* cardinality();
-
-   /**
-    * @brief Modifier une cardinalité
-    */
-   void setCardinality(Cardinality* cardinality);
+    void setSecondLink(AssociationLink* secondLink);
 
 private:
-    Cardinality *m_cardinality;
-    Entity *m_entity1;
-    Entity *m_entity2;
-
-
-
+    /**
+     * @brief Liens
+     */
+    QPair<AssociationLink*, AssociationLink*> m_links;
 };
 
 #endif // ASSOCIATION_H

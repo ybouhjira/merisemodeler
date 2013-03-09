@@ -23,7 +23,6 @@ SOURCES += main.cpp\
     item.cpp \
     enumtype.cpp \
     entity.cpp \
-    cardinality.cpp \
     association.cpp \
     graphicentity.cpp \
     graphicobject.cpp \
@@ -33,7 +32,8 @@ SOURCES += main.cpp\
     graphicresizableroundedrectobject.cpp \
     mcdmodel.cpp \
     mcdgraphicsscene.cpp \
-    modelstabwidget.cpp
+    modelstabwidget.cpp \
+    associationlink.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -46,7 +46,6 @@ HEADERS  += mainwindow.h \
     item.h \
     enumtype.h \
     entity.h \
-    cardinality.h \
     association.h \
     graphicentity.h \
     graphicobject.h \
@@ -57,4 +56,5 @@ HEADERS  += mainwindow.h \
     mcdmodel.h \
     mcdgraphicsscene.h \
     modelstabwidget.h \
+    associationlink.h
 

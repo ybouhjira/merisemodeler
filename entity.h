@@ -7,18 +7,17 @@
 #include <QString>
 
 /**
- * @brief La classe entité est la représentation d'un élément matériel ou
- * immatériel ayant un rôle dans le système que l'on désire décrire.
+ * @brief Cette classe représente un entité dans le model MCD. Elle contient les
+ * données de l'entité et n'a aucune relation avec sa representation graphique
  */
 class Entity : public Item
 {
     //METHODS
 public:
     /**
-     * @brief Construire une entité
-     * @param name : nom de l'entité
-     * @param uniqueConstraints : unique Constraints
-     * @param Identifier : identifiant de l'entité
+     * @brief Constructeur
+     * @param name : Nom de l'entité
+     * @param uniqueConstraints : Contraints de type UNIQUE
      */
     Entity(QString const &name
            , QList<Entity*> parents = QList<Entity*>()
@@ -26,7 +25,7 @@ public:
            );
 
     /**
-     * @brief Desctruction d'une entité
+     * @brief Destructeur
      */
     virtual ~Entity();
 
@@ -37,11 +36,13 @@ public:
 
     /**
      * @brief Supprimer un parent
+     * @param index Indice du parent
      */
     void removeParent(int index);
 
     /**
      * @brief Supprimer un parent
+     * @param parent Parent a supprimer
      */
     void removeParent(Entity* parent);
 
@@ -61,18 +62,25 @@ public:
     void addUniqueConstraint(UniqueConstraint* uniqueConstraint);
 
     /**
-     * @brief Supprimer une contrainte unique
+     * @brief Supprimer une contrainte UNIQUE
      */
     void removeUniqueConstraint(int index);
 
     /**
-     * @brief Supprimer une contrainte unique
+     * @brief Supprimer une contrainte UNIQUE
      */
     void removeUniqueConstraint(UniqueConstraint* uniqueConstraint);
 
     //ATTRIBUTS
 private:
+    /**
+     * @brief Entités des quelles cette entité hérite
+     */
     QList<Entity*> m_parents;
+
+    /**
+     * @brief Contraintes de type UNIQUE
+     */
     QList<UniqueConstraint*> m_uniqueConstraints;
 
 };
