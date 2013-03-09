@@ -4,7 +4,8 @@
 #include "mcdgraphicsscene.h"
 
 // Qt
-#include <QRegExp>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 McdModel::McdModel(QObject *parent)
     : QObject(parent)
@@ -46,28 +47,22 @@ McdGraphicsScene* McdModel::scene() const {
 }
 
 Entity* McdModel::createNewEntity() {
-    // AJOUT DANS LE MODEL
     QString entityName = tr("Entity");
+    QString nameSuffix = "" ;
 
-    // Recherche de noms similaires
-    for(bool similarName = true; similarName;) {
-        // Iterer sur tous les elements
-        int i;
-        for (i = 0; i < m_items.size() ; ++i) {
-            if(m_items[i]->name() == entityName) {
-                entityName.replace(
-                            QRegExp("(\\d*)$"),
-                            QString::number(QString("\\1").toInt() + 1)
-                            );
+    QListIterator<Item*> iterator(m_items);
+    while(iterator.hasNext()) {
+        while(iterator.hasNext()) {
+            if(iterator.next()->name()  == entityName + nameSuffix) {
+                nameSuffix = QString::number(nameSuffix.toInt() + 1);
+                iterator.toFront();
+                break;
             }
         }
-        // Si aucun non similaire trouvé
-        if(i == m_items.size()) {
-            similarName = false;
-        }
     }
-    Entity *entity = new Entity(entityName) ;
-    m_items.append(entity);
 
+    // Ajout de l'entité au Model
+    Entity *entity = new Entity(entityName + nameSuffix) ;
+    m_items.append(entity);
     return entity;
 }
