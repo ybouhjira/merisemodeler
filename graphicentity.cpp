@@ -17,7 +17,6 @@ GraphicEntity::GraphicEntity(
     GraphicResizableRoundedRectObject(x, y, width, height, 0, parent)
   , m_entity(entity)
 {
-
 }
 
 void GraphicEntity::paint

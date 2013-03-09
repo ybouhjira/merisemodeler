@@ -52,6 +52,7 @@ protected:
      */
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
+
 public slots:
     /**
      * @brief Mutateur
@@ -70,6 +71,7 @@ private:
      * @brief Mode
      */
     Mode m_mode;
+
 };
 
 #endif // MCDGRAPHICSSCENE_H

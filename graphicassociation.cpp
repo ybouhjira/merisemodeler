@@ -19,7 +19,6 @@ GraphicAssociation::GraphicAssociation (
     : GraphicResizableRoundedRectObject(x, y, width, height, radius, parent)
     , m_association(association)
 {
-    setFlag(QGraphicsItem::ItemIsMovable);
 }
 
 void GraphicAssociation::paint(

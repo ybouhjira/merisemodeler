@@ -22,6 +22,7 @@ protected:
       */
     GraphicObject(QGraphicsItem* parent) ;
 
+public:
     /**
      * @brief Destructeur
      */

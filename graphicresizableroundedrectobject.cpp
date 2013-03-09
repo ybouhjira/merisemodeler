@@ -3,6 +3,7 @@
 // Qt
 #include <QGraphicsSceneMouseEvent>
 #include <QCursor>
+#include <QGraphicsScene>
 
 const qreal GraphicResizableRoundedRectObject::PADDING = 6;
 
@@ -78,7 +79,13 @@ void GraphicResizableRoundedRectObject::mouseMoveEvent(QGraphicsSceneMouseEvent 
         setX(mapToParent(event->pos()).x());
         break;
     case Move:
-        setPos(mapToParent(event->pos() - m_grabingPoint).x(),
-               mapToParent(event->pos() - m_grabingPoint).y());
+        qreal dx = mapToParent(event->pos() - m_grabingPoint).x() - this->x();
+        qreal dy = mapToParent(event->pos() - m_grabingPoint).y() - this->y();
+        moveBy(dx, dy);
+        foreach (QGraphicsItem* item, scene()->selectedItems()) {
+            if(item != this) {
+                item->moveBy(dx, dy);
+            }
+        }
     }
 }

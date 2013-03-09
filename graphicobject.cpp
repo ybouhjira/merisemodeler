@@ -6,6 +6,7 @@ GraphicObject::GraphicObject(QGraphicsItem* parent)
     : QGraphicsObject(parent)
     , m_style(GraphicStyle::getDefaultStyle())
 {
+    setFlag(ItemIsSelectable);
 }
 
 GraphicObject::~GraphicObject() {
@@ -29,4 +30,7 @@ void GraphicObject::paint(QPainter *painter,
     painter->setPen(m_style->pen());
     painter->setFont(m_style->font());
     painter->setBrush(m_style->brush());
+    if(isSelected()) {
+        painter->setBrush(m_style->brush().color().darker());
+    }
 }

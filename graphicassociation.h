@@ -45,7 +45,12 @@ private:
     static qreal const DEFAULT_HEIGHT;
 
     // non static
+    /**
+     * @brief L'association representée
+     */
     Association *m_association;
+
+
 };
 
 #endif // GRAPHICASSOCIATION_H

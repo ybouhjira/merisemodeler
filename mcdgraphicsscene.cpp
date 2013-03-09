@@ -2,6 +2,7 @@
 #include "graphicentity.h"
 #include "graphicassociation.h"
 #include "mcdmodel.h"
+#include "graphicstyle.h"
 
 // Qt
 #include <QGraphicsSceneMouseEvent>
@@ -49,11 +50,18 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
                 Entity *entity2 = clickedEntity->entity();
                 Association *assoc = m_mcd->createAssociation(entity1, entity2);
                 addItem(new GraphicAssociation(assoc,x,y));
+
+                // Clean up
+                entity1 = nullptr;
                 setMode(None);
             }
         }
     }// PASSER L'EVENEMENT
     else if(m_mode == None) {
+        QGraphicsItem* clickedItem = itemAt(x,y, QTransform());
+        if(clickedItem != nullptr) {
+            clickedItem->setSelected(true);
+        }
         QGraphicsScene::mousePressEvent(event);
     }
 }

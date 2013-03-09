@@ -32,6 +32,7 @@ qreal GraphicRoundedRectObject::radius() const {
 void GraphicRoundedRectObject::paint
 (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget* widget) {
     GraphicObject::paint(painter, option, widget);
+    painter->setRenderHint(QPainter::Antialiasing);
     painter->drawRoundedRect(0, 0,m_width, m_height, m_radius, m_radius );
 }
 

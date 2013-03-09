@@ -29,6 +29,10 @@ McdUi::McdUi(QWidget *parent)
     m_toolBar->addSeparator();
     m_toolBar->addAction(m_inheritanceAction);
 
+    // Activation de la selection
+    m_graphicsView->setDragMode(QGraphicsView::RubberBandDrag);
+    m_graphicsView->setInteractive(true);
+
     // Connections
     connect(m_entityAction, SIGNAL(triggered()), this, SLOT(addEntity()) );
     connect(m_associationAction, SIGNAL(triggered()),
