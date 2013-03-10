@@ -62,3 +62,9 @@ qreal GraphicRoundedRectObject::width() const {
 void GraphicRoundedRectObject::setWidth(qreal width) {
     this->m_width = width;
 }
+
+QPainterPath GraphicRoundedRectObject::shape() const {
+    QPainterPath path;
+    path.addRoundedRect(0, 0,m_width, m_height, m_radius, m_radius );
+    return path;
+}

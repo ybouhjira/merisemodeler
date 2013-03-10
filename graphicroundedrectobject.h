@@ -82,6 +82,11 @@ public:
      */
     QRectF boundingRect() const override;
 
+    /**
+     * @reimp
+     **/
+    QPainterPath shape() const ;
+
     //ATTRIBUTS
 private:
     /**
