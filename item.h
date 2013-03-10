@@ -1,7 +1,8 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-#include "property.h"
+class Property;
+class GraphicObject;
 
 // Qt
 #include <QString>
@@ -19,6 +20,11 @@ public:
      * @return QString
      */
     QString name() const;
+
+    /**
+     * @brief Retourne la reprerésentation de l'élément
+     */
+    virtual GraphicObject* graphicObject() const = 0 ;
 
     /**
      * @brief Modifies the name of the item

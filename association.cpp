@@ -1,4 +1,5 @@
 #include "association.h"
+#include "associationlink.h"
 
 Association::Association(QString const &name
                          ,QPair<AssociationLink*, AssociationLink*> links)
@@ -41,4 +42,20 @@ void Association::setFirstLink(AssociationLink *firstLink) {
 
 void Association::setSecondLink(AssociationLink* secondLink) {
     m_links.second = secondLink;
+}
+
+GraphicAssociation* Association::graphicObject() const {
+    return m_graphicAssociation ;
+}
+
+void Association::setGraphicObject(GraphicAssociation *gassoc) {
+    m_graphicAssociation = gassoc;
+}
+
+Entity* Association::firstEntity() const {
+    return m_links.first->entity();
+}
+
+Entity* Association::secondEntity() const {
+    return m_links.second->entity();
 }

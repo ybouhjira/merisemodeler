@@ -1,4 +1,5 @@
 #include "graphicroundedrectobject.h"
+#include "graphicstyle.h"
 #include <QPainter>
 
 GraphicRoundedRectObject::GraphicRoundedRectObject(
@@ -37,7 +38,13 @@ void GraphicRoundedRectObject::paint
 }
 
 QRectF GraphicRoundedRectObject::boundingRect() const {
-    return QRectF(0, 0, m_width, m_height);
+    int penWidth = style()->pen().width() ;
+    return QRectF(
+                0 - penWidth,
+                0 - penWidth,
+                m_width + penWidth,
+                m_height + penWidth
+                );
 }
 
 qreal GraphicRoundedRectObject::height() const {

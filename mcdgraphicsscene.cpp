@@ -42,9 +42,11 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 
         if(clickedEntity != nullptr) {
             static Entity *entity1 = nullptr;
+            static GraphicEntity* gEntity1 = nullptr;
             // Clique sur la premier entité
             if (entity1 == nullptr) {
                 entity1 = clickedEntity->entity();
+                gEntity1 = clickedEntity;
             }// Clique sur la seconde entité
             else {
                 Entity *entity2 = clickedEntity->entity();

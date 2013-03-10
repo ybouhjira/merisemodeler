@@ -3,6 +3,9 @@
 
 #include "item.h"
 #include "uniqueconstraint.h"
+#include "graphicentity.h"
+
+// Qt
 #include <QList>
 #include <QString>
 
@@ -28,6 +31,20 @@ public:
      * @brief Destructeur
      */
     virtual ~Entity();
+
+    // Redefinitions
+    /**
+     * @reimp Item::graphicObject()
+     */
+    GraphicEntity* graphicObject() const ;
+
+    // Accesseurs et mutataurs
+
+    /**
+     * @brief Mutateur
+     * @param gEntity GraphicEntity representant cette entité
+     */
+    void setGraphicObject(GraphicEntity* gEntity);
 
     /**
      * @brief Ajouter un parent a l'entité
@@ -82,6 +99,11 @@ private:
      * @brief Contraintes de type UNIQUE
      */
     QList<UniqueConstraint*> m_uniqueConstraints;
+
+    /**
+     * @brief Representation graphique
+     */
+    GraphicEntity* m_graphicEntity;
 
 };
 

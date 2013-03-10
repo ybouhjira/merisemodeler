@@ -75,7 +75,6 @@ private :
      */
     Entity *m_entity;
 
-    //GraphicResizeHandelsGroup *m_handels;
 };
 
 #endif // GRAPHICENTITY_H

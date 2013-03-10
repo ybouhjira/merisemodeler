@@ -49,4 +49,10 @@ void Entity::removeUniqueConstraint(UniqueConstraint *uniqueConstraint)
     m_uniqueConstraints.removeOne(uniqueConstraint);
 }
 
+GraphicEntity* Entity::graphicObject() const {
+    return m_graphicEntity ;
+}
 
+void Entity::setGraphicObject(GraphicEntity *gEntity) {
+    m_graphicEntity = gEntity;
+}

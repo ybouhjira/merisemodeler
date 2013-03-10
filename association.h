@@ -3,6 +3,7 @@
 
 
 #include "item.h"
+#include "graphicassociation.h"
 #include "associationlink.h"
 class Entity;
 
@@ -54,7 +55,19 @@ public:
      */
     virtual ~Association();
 
+    // Redefinition
+    /**
+     * @reimp Item::graphicObject()
+     */
+    GraphicAssociation* graphicObject() const;
+
     // Accesseurs et mutateurs
+    /**
+     * @brief Mutateur
+     * @param gassoc Representation graphique de cette association
+     */
+    void setGraphicObject(GraphicAssociation* gassoc);
+
     /**
      * @brief Accesseur
      * @return Liens
@@ -71,11 +84,31 @@ public:
      */
     void setSecondLink(AssociationLink* secondLink);
 
+    /**
+     * @brief Retourne la première entité
+     * @remarks Cette méthodes est équivalant à
+     * @code
+     *     association.links().first.entity() ;
+     * @endcode
+     */
+    Entity* firstEntity() const;
+
+    /**
+     * @brief Retourne la deuxième entité
+     * @see Association::firstEntity()
+     */
+    Entity* secondEntity() const;
+
 private:
     /**
      * @brief Liens
      */
     QPair<AssociationLink*, AssociationLink*> m_links;
+
+    /**
+     * @brief Respresentation graphique
+     */
+    GraphicAssociation* m_graphicAssociation;
 };
 
 #endif // ASSOCIATION_H

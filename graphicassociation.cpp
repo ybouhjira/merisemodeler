@@ -1,7 +1,12 @@
 #include "graphicassociation.h"
 #include "association.h"
+#include "graphicarrow.h"
+#include "graphicentity.h"
+#include "entity.h"
+
 // Qt
 #include <QPainter>
+#include <QGraphicsScene>
 
 qreal const GraphicAssociation::RADIUS = 25;
 qreal const GraphicAssociation::DEFAULT_WIDTH = 100;
@@ -18,7 +23,21 @@ GraphicAssociation::GraphicAssociation (
         )
     : GraphicResizableRoundedRectObject(x, y, width, height, radius, parent)
     , m_association(association)
+    , m_arrows(new GraphicArrow(
+                   this,
+                   association->firstEntity()->graphicObject(),
+                   0.5,
+                   0.5,
+                   this),
+               new GraphicArrow(
+                   this,
+                   association->secondEntity()->graphicObject(),
+                   0.5,
+                   0.5,
+                   this)
+               )
 {
+    association->setGraphicObject(this);
 }
 
 void GraphicAssociation::paint(

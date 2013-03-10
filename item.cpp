@@ -1,4 +1,5 @@
 #include "item.h"
+#include "property.h"
 
 Item::Item(QString const & name)
     : m_name(name)
