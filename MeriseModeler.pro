@@ -58,3 +58,6 @@ HEADERS  += mainwindow.h \
     modelstabwidget.h \
     associationlink.h
 
+RESOURCES += \
+    ressourceFile.qrc
+
