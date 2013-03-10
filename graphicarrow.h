@@ -51,6 +51,26 @@ public:
      * @reimp
      */
     QPainterPath shape() const;
+
+    /**
+     * @reimp
+     */
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *);
+
+    /**
+     * @reimp
+     */
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+
+    /**
+     * @reimp
+     */
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+
+    /**
+     * @reimp
+     */
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     
     // Accesseurs et mutateurs
     /**
@@ -95,6 +115,19 @@ public slots:
      */
     void redraw();
 
+private:
+    /**
+     * @return Le poit sur lequel doit etre connecté la flèche avec la
+     * source en coordonées de cet elements
+     */
+    inline QPointF findSourcePoint() const;
+
+    /**
+     * @return Le poit sur lequel doit etre connecté la flèche avec la
+     * destination en coordonées de cet elements
+     */
+    inline QPointF findDestPoint() const;
+
     // ATTRIBUTS
 private:
     /**
@@ -117,6 +150,18 @@ private:
      * en pourcentage
      */
     qreal m_positionOnDestionation;
+
+    /**
+     * @brief Afficher les controleurs
+     */
+    bool m_displayHandels;
+
+    /**
+     * @brief Indique que la flèche est en train d'etre controlée par l'utilisateur
+     */
+    bool m_movingSource;
+
+    bool m_movingDestination;
 };
 
 #endif // GRAPHICARROW_H
