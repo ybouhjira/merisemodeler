@@ -25,8 +25,8 @@ public:
      * @todo Connecter avec widthChanged et heightChanged
      */
     GraphicArrow(
-            QGraphicsObject *source,
-            QGraphicsObject *destination,
+            GraphicObject *source,
+            GraphicObject *destination,
             qreal positionOnSource = 0.5,
             qreal positionOnDestination = 0.5,
             QGraphicsItem *parent = 0);
@@ -71,19 +71,24 @@ public:
      * @reimp
      */
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
+    /**
+     * @reimp
+     */
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *);
     
     // Accesseurs et mutateurs
     /**
      * @brief Accesseur
      * @return Source
      */
-    QGraphicsObject* source() const;
+    GraphicObject* source() const;
 
     /**
      * @brief Accesseur
      * @return Source
      */
-    QGraphicsObject* destination() const;
+    GraphicObject* destination() const;
 
     /**
      * @brief Accesseur
@@ -130,15 +135,19 @@ private:
 
     // ATTRIBUTS
 private:
+    // static
+    constexpr static const qreal HANDLE_SIZE = 6 ;
+
+    // non static
     /**
      * @brief Element source
      */
-    QGraphicsObject *m_source;
+    GraphicObject *m_source;
 
     /**
      * @brief Element de destination
      */
-    QGraphicsObject *m_destination;
+    GraphicObject *m_destination;
 
     /**
      * @brief Postion de l'extrimité de la flèche sur la source en pourcentage

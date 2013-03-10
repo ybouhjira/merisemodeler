@@ -48,6 +48,10 @@ signals:
      */
     void styleChanged(GraphicStyle*);
 
+    void widthChanged();
+
+    void heightChanged();
+
 public slots:
     /**
      * @brief Mutateur

@@ -7,6 +7,8 @@
  * @brief La classe GraphicResizableRoundedRectObject reimplement des méthodes
  * de QGraphicsItem pour permettre le redimensionnement et deplacement des
  * element avec la souris
+ *
+ * @todo Ajout d'une taille minimum
  */
 class GraphicResizableRoundedRectObject : public GraphicRoundedRectObject
 {

@@ -10,6 +10,7 @@
 #include <QApplication>
 #include <QTabBar>
 #include <QVBoxLayout>
+#include <QStatusBar>
 
 void MainWindow::showAboutDialog() {
     QString txt =
@@ -37,6 +38,8 @@ MainWindow::MainWindow()
     , m_quitAction(new QAction(tr("Quit"),this))
 {
     setWindowTitle("MeriseModeler");
+    setStatusBar(new QStatusBar(this));
+
     // MENUS
     setMenuBar(new QMenuBar(this));
     menuBar()->addMenu(m_fileMenu);

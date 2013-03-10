@@ -7,6 +7,7 @@
 #include <QPainterPath>
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QCursor>
 
 // PRIVATE
 QPointF GraphicArrow::findSourcePoint() const {
@@ -21,8 +22,8 @@ QPointF GraphicArrow::findDestPoint() const {
 
 // CONSTRUCTEUR
 GraphicArrow::GraphicArrow(
-        QGraphicsObject *source,
-        QGraphicsObject *destination,
+        GraphicObject *source,
+        GraphicObject *destination,
         qreal positionOnSource,
         qreal positionOnDestination,
         QGraphicsItem *parent) :
@@ -41,8 +42,13 @@ GraphicArrow::GraphicArrow(
     // Connections
     connect(m_source, SIGNAL(xChanged()), this, SLOT(redraw()) );
     connect(m_source, SIGNAL(yChanged()), this, SLOT(redraw()) );
+    connect(m_source, SIGNAL(heightChanged()), this, SLOT(redraw()) );
+    connect(m_source, SIGNAL(widthChanged()), this, SLOT(redraw()));
+
     connect(m_destination, SIGNAL(xChanged()), this, SLOT(redraw()) );
     connect(m_destination, SIGNAL(yChanged()), this, SLOT(redraw()) );
+    connect(m_destination, SIGNAL(heightChanged()), this, SLOT(redraw()) );
+    connect(m_destination, SIGNAL(widthChanged()), this, SLOT(redraw()) );
 }
 
 GraphicArrow::~GraphicArrow() {
@@ -59,8 +65,10 @@ void GraphicArrow::paint
     // Handlers
     if(m_displayHandels) {
         painter->setBrush(Qt::black);
-        painter->drawRect(QRectF(s - QPointF(2.5, 2.5), QSizeF(5,5)) );
-        painter->drawRect(QRectF(d  - QPointF(2.5, 2.5), QSizeF(5,5)) );
+        QPointF halfRect(HANDLE_SIZE / 2, HANDLE_SIZE / 2);
+        QSize size(HANDLE_SIZE, HANDLE_SIZE);
+        painter->drawRect(QRectF(s - halfRect, size));
+        painter->drawRect(QRectF(d - halfRect, size));
     }
 }
 
@@ -69,13 +77,13 @@ QRectF GraphicArrow::boundingRect() const {
     QPointF d = findDestPoint() ;
 
     QPointF topLeft(
-                ((s.x() < d.x())? s.x() : d.x()) - 2.5,
-                ((s.y() < d.y())? s.y() : d.y()) - 2.5
+                ((s.x() < d.x())? s.x() : d.x()) - HANDLE_SIZE / 2,
+                ((s.y() < d.y())? s.y() : d.y()) - HANDLE_SIZE / 2
                 );
 
     QPointF bottomRight(
-                ((s.x() > d.x())? s.x() : d.x()) + 2.5,
-                ((s.y() > d.y())? s.y() : d.y()) + 2.5
+                ((s.x() > d.x())? s.x() : d.x()) + HANDLE_SIZE / 2,
+                ((s.y() > d.y())? s.y() : d.y()) + HANDLE_SIZE / 2
                 );
 
     return QRectF(topLeft, bottomRight);
@@ -90,13 +98,21 @@ QPainterPath GraphicArrow::shape() const {
 
     // Pour inclure la largeur du trait
     QPainterPathStroker stroker;
-    stroker.setWidth(style()->pen().width());
+    stroker.setWidth(HANDLE_SIZE / 2);
     return stroker.createStroke(path);
 }
 
 // EVENTS
-void GraphicArrow::hoverEnterEvent(QGraphicsSceneHoverEvent *) {
+void GraphicArrow::hoverEnterEvent(QGraphicsSceneHoverEvent *event) {
     m_displayHandels = true ;
+
+    if(QLineF(findSourcePoint(), event->pos()).length() < HANDLE_SIZE)
+        setCursor(Qt::SizeAllCursor);
+    else if(QLineF(findDestPoint(), event->pos()).length() < HANDLE_SIZE)
+        setCursor(Qt::SizeAllCursor);
+    else
+        setCursor(QCursor());
+
     update(boundingRect());
 }
 
@@ -106,21 +122,37 @@ void GraphicArrow::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
 }
 
 void GraphicArrow::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
-    QPointF center = m_source->boundingRect().center() ;
+    if (m_movingSource || m_movingDestination) {
+        qreal *position;
+        GraphicObject* item;
 
-    if(m_movingSource)
-        m_positionOnSource = QLineF(center,event->pos()).angle() / 360;
-    else if(m_movingDestination)
-        m_positionOnDestionation = QLineF(center, event->pos()).angle() / 360;
-    redraw();
+        if(m_movingSource) {
+            position = &m_positionOnSource;
+            item = m_source;
+        } else if(m_movingDestination) {
+            position = &m_positionOnDestionation;
+            item = m_destination;
+        }
+
+        QPointF center = item->boundingRect().center();
+        QPointF topLeftCorner = item->boundingRect().topLeft();
+        topLeftCorner = mapFromItem(item,topLeftCorner);
+        center = mapFromItem(item, center);
+
+        QLineF posCenterLine(center,event->pos());
+        QLineF centerCornerLine(center, topLeftCorner);
+        *position = posCenterLine.angleTo(centerCornerLine) / 360;
+
+        redraw();
+    }
 }
 
 void GraphicArrow::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     QPointF pos = event->pos();
 
-    if(QLineF(findSourcePoint(), pos).length() < 6) {
+    if(QLineF(findSourcePoint(), pos).length() < 20) {
         m_movingSource = true;
-    }else if(QLineF(findDestPoint(), pos).length() < 6) {
+    }else if(QLineF(findDestPoint(), pos).length() < 20) {
         m_movingDestination = true;
     }else{
         m_movingSource = false;
@@ -128,12 +160,17 @@ void GraphicArrow::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     }
 }
 
+void GraphicArrow::mouseReleaseEvent(QGraphicsSceneMouseEvent *) {
+    m_movingDestination = false;
+    m_movingSource = false;
+}
+
 // ACCESSEURS ET MUTATEURS
-QGraphicsObject* GraphicArrow::source() const {
+GraphicObject* GraphicArrow::source() const {
     return m_source;
 }
 
-QGraphicsObject *GraphicArrow::destination() const {
+GraphicObject *GraphicArrow::destination() const {
     return m_destination;
 }
 

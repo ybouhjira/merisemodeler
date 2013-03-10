@@ -67,15 +67,19 @@ void GraphicResizableRoundedRectObject::mouseMoveEvent(QGraphicsSceneMouseEvent 
     case ResizeTop:
         setHeight(height() - y);
         setY(mapToParent(event->pos()).y());
+        emit heightChanged();
         break;
     case ResizeBottom:
         setHeight(y);
+        emit heightChanged();
         break;
     case ResizeRight:
         setWidth(x);
+        emit widthChanged();
         break;
     case ResizeLeft:
         setWidth(width() - x);
+        emit widthChanged();
         setX(mapToParent(event->pos()).x());
         break;
     case Move:
