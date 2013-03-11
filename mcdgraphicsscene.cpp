@@ -3,6 +3,7 @@
 #include "graphicassociation.h"
 #include "mcdmodel.h"
 #include "graphicstyle.h"
+#include "entity.h"
 
 // Qt
 #include <QGraphicsSceneMouseEvent>
@@ -51,7 +52,14 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             else {
                 Entity *entity2 = clickedEntity->entity();
                 Association *assoc = m_mcd->createAssociation(entity1, entity2);
-                addItem(new GraphicAssociation(assoc,x,y));
+
+                // Ajout l'association au centre
+                GraphicEntity* gEnt1 = entity1->graphicObject();
+                GraphicEntity* gEnt2 = entity2->graphicObject();
+                qreal assocX = (gEnt1->x() + gEnt2->x()) / 2 ;
+                qreal assocY = (gEnt1->y() + gEnt2->y()) / 2 ;
+                auto gAssoc = new GraphicAssociation(assoc, assocX, assocY);
+                addItem(gAssoc);
 
                 // Clean up
                 entity1 = nullptr;

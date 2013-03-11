@@ -52,10 +52,10 @@ void Association::setGraphicObject(GraphicAssociation *gassoc) {
     m_graphicAssociation = gassoc;
 }
 
-Entity* Association::firstEntity() const {
+Entity* Association::entity1() const {
     return m_links.first->entity();
 }
 
-Entity* Association::secondEntity() const {
+Entity* Association::entity2() const {
     return m_links.second->entity();
 }

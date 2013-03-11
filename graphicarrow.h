@@ -107,25 +107,25 @@ public slots:
      * @brief Mutateur
      * @param position Position entre 0 et 1
      */
-    void setPositionOnSource(qreal position);
+    void setPosOnSrc(qreal position);
 
     /**
      * @brief Mutateur
      * @param position Position entre 0 et 1
      */
-    void setPositionOnDestination(qreal position);
+    void setPosOnDest(qreal position);
 
     /**
      * @brief Redessine la flèche
      */
     void redraw();
 
-private:
+protected:
     /**
      * @return Le poit sur lequel doit etre connecté la flèche avec la
      * source en coordonées de cet elements
      */
-    inline QPointF findSourcePoint() const;
+    inline QPointF findSrcPoint() const;
 
     /**
      * @return Le poit sur lequel doit etre connecté la flèche avec la

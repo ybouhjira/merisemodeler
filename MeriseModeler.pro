@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     mcdgraphicsscene.cpp \
     modelstabwidget.cpp \
     associationlink.cpp \
-    graphicarrow.cpp
+    graphicarrow.cpp \
+    graphiccardinalityarrow.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -58,7 +59,8 @@ HEADERS  += mainwindow.h \
     mcdgraphicsscene.h \
     modelstabwidget.h \
     associationlink.h \
-    graphicarrow.h
+    graphicarrow.h \
+    graphiccardinalityarrow.h
 
 RESOURCES += \
     ressourceFile.qrc

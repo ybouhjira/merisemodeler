@@ -1,8 +1,9 @@
-#include "graphicassociation.h"
+﻿#include "graphicassociation.h"
 #include "association.h"
 #include "graphicarrow.h"
 #include "graphicentity.h"
 #include "entity.h"
+#include "graphiccardinalityarrow.h"
 
 // Qt
 #include <QPainter>
@@ -23,21 +24,34 @@ GraphicAssociation::GraphicAssociation (
         )
     : GraphicResizableRoundedRectObject(x, y, width, height, radius, parent)
     , m_association(association)
-    , m_arrows(new GraphicArrow(
+    , m_arrows(new GraphicCardinalityArrow(
+                   association->links().first->min(),
+                   association->links().first->max(),
                    this,
-                   association->firstEntity()->graphicObject(),
+                   association->entity1()->graphicObject(),
                    0.5,
                    0.5,
                    this),
-               new GraphicArrow(
+               new GraphicCardinalityArrow(
+                   association->links().second->min(),
+                   association->links().second->max(),
                    this,
-                   association->secondEntity()->graphicObject(),
+                   association->entity2()->graphicObject(),
                    0.5,
                    0.5,
                    this)
                )
 {
     association->setGraphicObject(this);
+
+    qreal xEnt1 = association->entity1()->graphicObject()->x() ;
+    qreal xEnt2 = association->entity2()->graphicObject()->x() ;
+
+    m_arrows.first->setPosOnDest((this->x() > xEnt1)? 0.35 : 0.85);
+    m_arrows.second->setPosOnDest((this->x() > xEnt2)? 0.35 : 0.85);
+
+    m_arrows.first->setPosOnSrc((this->x() > xEnt1)? 0.97 : 0.53);
+    m_arrows.second->setPosOnSrc((this->x() > xEnt2)? 0.97 : 0.53);
 }
 
 void GraphicAssociation::paint(

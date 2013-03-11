@@ -91,13 +91,13 @@ public:
      *     association.links().first.entity() ;
      * @endcode
      */
-    Entity* firstEntity() const;
+    Entity* entity1() const;
 
     /**
      * @brief Retourne la deuxième entité
      * @see Association::firstEntity()
      */
-    Entity* secondEntity() const;
+    Entity* entity2() const;
 
 private:
     /**

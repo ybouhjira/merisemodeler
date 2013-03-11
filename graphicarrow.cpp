@@ -10,7 +10,7 @@
 #include <QCursor>
 
 // PRIVATE
-QPointF GraphicArrow::findSourcePoint() const {
+QPointF GraphicArrow::findSrcPoint() const {
     QPointF s = m_source->shape().pointAtPercent(m_positionOnSource);
     return mapFromItem(m_source,s) ;
 }
@@ -58,7 +58,7 @@ void GraphicArrow::paint
 (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     GraphicObject::paint(painter, option, widget);
-    QPointF s = findSourcePoint();
+    QPointF s = findSrcPoint();
     QPointF d = findDestPoint();
     painter->drawLine(s, d);
 
@@ -73,7 +73,7 @@ void GraphicArrow::paint
 }
 
 QRectF GraphicArrow::boundingRect() const {
-    QPointF s = findSourcePoint() ;
+    QPointF s = findSrcPoint() ;
     QPointF d = findDestPoint() ;
 
     QPointF topLeft(
@@ -90,7 +90,7 @@ QRectF GraphicArrow::boundingRect() const {
 }
 
 QPainterPath GraphicArrow::shape() const {
-    QPointF s = findSourcePoint() ;
+    QPointF s = findSrcPoint() ;
     QPointF d = findDestPoint() ;
 
     QPainterPath path(s);
@@ -106,7 +106,7 @@ QPainterPath GraphicArrow::shape() const {
 void GraphicArrow::hoverEnterEvent(QGraphicsSceneHoverEvent *event) {
     m_displayHandels = true ;
 
-    if(QLineF(findSourcePoint(), event->pos()).length() < HANDLE_SIZE)
+    if(QLineF(findSrcPoint(), event->pos()).length() < HANDLE_SIZE)
         setCursor(Qt::SizeAllCursor);
     else if(QLineF(findDestPoint(), event->pos()).length() < HANDLE_SIZE)
         setCursor(Qt::SizeAllCursor);
@@ -150,7 +150,7 @@ void GraphicArrow::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 void GraphicArrow::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     QPointF pos = event->pos();
 
-    if(QLineF(findSourcePoint(), pos).length() < 20) {
+    if(QLineF(findSrcPoint(), pos).length() < 20) {
         m_movingSource = true;
     }else if(QLineF(findDestPoint(), pos).length() < 20) {
         m_movingDestination = true;
@@ -182,11 +182,11 @@ qreal GraphicArrow::positionOnDestination() const {
     return m_positionOnDestionation;
 }
 
-void GraphicArrow::setPositionOnSource(qreal position) {
+void GraphicArrow::setPosOnSrc(qreal position) {
     m_positionOnSource  = position ;
 }
 
-void GraphicArrow::setPositionOnDestination(qreal position) {
+void GraphicArrow::setPosOnDest(qreal position) {
     m_positionOnDestionation = position;
 }
 
