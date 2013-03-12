@@ -118,20 +118,19 @@ public slots:
     /**
      * @brief Redessine la flèche
      */
-    void redraw();
+    virtual void redraw();
 
-protected:
     /**
-     * @return Le poit sur lequel doit etre connecté la flèche avec la
+     * @return Le point sur lequel doit etre connecté la flèche avec la
      * source en coordonées de cet elements
      */
-    inline QPointF findSrcPoint() const;
+    QPointF findSrcPoint() const;
 
     /**
-     * @return Le poit sur lequel doit etre connecté la flèche avec la
+     * @return Le point sur lequel doit etre connecté la flèche avec la
      * destination en coordonées de cet elements
      */
-    inline QPointF findDestPoint() const;
+    QPointF findDestPoint() const;
 
     // ATTRIBUTS
 private:

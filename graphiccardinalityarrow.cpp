@@ -1,4 +1,5 @@
 #include "graphiccardinalityarrow.h"
+#include "graphiccardinaltytextitem.h"
 
 // Qt
 #include <QGraphicsSimpleTextItem>
@@ -15,24 +16,9 @@ GraphicCardinalityArrow::GraphicCardinalityArrow(
     GraphicArrow(source, destination, positionOnSource, positionOnDestination, parent)
   , m_min(min)
   , m_max(max)
-  , m_text(new QGraphicsSimpleTextItem("",this))
+  , m_text(new GraphicCardinalityTextItem(this, min, max))
 {
-    // Texte de la cardinalité
-    QString text = "";
-    switch(min) {
-    case AssociationLink::Zero: text += "0"; break;
-    case AssociationLink::One: text += "1"; break;
-    case AssociationLink::N: text += "n"; break;
-    }
-    text += ";";
-    switch(max) {
-    case AssociationLink::Zero: text += "0"; break;
-    case AssociationLink::One: text += "1"; break;
-    case AssociationLink::N: text += "n"; break;
-    }
-    m_text->setText(text);
-    m_text->setFlag(ItemIsMovable);
-    m_text->setPos(findDestPoint());
+
 }
 
 GraphicCardinalityArrow::~GraphicCardinalityArrow() {
@@ -52,4 +38,9 @@ AssociationLink::Cardinality GraphicCardinalityArrow::min() const {
 
 AssociationLink::Cardinality GraphicCardinalityArrow::max() const {
     return m_max ;
+}
+
+void GraphicCardinalityArrow::redraw() {
+    GraphicArrow::redraw();
+    m_text->updatePosOnDestCoordinates();
 }

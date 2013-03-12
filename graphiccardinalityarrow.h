@@ -3,6 +3,7 @@
 
 #include "graphicarrow.h"
 #include "associationlink.h"
+class GraphicCardinalityTextItem;
 
 // Qt
 class QGraphicsSimpleTextItem;
@@ -63,6 +64,13 @@ public slots:
      */
     void setMax(AssociationLink::Cardinality max);
 
+    /**
+     * @brief Appele GraphicArrow::redraw() et met à jour la position du text
+     * de la cardinalité
+     * @reimp
+     */
+    void redraw();
+
     // ATTRIBUTS
 private:
     /**
@@ -78,7 +86,8 @@ private:
     /**
      * @brief Le texte represnetant les cardinalité
      */
-    QGraphicsSimpleTextItem *m_text;
+    GraphicCardinalityTextItem *m_text;
+
     
 };
 
