@@ -14,7 +14,7 @@ GraphicCardinalityTextItem::GraphicCardinalityTextItem(
     , m_parentArrow(parentArrow)
 {
     updateText();
-    //updatePosOnDestCoordinates();
+    updatePosOnDestCoordinates();
 }
 
 AssociationLink::Cardinality GraphicCardinalityTextItem::min() const {

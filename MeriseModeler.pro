@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     associationlink.cpp \
     graphicarrow.cpp \
     graphiccardinalityarrow.cpp \
-    graphiccardinaltytextitem.cpp
+    graphiccardinaltytextitem.cpp \
+    graphicinheritencearrowobject.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -62,7 +63,8 @@ HEADERS  += mainwindow.h \
     associationlink.h \
     graphicarrow.h \
     graphiccardinalityarrow.h \
-    graphiccardinaltytextitem.h
+    graphiccardinaltytextitem.h \
+    graphicinheritencearrowobject.h
 
 RESOURCES += \
     ressourceFile.qrc

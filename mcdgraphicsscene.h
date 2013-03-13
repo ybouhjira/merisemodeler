@@ -9,6 +9,8 @@ class McdModel;
  * @brief Cette class est une sous class de QGraphicsScene qui contient
  * les elements graphique representant le MCD comme @ref GraphicEntity, et
  * @ref GraphicAsssociation
+ *
+ * @todo Refactor to a controller and a View
  */
 class McdGraphicsScene : public QGraphicsScene
 {
@@ -21,6 +23,7 @@ public:
     enum Mode {
         AddEntity,       //! Mode d'ajout d'une entité
         AddAssociation,  //! Mode d'ajout d'une association
+        Inheritence,     //! Mode d'héritage
         Remove,          //! Mode de supression
         None             //! Rien
     };

@@ -1,9 +1,13 @@
-#include "mcdgraphicsscene.h"
-#include "graphicentity.h"
-#include "graphicassociation.h"
+
 #include "mcdmodel.h"
 #include "graphicstyle.h"
 #include "entity.h"
+
+#include "mcdgraphicsscene.h"
+
+#include "graphicentity.h"
+#include "graphicassociation.h"
+#include "graphicinheritencearrowobject.h"
 
 // Qt
 #include <QGraphicsSceneMouseEvent>
@@ -43,11 +47,10 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 
         if(clickedEntity != nullptr) {
             static Entity *entity1 = nullptr;
-            static GraphicEntity* gEntity1 = nullptr;
+
             // Clique sur la premier entité
             if (entity1 == nullptr) {
                 entity1 = clickedEntity->entity();
-                gEntity1 = clickedEntity;
             }// Clique sur la seconde entité
             else {
                 Entity *entity2 = clickedEntity->entity();
@@ -66,8 +69,38 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
                 setMode(None);
             }
         }
-    }// PASSER L'EVENEMENT
-    else if(m_mode == None) {
+    }// HERITAGE
+    else if(m_mode == Inheritence) {
+        // !! COPIER COLLER !!
+        QGraphicsItem *clickedItem = itemAt(x,y, QTransform());
+        auto *clickedEntity = dynamic_cast<GraphicEntity*>(clickedItem);
+
+        if(clickedEntity != nullptr) {
+            static Entity *entity1 = nullptr;
+
+            // Clique sur la premier entité
+            if (entity1 == nullptr) {
+                entity1 = clickedEntity->entity();
+            }// Clique sur la seconde entité
+            else {
+                Entity *entity2 = clickedEntity->entity();
+                entity1->addParent(entity2);
+
+                // Ajout de la fléche d'héritage
+                auto arrow = new GraphicInheritenceArrowObject(
+                            entity1->graphicObject(),
+                            entity2->graphicObject()
+                            );
+                addItem(arrow);
+
+                // Clean up
+                entity1 = nullptr;
+                setMode(None);
+            }
+        }
+
+    // PASSER L'EVENEMENT
+    } else if(m_mode == None) {
         QGraphicsItem* clickedItem = itemAt(x,y, QTransform());
         if(clickedItem != nullptr) {
             clickedItem->setSelected(true);

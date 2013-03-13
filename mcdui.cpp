@@ -34,9 +34,12 @@ McdUi::McdUi(QWidget *parent)
     m_graphicsView->setInteractive(true);
 
     // Connections
-    connect(m_entityAction, SIGNAL(triggered()), this, SLOT(addEntity()) );
+    connect(m_entityAction, SIGNAL(triggered()),
+            this, SLOT(setAddEntityModeOnScene()) );
     connect(m_associationAction, SIGNAL(triggered()),
-            this, SLOT(addAssociation()) );
+            this, SLOT(setAddAssocModeOnScene()) );
+    connect(m_inheritanceAction, SIGNAL(triggered()),
+            this, SLOT(setInheritenceModeOnScene()) );
 }
 
 void McdUi::setModel(McdModel *mcd) {
@@ -49,10 +52,14 @@ McdModel* McdUi::model() const {
     return m_model ;
 }
 
-void McdUi::addEntity() const {
+void McdUi::setAddEntityModeOnScene() const {
     m_model->scene()->setMode(McdGraphicsScene::AddEntity);
 }
 
-void McdUi::addAssociation() const {
+void McdUi::setAddAssocModeOnScene() const {
     m_model->scene()->setMode(McdGraphicsScene::AddAssociation);
+}
+
+void McdUi::setInheritenceModeOnScene() const {
+    m_model->scene()->setMode(McdGraphicsScene::Inheritence);
 }

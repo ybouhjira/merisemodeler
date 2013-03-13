@@ -64,11 +64,7 @@ private:
     // ATTRIBUTS
 private:
 
-    /**
-     * @brief Position du text dans le repére dont le centre est le point de
-     * destination de la fléche
-     */
-    QPointF m_posOnDestPointCoordinates;
+
 
     /**
      * Cardinalité minimum
@@ -79,6 +75,12 @@ private:
      * Cardinalité maximum
      **/
     AssociationLink::Cardinality m_max;
+
+    /**
+     * @brief Position du text dans le repére dont le centre est le point de
+     * destination de la fléche
+     */
+    QPointF m_posOnDestPointCoordinates;
 
     /**
      * @brief Fléche sur laquelle est accroché cette cardinalité
