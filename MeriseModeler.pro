@@ -40,7 +40,9 @@ SOURCES += main.cpp\
     graphicinheritencearrowobject.cpp \
     pdfsceneexporter.cpp \
     graphicssceneexporter.cpp \
-    svgsceneexporter.cpp
+    svgsceneexporter.cpp \
+    entityeditwidget.cpp \
+    entitytablemodel.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -70,7 +72,9 @@ HEADERS  += mainwindow.h \
     graphicinheritencearrowobject.h \
     graphicssceneexporter.h \
     pdfsceneexporter.h \
-    svgsceneexporter.h
+    svgsceneexporter.h \
+    entityeditwidget.h \
+    entitytablemodel.h
 
 RESOURCES += \
     ressourceFile.qrc

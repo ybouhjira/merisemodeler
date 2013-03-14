@@ -38,7 +38,6 @@ MainWindow::MainWindow()
     , m_quitAction(new QAction(tr("Quit"),this))
 {
     setWindowTitle("MeriseModeler");
-    setStatusBar(new QStatusBar(this));
 
     // MENUS
     setMenuBar(new QMenuBar(this));

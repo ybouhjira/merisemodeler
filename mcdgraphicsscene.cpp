@@ -102,9 +102,8 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     // PASSER L'EVENEMENT
     } else if(m_mode == None) {
         QGraphicsItem* clickedItem = itemAt(x,y, QTransform());
-        if(clickedItem != nullptr) {
+        if(clickedItem != nullptr)
             clickedItem->setSelected(true);
-        }
         QGraphicsScene::mousePressEvent(event);
     }
 }

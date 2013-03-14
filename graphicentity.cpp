@@ -18,6 +18,9 @@ GraphicEntity::GraphicEntity(
   , m_entity(entity)
 {
     entity->setGraphicObject(this);
+
+    // Connection
+    connect(m_entity, &Item::nameChanged, [=](){ update(boundingRect()); });
 }
 
 void GraphicEntity::paint

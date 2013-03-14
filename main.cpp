@@ -2,6 +2,8 @@
 #include <QApplication>
 #include <QMenuBar>
 
+#include "entityeditwidget.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

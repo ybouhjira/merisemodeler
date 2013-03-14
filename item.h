@@ -27,6 +27,19 @@ public:
     virtual GraphicObject* graphicObject() const = 0 ;
 
     /**
+     * @brief Accesseur
+     * @return Les properiétés
+     */
+    QList<Property*> properties();
+
+    /**
+     * @brief Destroys the item
+     */
+    virtual ~Item();
+
+public slots:
+
+    /**
      * @brief Modifies the name of the item
      * @param name
      */
@@ -50,17 +63,11 @@ public:
      */
     void removeProperty(Property* property);
 
+signals:
     /**
-     * @brief Accesseur
-     * @return Les properiétés
+     * @brief Nom changé
      */
-    QList<Property*> properties();
-
-    /**
-     * @brief Destroys the item
-     */
-    virtual ~Item();
-
+    void nameChanged();
 protected:
     /**
      * @brief Constructs an item with a name

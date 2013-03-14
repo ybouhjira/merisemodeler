@@ -4,6 +4,7 @@
 #include "modelui.h"
 class McdModel;
 class ItemsBuilder;
+class EntityEditWidget;
 
 /**
  * @brief L'interface graphique du MCD
@@ -51,6 +52,11 @@ private slots:
      */
     void setInheritenceModeOnScene() const;
 
+    /**
+     * @brief Change l'element affiché dans le panneau selon la selection
+     */
+    void sceneSelectionChanged();
+
 signals:
     void modelChanged(McdModel*) ;
 private:
@@ -85,6 +91,17 @@ private:
       * @brief QAction qui Ajoute un relation d'hériatge entre deux entités
       */
     QAction *m_inheritanceAction;
+
+    /**
+     * @brief Widget qui edit l'entité
+     */
+    EntityEditWidget *m_entityWidget;
+
+    /**
+     * @brief Panneau qui contient les widgets qui permettent
+     * d'éditer les entités et associaotions
+     */
+    QDockWidget *m_itemEditDock;
 
 };
 
