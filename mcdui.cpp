@@ -60,9 +60,7 @@ McdUi::McdUi(QWidget *parent)
     connect(m_entityWidget, &EntityEditWidget::entityEdited, [=](Entity* ent){
         QGraphicsItem *gEntity = ent->graphicObject();
         m_graphicsView->updateScene({gEntity->boundingRect()});
-        // hack to make the graphicview auto update
-        m_graphicsView->hide();
-        m_graphicsView->show();
+        m_graphicsView->update();
     });
 }
 
