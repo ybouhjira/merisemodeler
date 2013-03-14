@@ -68,3 +68,7 @@ MainWindow::MainWindow()
 void MainWindow::createNewMcd() const{
     m_tabWidget->addModel(tr("unamed"), new McdModel);
 }
+
+QMenu* MainWindow::fileMenu() {
+    return m_fileMenu;
+}

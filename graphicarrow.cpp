@@ -11,12 +11,12 @@
 
 // PRIVATE
 QPointF GraphicArrow::findSrcPoint() const {
-    QPointF s = m_source->shape().pointAtPercent(m_positionOnSource);
+    QPointF s = m_source->shape().pointAtPercent(m_posOnSrc);
     return mapFromItem(m_source,s) ;
 }
 
 QPointF GraphicArrow::findDestPoint() const {
-    QPointF d = m_destination->shape().pointAtPercent(m_positionOnDestionation);
+    QPointF d = m_destination->shape().pointAtPercent(m_positionOnDest);
     return mapFromItem(m_destination,d) ;
 }
 
@@ -30,8 +30,8 @@ GraphicArrow::GraphicArrow(
     GraphicObject(parent)
   , m_source(source)
   , m_destination(destination)
-  , m_positionOnSource(positionOnSource)
-  , m_positionOnDestionation(positionOnDestination)
+  , m_posOnSrc(positionOnSource)
+  , m_positionOnDest(positionOnDestination)
   , m_displayHandels(false)
   , m_movingSource(false)
   , m_movingDestination(false)
@@ -121,27 +121,16 @@ void GraphicArrow::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
     update(boundingRect());
 }
 
-void GraphicArrow::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
+void GraphicArrow::mouseMoveEvent(QGraphicsSceneMouseEvent *e) {
     if (m_movingSource || m_movingDestination) {
-        qreal *position;
-        GraphicObject* item;
+        qreal &pos = m_movingSource? m_posOnSrc : m_positionOnDest;
+        GraphicObject *item = m_movingSource? m_source : m_destination;
 
-        if(m_movingSource) {
-            position = &m_positionOnSource;
-            item = m_source;
-        } else if(m_movingDestination) {
-            position = &m_positionOnDestionation;
-            item = m_destination;
-        }
+        QPointF center = mapFromItem(item, item->boundingRect().center());
+        QPointF corner = mapFromItem(item, item->boundingRect().topLeft());
 
-        QPointF center = item->boundingRect().center();
-        QPointF topLeftCorner = item->boundingRect().topLeft();
-        topLeftCorner = mapFromItem(item,topLeftCorner);
-        center = mapFromItem(item, center);
-
-        QLineF posCenterLine(center,event->pos());
-        QLineF centerCornerLine(center, topLeftCorner);
-        *position = posCenterLine.angleTo(centerCornerLine) / 360;
+        qreal angle = QLineF(center,e->pos()).angleTo(QLineF(center, corner));
+        pos = angle / 360;
 
         redraw();
     }
@@ -175,19 +164,19 @@ GraphicObject *GraphicArrow::destination() const {
 }
 
 qreal GraphicArrow::positionOnSource() const {
-    return m_positionOnSource;
+    return m_posOnSrc;
 }
 
 qreal GraphicArrow::positionOnDestination() const {
-    return m_positionOnDestionation;
+    return m_positionOnDest;
 }
 
 void GraphicArrow::setPosOnSrc(qreal position) {
-    m_positionOnSource  = position ;
+    m_posOnSrc  = position ;
 }
 
 void GraphicArrow::setPosOnDest(qreal position) {
-    m_positionOnDestionation = position;
+    m_positionOnDest = position;
 }
 
 void GraphicArrow::redraw() {

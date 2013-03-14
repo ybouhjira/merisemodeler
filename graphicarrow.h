@@ -151,13 +151,13 @@ private:
     /**
      * @brief Postion de l'extrimité de la flèche sur la source en pourcentage
      */
-    qreal m_positionOnSource;
+    qreal m_posOnSrc;
 
     /**
      * @brief Postion de l'extrimité de la flèche sur la destination
      * en pourcentage
      */
-    qreal m_positionOnDestionation;
+    qreal m_positionOnDest;
 
     /**
      * @brief Afficher les controleurs

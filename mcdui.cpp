@@ -29,6 +29,9 @@ McdUi::McdUi(QWidget *parent)
     m_toolBar->addSeparator();
     m_toolBar->addAction(m_inheritanceAction);
 
+    m_graphicsView->setSceneRect(0,0,2000,2000);
+    m_graphicsView->scroll(-1000, -1000);
+
     // Activation de la selection
     m_graphicsView->setDragMode(QGraphicsView::RubberBandDrag);
     m_graphicsView->setInteractive(true);

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core widgets
+QT       += core widgets svg
 CONFIG += c++11
 
 TARGET = MeriseModeler
@@ -37,7 +37,10 @@ SOURCES += main.cpp\
     graphicarrow.cpp \
     graphiccardinalityarrow.cpp \
     graphiccardinaltytextitem.cpp \
-    graphicinheritencearrowobject.cpp
+    graphicinheritencearrowobject.cpp \
+    pdfsceneexporter.cpp \
+    graphicssceneexporter.cpp \
+    svgsceneexporter.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -64,7 +67,10 @@ HEADERS  += mainwindow.h \
     graphicarrow.h \
     graphiccardinalityarrow.h \
     graphiccardinaltytextitem.h \
-    graphicinheritencearrowobject.h
+    graphicinheritencearrowobject.h \
+    graphicssceneexporter.h \
+    pdfsceneexporter.h \
+    svgsceneexporter.h
 
 RESOURCES += \
     ressourceFile.qrc

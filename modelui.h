@@ -23,6 +23,12 @@ protected:
      */
     virtual ~ModelUi();
 
+private slots:
+    /**
+     * @brief Affiche une boite de dialogue pour exporter le model
+     */
+    void showExportDialog();
+
     // ATTRIBUTS
 protected:
     /**
@@ -34,6 +40,11 @@ protected:
       * @brief Barre d'outils
       */
     QToolBar *m_toolBar;
+
+    /**
+     * @brief Action pour exporter le model en PDF, SVG ou autre
+     */
+    QAction *m_exportAction;
 };
 
 #endif // MODELUI_H

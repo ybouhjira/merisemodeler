@@ -23,6 +23,11 @@ public:
      */
     static MainWindow* getInstance();
 
+    /**
+     * @return Le menu fichier
+     */
+    QMenu* fileMenu() ;
+
 public slots:
     /**
      * @brief Affiche le message a propos
