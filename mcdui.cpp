@@ -57,10 +57,8 @@ McdUi::McdUi(QWidget *parent)
     connect(m_inheritanceAction, SIGNAL(triggered()),
             this, SLOT(setInheritenceModeOnScene()) );
 
-    connect(m_entityWidget, &EntityEditWidget::entityEdited, [=](Entity* ent){
-        QGraphicsItem *gEntity = ent->graphicObject();
-        m_graphicsView->updateScene({gEntity->boundingRect()});
-        m_graphicsView->update();
+    connect(m_entityWidget, &EntityEditWidget::entityEdited, [=](){
+        m_graphicsView->viewport()->update();
     });
 }
 

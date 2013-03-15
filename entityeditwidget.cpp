@@ -74,4 +74,5 @@ Entity* EntityEditWidget::entity() const {
 
 void EntityEditWidget::addProperty() {
     m_tableModel->addProperty(new Property(tr("property"), Type("SomeTYpe")));
+    emit entityEdited(m_entity);
 }
