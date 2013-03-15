@@ -2,6 +2,7 @@
 #define ENTITYEDITWIDGET_H
 
 class Entity;
+class EntityTableModel;
 
 // Qt
 #include <QWidget>
@@ -9,6 +10,7 @@ class QLineEdit;
 class QVBoxLayout;
 class QTableView;
 class QTabWidget;
+class QPushButton;
 
 /**
  * @brief EntityEditWidget est le widget qui permet d'éditer une entité
@@ -49,6 +51,13 @@ public slots:
      */
     void setEntity(Entity* entity);
 
+private slots:
+    /**
+     * @brief Ajoute une properiété à l'entité lorsque on clique sur le
+     * bouton ajouter
+     */
+    void addProperty();
+
 private:
     /**
      * @brief L'entité
@@ -73,7 +82,22 @@ private:
     /**
      * @brief Table qui affiche les propriétés
      */
-    QTableView *m_propertiesView;
+    QTableView *m_tableView;
+
+    /**
+     * @brief Model qui sert à représenter les donnés pour le QTableView
+     */
+    EntityTableModel *m_tableModel;
+
+    /**
+     * @brief Bouton Ajouter proriété
+     */
+    QPushButton *m_addButton;
+
+    /**
+     * @brief Bouton supprimer propriété
+     */
+    QPushButton *m_removeButton;
     
 };
 

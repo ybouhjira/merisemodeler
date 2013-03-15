@@ -7,9 +7,9 @@ Property::Property ( QString const &name
                    , bool identifiant)
     : m_name(name)
     , m_type(type)
-    , m_obligatory(obligatory)
+    , m_isObligatory(obligatory)
     , m_defaultValue(defaultVal)
-    , m_identifiant(identifiant)
+    , m_isIdentifier(identifiant)
     , m_check(check)
 {
 }
@@ -29,17 +29,17 @@ void Property::setName(QString const &name)
     m_name = name;
 }
 
-bool Property::obligatory()
+bool Property::isObligatory()
 {
-    return m_obligatory;
+    return m_isObligatory;
 }
 
-void Property::setObligatory(bool obligatory)
+void Property::setIsObligatory(bool obligatory)
 {
-    m_obligatory = obligatory;
+    m_isObligatory = obligatory;
 }
 
-QString Property::check()
+QString Property::check() const
 {
     return m_check;
 }
@@ -49,7 +49,7 @@ void Property::setCheck(QString const &Check)
     m_check = Check;
 }
 
-QString Property::defaultValue()
+QString Property::defaultValue() const
 {
     return m_defaultValue;
 }
@@ -67,5 +67,9 @@ Type Property::type()
 void Property::setType(Type T)
 {
     m_type = T;
+}
+
+bool Property::isIdentifier() const {
+  return m_isIdentifier;
 }
 

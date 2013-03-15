@@ -21,10 +21,10 @@ public:
      */
     Property(QString const &name,
              Type type,
-             bool obligatory = false,
+             bool isObligatory = false,
              QString const &check = "",
              QString const &defaultValue = "",
-             bool identifiant = false);
+             bool isIdentifier = false);
 
     /**
      * @brief Destructeur
@@ -47,19 +47,19 @@ public:
      * @brief Accesseur
      * @return Valeur est obligatoire
      */
-    bool obligatory();
+    bool isObligatory();
 
     /**
      * @brief Mutateur
      * @param Valeur est obligatoire
      */
-    void setObligatory(bool obligatory);
+    void setIsObligatory(bool isObligatory);
 
     /**
      * @brief Accesseur
      * @return Identifiant
      */
-    bool identifiant();
+    bool isIdentifier() const;
 
     /**
      * @brief
@@ -69,7 +69,7 @@ public:
     /**
      * @brief returns the check condition
      */
-    QString check();
+    QString check() const;
 
     /**
      * @brief Modifies the check condition
@@ -79,7 +79,7 @@ public:
     /**
      * @brief returns the default value
      */
-    QString defaultValue();
+    QString defaultValue() const;
 
     /**
      * @brief Modifies the default value
@@ -111,7 +111,7 @@ private:
     /**
      * @brief Obligatoire
      */
-    bool m_obligatory;
+    bool m_isObligatory;
 
     /**
      * @brief Valeur par default
@@ -121,7 +121,7 @@ private:
     /**
      * @brief Est un identifiant
      */
-    bool m_identifiant;
+    bool m_isIdentifier;
 
     /**
      * @brief Condition

@@ -25,6 +25,7 @@ void Item::setName(QString const &name)
 void Item::addProperty(Property *property)
 {
     m_properties.append(property);
+    emit propertiesEdited();
 }
 
 void Item::removeProperty(int index)

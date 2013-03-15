@@ -68,6 +68,11 @@ signals:
      * @brief Nom changé
      */
     void nameChanged();
+
+    /**
+     * @brief Properietes changées
+     */
+    void propertiesEdited();
 protected:
     /**
      * @brief Constructs an item with a name
