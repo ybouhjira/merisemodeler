@@ -19,24 +19,36 @@ public:
     // Redéfinitions
     /**
      * @reimp
+     * @brief Renvoie les données
      */
-    QVariant data(const QModelIndex &index, int role) const ;
+    QVariant data(const QModelIndex &index, int role) const override;
 
     /**
      * @reimp
+     * @brief Renvoie le nombre de lignes
      */
-    int rowCount(const QModelIndex &parent) const;
+    int rowCount(const QModelIndex &parent) const override;
 
     /**
      * @reimp
+     * @brief Renvoie le nombre de colonne
      */
-    int columnCount(const QModelIndex &parent) const;
+    int columnCount(const QModelIndex &parent) const override;
 
     /**
      * @reimp
+     * @brief Renvoie les titres des colonnes et les nombre des lignes
      */
     QVariant headerData(int section,
-                        Qt::Orientation orientation, int role) const;
+                        Qt::Orientation orientation, int role) const override;
+
+    /**
+     * @reimp
+     * @brief implmenté pour indiquer que les deux dernières colonnes doivent
+     * etre representés sous forme de checkbox
+     */
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+
 
 public slots:
     /**

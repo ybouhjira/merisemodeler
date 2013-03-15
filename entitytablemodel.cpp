@@ -19,12 +19,21 @@ QVariant EntityTableModel::data(const QModelIndex &index, int role) const {
             case 1:
                 return pty->type().name();
                 break;
+            case 4:
+                return pty->defaultValue();
+            default:
+                return QVariant();
+            }
+        case Qt::CheckStateRole:
+            switch(index.column()) {
             case 2:
                 return pty->isIdentifier();
                 break;
             case 3:
                 return pty->isObligatory();
                 break;
+            default:
+                return QVariant();
             }
         default:
             return QVariant();
@@ -42,7 +51,7 @@ int EntityTableModel::rowCount(const QModelIndex &/*parent*/) const {
 }
 
 int EntityTableModel::columnCount(const QModelIndex &/*parent*/) const {
-    return 4;
+    return 5;
 }
 
 QVariant EntityTableModel::headerData
@@ -62,11 +71,13 @@ QVariant EntityTableModel::headerData
                 return tr("Type");
                 break;
             case 2:
-                return tr("Id");
+                return tr("id");
                 break;
             case 3:
                 return tr("Obligatory");
                 break;
+            case 4:
+                return tr("Default");
             default:
                 return QVariant();
             }
@@ -89,4 +100,24 @@ void EntityTableModel::addProperty(Property *property) {
     beginResetModel();
     m_entity->addProperty(property);
     endResetModel();
+}
+
+Qt::ItemFlags EntityTableModel::flags(const QModelIndex &index) const {
+    switch(index.column()) {
+    case 0:
+    case 1:
+        return Qt::ItemIsSelectable
+                | Qt::ItemIsEditable
+                | Qt::ItemIsEnabled;
+        break;
+    case 2:
+    case 3:
+        return Qt::ItemIsSelectable
+                | Qt::ItemIsEditable
+                | Qt::ItemIsEnabled
+                | Qt::ItemIsUserCheckable;
+        break;
+    default:
+        return Qt::NoItemFlags;
+    }
 }
