@@ -58,7 +58,12 @@ private slots:
     void sceneSelectionChanged();
 
 signals:
+    /**
+     * @reimp
+     * @brief Model Changé avec McdUi::setModel
+     */
     void modelChanged(McdModel*) ;
+
 private:
     /**
      * @brief Constructeur

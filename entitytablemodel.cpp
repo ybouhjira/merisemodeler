@@ -27,10 +27,10 @@ QVariant EntityTableModel::data(const QModelIndex &index, int role) const {
         case Qt::CheckStateRole:
             switch(index.column()) {
             case 2:
-                return pty->isIdentifier();
+                return pty->isIdentifier()? Qt::Checked : Qt::Unchecked;
                 break;
             case 3:
-                return pty->isObligatory();
+                return pty->isObligatory()? Qt::Checked : Qt::Unchecked;
                 break;
             default:
                 return QVariant();
@@ -38,7 +38,7 @@ QVariant EntityTableModel::data(const QModelIndex &index, int role) const {
         default:
             return QVariant();
         }
-    }else {
+    } else {
         return QVariant();
     }
 }
@@ -60,7 +60,7 @@ QVariant EntityTableModel::headerData
     case Qt::DisplayRole:
         switch(orientation) {
         case Qt::Vertical:
-            return section;
+            return section + 1;
             break;
         case Qt::Horizontal:
             switch(section) {
@@ -97,27 +97,62 @@ void EntityTableModel::setEntity(Entity *entity) {
 }
 
 void EntityTableModel::addProperty(Property *property) {
-    beginResetModel();
-    m_entity->addProperty(property);
-    endResetModel();
+    if(m_entity != nullptr) {
+        beginResetModel();
+        m_entity->addProperty(property);
+        endResetModel();
+    }
 }
 
 Qt::ItemFlags EntityTableModel::flags(const QModelIndex &index) const {
     switch(index.column()) {
-    case 0:
-    case 1:
-        return Qt::ItemIsSelectable
-                | Qt::ItemIsEditable
-                | Qt::ItemIsEnabled;
+    case 0: //< Nom
+    case 1: //< Type
+    case 4: //< Default
+        return Qt::ItemIsEditable | Qt::ItemIsEnabled;
         break;
-    case 2:
-    case 3:
-        return Qt::ItemIsSelectable
-                | Qt::ItemIsEditable
-                | Qt::ItemIsEnabled
+    case 2: //< id
+    case 3: // oblig
+        return Qt::ItemIsEnabled
                 | Qt::ItemIsUserCheckable;
         break;
     default:
         return Qt::NoItemFlags;
     }
+}
+
+bool EntityTableModel::setData
+(const QModelIndex &index, const QVariant &value, int role)
+{
+    // La properiété à changer
+    Property* property = m_entity->properties()[index.row()] ;
+
+    bool sucssesfulChange = false;
+
+    switch(index.column()) {
+    case 0:
+        property->setName(value.toString());
+        sucssesfulChange = true;
+        break;
+    case 1:
+        return false;
+        break;
+    case 2:
+        property->setIsIdentifier(value.toBool());
+        sucssesfulChange = true;
+        break;
+    case 3:
+        property->setIsObligatory(value.toBool());
+        sucssesfulChange = true;
+        break;
+    case 4:
+        property->setDefaultValue(value.toString());
+        sucssesfulChange = true;
+        break;
+    }
+    if(sucssesfulChange) {
+        emit dataChanged(index, index, {role});
+        return true;
+    }
+    return false;
 }

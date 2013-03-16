@@ -73,3 +73,6 @@ bool Property::isIdentifier() const {
   return m_isIdentifier;
 }
 
+void Property::setIsIdentifier(bool id) {
+    m_isIdentifier = id;
+}

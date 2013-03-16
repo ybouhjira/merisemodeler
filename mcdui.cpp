@@ -57,9 +57,11 @@ McdUi::McdUi(QWidget *parent)
     connect(m_inheritanceAction, SIGNAL(triggered()),
             this, SLOT(setInheritenceModeOnScene()) );
 
-    connect(m_entityWidget, &EntityEditWidget::entityEdited, [=](){
+    auto updateFunc = [=](){
         m_graphicsView->viewport()->update();
-    });
+    };
+    connect(m_entityWidget, &EntityEditWidget::entityEdited, updateFunc);
+
 }
 
 void McdUi::setModel(McdModel *mcd) {

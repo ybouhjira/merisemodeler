@@ -1,5 +1,6 @@
 #include "graphicentity.h"
 #include "entity.h"
+#include "graphicstyle.h"
 
 //Qt
 #include <QPainter>
@@ -47,10 +48,15 @@ void GraphicEntity::paint
     painter->drawLine(0, lineY, width(), lineY);
 
     // Ecrire les proprietes
-    QList<Property*> properties = m_entity->properties();
-    for(int i=0, size=properties.size(); i<size; i++) {
+    QFont underlined = style()->font();
+    underlined.setUnderline(true);
+
+    QList<Property*> pts = m_entity->properties();
+    for(int i=0; i<pts.size(); i++) {
+        // sourligner les identifiants
+        painter->setFont(pts[i]->isIdentifier()? underlined : style()->font());
         qreal pHeight = lineY + (padding + fontHeight)*(i + 1);
-        painter->drawText(padding, pHeight, properties[i]->name());
+        painter->drawText(padding, pHeight, pts[i]->name());
     }
 }
 

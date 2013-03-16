@@ -53,8 +53,13 @@ EntityEditWidget::EntityEditWidget(Entity *entity, QWidget *parent)
         m_entity->setName(text);
         emit entityEdited(m_entity);
     });
-
+    // Bouton ajouter
     connect(m_addButton, SIGNAL(clicked()), this, SLOT(addProperty()) );
+
+    // connection avec le model
+    connect(m_tableModel, &QAbstractItemModel::dataChanged, [=]() {
+        emit entityEdited(m_entity);
+    });
 }
 
 void EntityEditWidget::setEntity(Entity *entity) {

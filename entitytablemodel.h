@@ -49,6 +49,11 @@ public:
      */
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
+    /**
+     * @reimp
+     */
+    bool setData(const QModelIndex &index, const QVariant &value, int role);
+
 
 public slots:
     /**

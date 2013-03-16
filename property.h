@@ -64,7 +64,7 @@ public:
     /**
      * @brief
      */
-    void setIdentifiant();
+    void setIsIdentifier(bool isIndetifier);
 
     /**
      * @brief returns the check condition
