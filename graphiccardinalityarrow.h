@@ -23,8 +23,8 @@ public:
      * @ref GraphicArrow
      */
     GraphicCardinalityArrow(
-            AssociationLink::Cardinality min,
-            AssociationLink::Cardinality max,
+            Logic::Link::Cardinality min,
+            Logic::Link::Cardinality max,
             GraphicObject *source,
             GraphicObject *destination,
             qreal positionOnSource = 0.5,
@@ -42,13 +42,13 @@ public:
      * @brief Accesseur
      * @return Cardinalité minimum
      */
-    AssociationLink::Cardinality min() const;
+    Logic::Link::Cardinality min() const;
 
     /**
      * @brief Accesseur
      * @return Cardinalité maximum
      */
-    AssociationLink::Cardinality max() const;
+    Logic::Link::Cardinality max() const;
 
     // Mutateurs
 public slots:
@@ -56,13 +56,13 @@ public slots:
      * @brief Mutateur
      * @param min Cardinalité minimum
      */
-    void setMin(AssociationLink::Cardinality min);
+    void setMin(Logic::Link::Cardinality min);
 
     /**
      * @brief Mutateur
      * @param max Cardinalité maximum
      */
-    void setMax(AssociationLink::Cardinality max);
+    void setMax(Logic::Link::Cardinality max);
 
     /**
      * @brief Appele GraphicArrow::redraw() et met à jour la position du text
@@ -76,12 +76,12 @@ private:
     /**
      * @brief Cardinalé minimum
      */
-    AssociationLink::Cardinality m_min;
+    Logic::Link::Cardinality m_min;
 
     /**
      * @brief Cardinalité maximum
      */
-    AssociationLink::Cardinality m_max;
+    Logic::Link::Cardinality m_max;
 
     /**
      * @brief Le texte represnetant les cardinalité

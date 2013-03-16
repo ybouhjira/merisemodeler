@@ -2,12 +2,14 @@
 #include "item.h"
 #include "entity.h"
 #include "association.h"
-#include "mcdgraphicsscene.h"
 #include "associationlink.h"
+#include "mcdgraphicsscene.h"
 
 // Qt
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+
+using namespace Logic;
 
 McdModel::McdModel(QObject *parent)
     : QObject(parent)
@@ -64,7 +66,7 @@ Entity* McdModel::createEntity() {
     }
 
     // Ajout de l'entité au Model
-    Entity *entity = new Entity(entityName + nameSuffix) ;
+    auto entity = new Entity(entityName + nameSuffix) ;
     m_items.append(entity);
     return entity;
 }

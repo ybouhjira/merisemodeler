@@ -6,8 +6,8 @@
 #include <QPen>
 
 GraphicCardinalityArrow::GraphicCardinalityArrow(
-        AssociationLink::Cardinality min,
-        AssociationLink::Cardinality max,
+        Logic::Link::Cardinality min,
+        Logic::Link::Cardinality max,
         GraphicObject *source,
         GraphicObject *destination,
         qreal positionOnSource,
@@ -24,19 +24,19 @@ GraphicCardinalityArrow::GraphicCardinalityArrow(
 GraphicCardinalityArrow::~GraphicCardinalityArrow() {
 }
 
-void GraphicCardinalityArrow::setMin(AssociationLink::Cardinality min) {
+void GraphicCardinalityArrow::setMin(Logic::Link::Cardinality min) {
     m_min = min;
 }
 
-void GraphicCardinalityArrow::setMax(AssociationLink::Cardinality max) {
+void GraphicCardinalityArrow::setMax(Logic::Link::Cardinality max) {
     m_max = max ;
 }
 
-AssociationLink::Cardinality GraphicCardinalityArrow::min() const {
+Logic::Link::Cardinality GraphicCardinalityArrow::min() const {
     return m_min ;
 }
 
-AssociationLink::Cardinality GraphicCardinalityArrow::max() const {
+Logic::Link::Cardinality GraphicCardinalityArrow::max() const {
     return m_max ;
 }
 

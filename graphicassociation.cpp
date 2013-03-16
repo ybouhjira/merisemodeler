@@ -14,7 +14,7 @@ qreal const GraphicAssociation::DEFAULT_WIDTH = 100;
 qreal const GraphicAssociation::DEFAULT_HEIGHT = 50;
 
 GraphicAssociation::GraphicAssociation (
-        Association *association,
+        Logic::Association *association,
         qreal x,
         qreal y,
         qreal width,
@@ -83,7 +83,7 @@ void GraphicAssociation::paint(
         painter->drawLine(0, lineY, width(), lineY);
 
         // Ecrire les entité
-        QList<Property*> properties = m_association->properties();
+        QList<Logic::Property*> properties = m_association->properties();
         for(int i=0, size=properties.size(); i<size; i++) {
             qreal pHeight = lineY + (padding + fontHeight)*(i + 1);
             painter->drawText(padding, pHeight, properties[i]->name());

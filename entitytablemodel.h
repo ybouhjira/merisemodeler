@@ -13,7 +13,7 @@ public:
      * @param parent QObject parent
      */
     explicit EntityTableModel(
-            Entity* entity = nullptr,
+            Logic::Entity* entity = nullptr,
             QObject* parent = nullptr);
 
     // Redéfinitions
@@ -60,19 +60,19 @@ public slots:
      * @brief Change l'entité en plus d'établir la connexion avec les
      * signaux qui sont emis lors du changement de cette dernière
      */
-    void setEntity(Entity* entity);
+    void setEntity(Logic::Entity* entity);
 
     /**
      * @brief Ajoute la propriété a l'entité
      * @param pty Properiété
      */
-    void addProperty(Property* property);
+    void addProperty(Logic::Property* property);
 
 private:
     /**
      * @brief Entité
      */
-    Entity *m_entity;
+    Logic::Entity *m_entity;
 };
 
 #endif // ENTITYTABLEMODEL_H

@@ -1,6 +1,7 @@
 #ifndef GRAPHICCARDINALTYTEXTITEM_H
 #define GRAPHICCARDINALTYTEXTITEM_H
 
+#include "logic/namespace.h"
 #include "associationlink.h"
 class GraphicCardinalityArrow;
 // Qt
@@ -16,8 +17,8 @@ class GraphicCardinalityTextItem : public QGraphicsSimpleTextItem
 public:
     GraphicCardinalityTextItem(
             GraphicCardinalityArrow* parentArrow,
-            AssociationLink::Cardinality min = AssociationLink::Zero,
-            AssociationLink::Cardinality max = AssociationLink::N
+            Logic::Link::Cardinality min = Logic::Link::Zero,
+            Logic::Link::Cardinality max = Logic::Link::N
             );
 
     // Redefinitions
@@ -28,26 +29,26 @@ public:
      * @brief Accesseur
      * @return  Cardinalité minimum
      */
-    AssociationLink::Cardinality min() const;
+    Logic::Link::Cardinality min() const;
 
     /**
      * @brief Accesseur
      * @return Cardinalité maximum
      */
-    AssociationLink::Cardinality max() const;
+    Logic::Link::Cardinality max() const;
 
     // Mutateurs
     /**
      * @brief mutateur
      * @param Cardinalité minimum
      */
-    void setMin(AssociationLink::Cardinality min);
+    void setMin(Logic::Link::Cardinality min);
 
     /**
      * @brief Mutateur
      * @param Cardinalité maximum
      */
-    void setMax(AssociationLink::Cardinality max);
+    void setMax(Logic::Link::Cardinality max);
 
     /**
      * @brief Met à jour la les coordonés dans le repaire dont le centre est le
@@ -69,12 +70,12 @@ private:
     /**
      * Cardinalité minimum
      **/
-    AssociationLink::Cardinality m_min ;
+    Logic::Link::Cardinality m_min ;
 
     /**
      * Cardinalité maximum
      **/
-    AssociationLink::Cardinality m_max;
+    Logic::Link::Cardinality m_max;
 
     /**
      * @brief Position du text dans le repére dont le centre est le point de

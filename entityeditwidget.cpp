@@ -12,7 +12,7 @@
 #include <QRegExpValidator>
 #include <QPushButton>
 
-EntityEditWidget::EntityEditWidget(Entity *entity, QWidget *parent)
+EntityEditWidget::EntityEditWidget(Logic::Entity *entity, QWidget *parent)
     : QWidget(parent)
     , m_entity(entity)
     , m_entityPageWidget(new QWidget)
@@ -62,7 +62,7 @@ EntityEditWidget::EntityEditWidget(Entity *entity, QWidget *parent)
     });
 }
 
-void EntityEditWidget::setEntity(Entity *entity) {
+void EntityEditWidget::setEntity(Logic::Entity *entity) {
     if(entity != m_entity) {
         m_entity = entity ;
         emit entityChanged(m_entity);
@@ -73,11 +73,11 @@ void EntityEditWidget::setEntity(Entity *entity) {
     }
 }
 
-Entity* EntityEditWidget::entity() const {
+Logic::Entity* EntityEditWidget::entity() const {
     return m_entity;
 }
 
 void EntityEditWidget::addProperty() {
-    m_tableModel->addProperty(new Property(tr("property"), Type("SomeTYpe")));
+    m_tableModel->addProperty(new Logic::Property(tr("property"), Logic::Type("SomeTYpe")));
     emit entityEdited(m_entity);
 }

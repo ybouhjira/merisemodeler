@@ -1,6 +1,8 @@
 #include "entitytablemodel.h"
 #include "property.h"
 
+using namespace Logic;
+
 EntityTableModel::EntityTableModel(Entity* entity, QObject* parent)
     : QAbstractTableModel(parent)
 {

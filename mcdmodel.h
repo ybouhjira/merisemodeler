@@ -1,10 +1,8 @@
 #ifndef MCDMODEL_H
 #define MCDMODEL_H
 
-class Item;
+#include "logic/namespace.h"
 class McdGraphicsScene;
-class Entity;
-class Association;
 
 // Qt
 #include <QObject>
@@ -40,19 +38,19 @@ public slots:
      * @brief items
      * @return List des élements
      */
-    QList<Item*> items() const;
+    QList<Logic::Item*> items() const;
 
     /**
      * @brief Ajoute une entité ou association au model
      * @param item Element à ajouter
      */
-    void addItem(Item* item);
+    void addItem(Logic::Item* item);
 
     /**
      * @brief Supprimer un element du model
      * @param item Element à supprimer
      */
-    void removeItem(Item* item);
+    void removeItem(Logic::Item* item);
 
     /**
      * @brief Supprimer un element du model
@@ -67,7 +65,7 @@ public slots:
      * exemple : Entity1, Entity2, ... etc
      * @return L'entité creée
      */
-    Entity* createEntity();
+    Logic::Entity* createEntity();
 
     /**
      * @brief Crée une association nommée Association et l'ajoute au model.
@@ -76,13 +74,13 @@ public slots:
      * @param second Entité liée avec cette association
      * @return L'association creée
      */
-    Association* createAssociation(Entity* first, Entity* second);
+    Logic::Association* createAssociation(Logic::Entity* first, Logic::Entity* second);
 
 signals:
     /**
      * @brief Emit lors de l'ajout d'un element
      */
-    void itemAdded(Item* item);
+    void itemAdded(Logic::Item* item);
 
     /**
      * @brief Emit lors de la supression d'un element
@@ -95,7 +93,7 @@ private:
     /**
      * @brief Les entités et les Associations
      */
-    QList<Item*> m_items;
+    QList<Logic::Item*> m_items;
 
     /**
      * @brief Respresentation graphique du Model MCD

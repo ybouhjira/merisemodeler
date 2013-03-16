@@ -37,7 +37,7 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 
     // AJOUTER UNE ENTITE
     if(m_mode == AddEntity) {
-        Entity *entity = m_mcd->createEntity();
+        Logic::Entity *entity = m_mcd->createEntity();
         addItem(new GraphicEntity(entity, x, y));
         setMode(None);
     }// AJOUTER UNE ASSOCIATION
@@ -46,15 +46,15 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
         auto *clickedEntity = dynamic_cast<GraphicEntity*>(clickedItem);
 
         if(clickedEntity != nullptr) {
-            static Entity *entity1 = nullptr;
+            static Logic::Entity *entity1 = nullptr;
 
             // Clique sur la premier entité
             if (entity1 == nullptr) {
                 entity1 = clickedEntity->entity();
             }// Clique sur la seconde entité
             else {
-                Entity *entity2 = clickedEntity->entity();
-                Association *assoc = m_mcd->createAssociation(entity1, entity2);
+                Logic::Entity *entity2 = clickedEntity->entity();
+                Logic::Association *assoc = m_mcd->createAssociation(entity1, entity2);
 
                 // Ajout l'association au centre
                 GraphicEntity* gEnt1 = entity1->graphicObject();
@@ -76,14 +76,14 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
         auto *clickedEntity = dynamic_cast<GraphicEntity*>(clickedItem);
 
         if(clickedEntity != nullptr) {
-            static Entity *entity1 = nullptr;
+            static Logic::Entity *entity1 = nullptr;
 
             // Clique sur la premier entité
             if (entity1 == nullptr) {
                 entity1 = clickedEntity->entity();
             }// Clique sur la seconde entité
             else {
-                Entity *entity2 = clickedEntity->entity();
+                Logic::Entity *entity2 = clickedEntity->entity();
                 entity1->addParent(entity2);
 
                 // Ajout de la fléche d'héritage

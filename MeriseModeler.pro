@@ -10,20 +10,14 @@ CONFIG += c++11
 TARGET = MeriseModeler
 TEMPLATE = app
 
+include(logic/logic.pri)
+
+SUBDIRS += logic
 
 SOURCES += main.cpp\
         mainwindow.cpp \
         mcdui.cpp \
         modelui.cpp \
-    uniqueconstraint.cpp \
-    type.cpp \
-    property.cpp \
-    numeriquetype.cpp \
-    maxsizetype.cpp \
-    item.cpp \
-    enumtype.cpp \
-    entity.cpp \
-    association.cpp \
     graphicentity.cpp \
     graphicobject.cpp \
     graphicroundedrectobject.cpp \
@@ -33,7 +27,6 @@ SOURCES += main.cpp\
     mcdmodel.cpp \
     mcdgraphicsscene.cpp \
     modelstabwidget.cpp \
-    associationlink.cpp \
     graphicarrow.cpp \
     graphiccardinalityarrow.cpp \
     graphiccardinaltytextitem.cpp \
@@ -47,15 +40,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     modelui.h \
     mcdui.h \
-    uniqueconstraint.h \
-    type.h \
-    property.h \
-    numeriquetype.h \
-    maxsizetype.h \
-    item.h \
-    enumtype.h \
-    entity.h \
-    association.h \
     graphicentity.h \
     graphicobject.h \
     graphicroundedrectobject.h \
@@ -65,7 +49,6 @@ HEADERS  += mainwindow.h \
     mcdmodel.h \
     mcdgraphicsscene.h \
     modelstabwidget.h \
-    associationlink.h \
     graphicarrow.h \
     graphiccardinalityarrow.h \
     graphiccardinaltytextitem.h \
@@ -74,7 +57,7 @@ HEADERS  += mainwindow.h \
     pdfsceneexporter.h \
     svgsceneexporter.h \
     entityeditwidget.h \
-    entitytablemodel.h
+    entitytablemodel.h \
 
 RESOURCES += \
     ressourceFile.qrc

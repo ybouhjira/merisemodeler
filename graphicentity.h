@@ -1,8 +1,8 @@
 #ifndef GRAPHICENTITY_H
 #define GRAPHICENTITY_H
 
+#include "logic/namespace.h"
 #include "graphicresizableroundedrectobject.h"
-class Entity;
 class GraphicResizeHandelsGroup;
 
 // Qt
@@ -25,7 +25,7 @@ public:
      * @param parent Element parent
      */
     GraphicEntity(
-            Entity *entity,
+            Logic::Entity *entity,
             qreal x = 0,
             qreal y = 0,
             qreal width = DEFAULT_WIDTH,
@@ -46,13 +46,13 @@ public:
      * @brief Accesseur
      * @param entity Entité à representer
      */
-    void setEntity(Entity* entity) ;
+    void setEntity(Logic::Entity* entity) ;
 
     /**
      * @brief Mutateur
      * @return L'entité representé
      */
-    Entity* entity() const ;
+    Logic::Entity* entity() const ;
 
     // ATTRIBUTS
 private :
@@ -73,7 +73,7 @@ private :
     /**
      * @brief Entité representée par cet element
      */
-    Entity *m_entity;
+    Logic::Entity *m_entity;
 
 };
 

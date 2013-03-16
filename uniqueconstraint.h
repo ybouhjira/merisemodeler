@@ -2,7 +2,7 @@
 #define UNIQUECONSTRAINT_H
 
 #include <QList>
-#include "property.h"
+#include "logic/property.h"
 
 class UniqueConstraint
 {
@@ -10,7 +10,7 @@ public:
     /**
      * @brief Constructs an Unique Constraint
      */
-    UniqueConstraint(QList<Property*> properties);
+    UniqueConstraint(QList<Logic::Property*> properties);
 
     /**
      * @brief Destructs an Unique Constraint
@@ -20,13 +20,13 @@ public:
     /**
      * @brief returns the list of the properties of the constraint
      */
-    QList<Property*> properties();
+    QList<Logic::Property*> properties();
 
     /**
      * @brief adds a property
      * @param property
      */
-    void addProperty(Property *property);
+    void addProperty(Logic::Property *property);
 
     /**
      * @brief removes a property
@@ -38,11 +38,11 @@ public:
      * @brief removes a Property
      * @param property
      */
-    void removeProperty(Property *property);
+    void removeProperty(Logic::Property *property);
 
     //ATTRIBUTS
 private:
-    QList<Property*> m_properties;
+    QList<Logic::Property*> m_properties;
 };
 
 #endif // UNIQUECONSTRAINT_H

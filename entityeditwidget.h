@@ -1,7 +1,7 @@
 #ifndef ENTITYEDITWIDGET_H
 #define ENTITYEDITWIDGET_H
 
-class Entity;
+#include "logic/namespace.h"
 class EntityTableModel;
 
 // Qt
@@ -23,33 +23,33 @@ public:
      * @brief Constructeur
      * @param parent
      */
-    explicit EntityEditWidget(Entity* entity = nullptr,
+    explicit EntityEditWidget(Logic::Entity* entity = nullptr,
                               QWidget *parent = 0);
     
     /**
      * @brief Accesseur
      * @return L'Entité
      */
-    Entity* entity() const;
+    Logic::Entity* entity() const;
 signals:
     /**
      * @brief L'entité à été changé par une autre
      * @param entity Nouvelle entité
      */
-    void entityChanged(Entity* entity);
+    void entityChanged(Logic::Entity* entity);
 
     /**
      * @brief Emit lorsque l'entité est éditée
      * @param entity L'entité edité
      */
-    void entityEdited(Entity* entity);
+    void entityEdited(Logic::Entity* entity);
     
 public slots:
     /**
      * @brief Mutateur
      * @param L'entité
      */
-    void setEntity(Entity* entity);
+    void setEntity(Logic::Entity* entity);
 
 private slots:
     /**
@@ -62,7 +62,7 @@ private:
     /**
      * @brief L'entité
      */
-    Entity* m_entity;
+    Logic::Entity* m_entity;
 
     /**
      * @brief Premier onglet

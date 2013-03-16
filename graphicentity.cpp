@@ -1,6 +1,7 @@
 #include "graphicentity.h"
-#include "entity.h"
+#include "logic/entity.h"
 #include "graphicstyle.h"
+#include "logic/property.h"
 
 //Qt
 #include <QPainter>
@@ -9,7 +10,7 @@
 #include <QCursor>
 
 GraphicEntity::GraphicEntity(
-        Entity *entity,
+        Logic::Entity *entity,
         qreal x,
         qreal y,
         qreal width,
@@ -21,7 +22,7 @@ GraphicEntity::GraphicEntity(
     entity->setGraphicObject(this);
 
     // Connection
-    connect(m_entity, &Item::nameChanged, [=](){ update(boundingRect()); });
+    connect(m_entity, &Logic::Item::nameChanged, [=](){ update(boundingRect()); });
 }
 
 void GraphicEntity::paint
@@ -51,7 +52,7 @@ void GraphicEntity::paint
     QFont underlined = style()->font();
     underlined.setUnderline(true);
 
-    QList<Property*> pts = m_entity->properties();
+    QList<Logic::Property*> pts = m_entity->properties();
     for(int i=0; i<pts.size(); i++) {
         // sourligner les identifiants
         painter->setFont(pts[i]->isIdentifier()? underlined : style()->font());
@@ -60,11 +61,11 @@ void GraphicEntity::paint
     }
 }
 
-void GraphicEntity::setEntity(Entity *entity) {
+void GraphicEntity::setEntity(Logic::Entity *entity) {
     m_entity = entity;
 }
 
-Entity* GraphicEntity::entity() const {
+Logic::Entity* GraphicEntity::entity() const {
     return m_entity;
 }
 

@@ -5,8 +5,8 @@
 
 GraphicCardinalityTextItem::GraphicCardinalityTextItem(
         GraphicCardinalityArrow* parentArrow,
-        AssociationLink::Cardinality min,
-        AssociationLink::Cardinality max)
+        Logic::Link::Cardinality min,
+        Logic::Link::Cardinality max)
     : QGraphicsSimpleTextItem(parentArrow)
     , m_min(min)
     , m_max(max)
@@ -17,19 +17,19 @@ GraphicCardinalityTextItem::GraphicCardinalityTextItem(
     updatePosOnDestCoordinates();
 }
 
-AssociationLink::Cardinality GraphicCardinalityTextItem::min() const {
+Logic::Link::Cardinality GraphicCardinalityTextItem::min() const {
     return m_min;
 }
 
-AssociationLink::Cardinality GraphicCardinalityTextItem::max() const {
+Logic::Link::Cardinality GraphicCardinalityTextItem::max() const {
     return m_max;
 }
 
-void GraphicCardinalityTextItem::setMin(AssociationLink::Cardinality min) {
+void GraphicCardinalityTextItem::setMin(Logic::Link::Cardinality min) {
     m_min = min;
 }
 
-void GraphicCardinalityTextItem::setMax(AssociationLink::Cardinality max) {
+void GraphicCardinalityTextItem::setMax(Logic::Link::Cardinality max) {
     m_max = max;
 }
 
@@ -42,15 +42,15 @@ void GraphicCardinalityTextItem::updateText() {
     // Texte de la cardinalité
     QString text = "";
     switch(m_min) {
-    case AssociationLink::Zero: text += "0"; break;
-    case AssociationLink::One: text += "1"; break;
-    case AssociationLink::N: text += "n"; break;
+    case Logic::Link::Zero: text += "0"; break;
+    case Logic::Link::One: text += "1"; break;
+    case Logic::Link::N: text += "n"; break;
     }
     text += ";";
     switch(m_max) {
-    case AssociationLink::Zero: text += "0"; break;
-    case AssociationLink::One: text += "1"; break;
-    case AssociationLink::N: text += "n"; break;
+    case Logic::Link::Zero: text += "0"; break;
+    case Logic::Link::One: text += "1"; break;
+    case Logic::Link::N: text += "n"; break;
     }
 
     setText(text);

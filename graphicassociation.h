@@ -1,8 +1,8 @@
 #ifndef GRAPHICASSOCIATION_H
 #define GRAPHICASSOCIATION_H
 
+#include "logic/namespace.h"
 #include "graphicresizableroundedrectobject.h"
-class Association;
 class GraphicArrow;
 class GraphicEntity;
 
@@ -11,7 +11,7 @@ class GraphicAssociation : public GraphicResizableRoundedRectObject
     // METHODES
 public:
     // COnstructeur
-    GraphicAssociation(Association *association,
+    GraphicAssociation(Logic::Association *association,
             qreal x = 0,
             qreal y = 0,
             qreal width = DEFAULT_WIDTH,
@@ -49,7 +49,7 @@ private:
     /**
      * @brief L'association representée
      */
-    Association *m_association;
+    Logic::Association *m_association;
 
     /**
      * @brief Flèches
