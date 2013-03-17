@@ -1,5 +1,5 @@
 #include "entityeditwidget.h"
-#include "entity.h"
+#include "logic/entity.h"
 #include "entitytablemodel.h"
 
 // Qt

@@ -1,7 +1,7 @@
 #ifndef ENTITYTABLEMODEL_H
 #define ENTITYTABLEMODEL_H
 
-#include "entity.h"
+#include "logic/entity.h"
 #include <QAbstractTableModel>
 
 class EntityTableModel : public QAbstractTableModel

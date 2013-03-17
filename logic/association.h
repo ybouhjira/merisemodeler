@@ -2,7 +2,7 @@
 #define ASSOCIATION_H
 
 #include "item.h"
-#include "graphicassociation.h"
+#include "graphic/association.h"
 #include "associationlink.h"
 #include "logic/namespace.h"
 
@@ -56,14 +56,14 @@ public:
     /**
      * @reimp Item::graphicObject()
      */
-    GraphicAssociation* graphicObject() const;
+    Graphic::Association* graphicObject() const;
 
     // Accesseurs et mutateurs
     /**
      * @brief Mutateur
      * @param gassoc Representation graphique de cette association
      */
-    void setGraphicObject(GraphicAssociation* gassoc);
+    void setGraphicObject(Graphic::Association* gassoc);
 
     /**
      * @brief Accesseur
@@ -74,7 +74,7 @@ public:
     /**
      * @brief Change le prmier lien
      */
-    void setFirstLink(Link* firstLink);
+    void setFirstLink(Logic::Link* firstLink);
 
     /**
      * @brief Change le deuxième lien
@@ -88,13 +88,13 @@ public:
      *     association.links().first.entity() ;
      * @endcode
      */
-    Entity* entity1() const;
+    Logic::Entity* entity1() const;
 
     /**
      * @brief Retourne la deuxième entité
      * @see Association::firstEntity()
      */
-    Entity* entity2() const;
+    Logic::Entity* entity2() const;
 
 private:
     /**
@@ -105,7 +105,7 @@ private:
     /**
      * @brief Respresentation graphique
      */
-    GraphicAssociation* m_graphicAssociation;
+    Graphic::Association* m_graphicAssociation;
 };
 
 #endif // ASSOCIATION_H

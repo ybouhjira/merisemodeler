@@ -2,7 +2,8 @@
 #define ITEM_H
 
 #include "logic/namespace.h"
-class GraphicObject;
+#include "graphic/namespace.h"
+class Object;
 
 // Qt
 #include <QString>
@@ -24,7 +25,7 @@ public:
     /**
      * @brief Retourne la reprerésentation de l'élément
      */
-    virtual GraphicObject* graphicObject() const = 0 ;
+    virtual Graphic::Object* graphicObject() const = 0 ;
 
     /**
      * @brief Accesseur

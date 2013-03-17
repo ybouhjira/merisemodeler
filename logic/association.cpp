@@ -46,11 +46,11 @@ void Association::setSecondLink(Link* secondLink) {
     m_links.second = secondLink;
 }
 
-GraphicAssociation* Association::graphicObject() const {
+Graphic::Association *Association::graphicObject() const {
     return m_graphicAssociation ;
 }
 
-void Association::setGraphicObject(GraphicAssociation *gassoc) {
+void Association::setGraphicObject(Graphic::Association *gassoc) {
     m_graphicAssociation = gassoc;
 }
 

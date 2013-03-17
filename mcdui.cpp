@@ -1,11 +1,11 @@
 #include "mcdui.h"
 #include "mcdmodel.h"
-#include "entity.h"
+#include "logic/entity.h"
 #include "mainwindow.h"
 #include "mcdgraphicsscene.h"
 #include "entityeditwidget.h"
-#include "graphicentity.h"
-#include "graphicassociation.h"
+#include "graphic/entity.h"
+#include "graphic/association.h"
 
 // Qt
 #include <QToolBar>
@@ -103,7 +103,7 @@ void McdUi::sceneSelectionChanged() {
     if(!items.empty()) {
         for(QGraphicsItem* item : items) {
             // Tester si c'est une entité
-            auto gEntity = dynamic_cast<GraphicEntity*>(item);
+            auto gEntity = dynamic_cast<Graphic::Entity*>(item);
             if(gEntity != nullptr) {
                 m_itemEditDock->setWidget(m_entityWidget);
                 m_entityWidget->setEntity(gEntity->entity());

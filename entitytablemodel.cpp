@@ -1,5 +1,5 @@
 #include "entitytablemodel.h"
-#include "property.h"
+#include "logic/property.h"
 
 using namespace Logic;
 

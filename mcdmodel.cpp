@@ -1,8 +1,7 @@
 #include "mcdmodel.h"
-#include "item.h"
-#include "entity.h"
-#include "association.h"
-#include "associationlink.h"
+#include "logic/entity.h"
+#include "logic/association.h"
+#include "logic/associationlink.h"
 #include "mcdgraphicsscene.h"
 
 // Qt

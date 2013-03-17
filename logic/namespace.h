@@ -14,6 +14,7 @@ namespace Logic {
  class EnumType;
 
  class Property;
+ class UniqueConstraint;
 }
 
 #endif // NAMESPACE_LOGIC_H

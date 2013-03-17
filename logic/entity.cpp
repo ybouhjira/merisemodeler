@@ -9,24 +9,29 @@ Entity::Entity(QString const &name
     : Item(name)
     , m_parents(parents)
     , m_uniqueConstraints(uniqueConstraints)
-
 {
 }
+
 Entity::~Entity()
-{}
+{
+}
+
 void Entity::addParent(Entity *parent)
 {
     m_parents.append(parent);
 }
+
 void Entity::addUniqueConstraint(UniqueConstraint *uniqueConstraint)
 {
     m_uniqueConstraints.append(uniqueConstraint);
 }
+
 //ACCESSORS
 QList<Entity*> Entity::parents()
 {
     return m_parents;
 }
+
 QList<UniqueConstraint*> Entity::uniqueConstraints()
 {
     return m_uniqueConstraints;
@@ -37,6 +42,7 @@ void Entity::removeParent(Entity *parent)
 {
     m_parents.removeOne(parent);
 }
+
 void Entity::removeParent(int index)
 {
     m_parents.removeAt(index);
@@ -46,15 +52,16 @@ void Entity::removeUniqueConstraint(int index)
 {
     m_uniqueConstraints.removeAt(index);
 }
+
 void Entity::removeUniqueConstraint(UniqueConstraint *uniqueConstraint)
 {
     m_uniqueConstraints.removeOne(uniqueConstraint);
 }
 
-GraphicEntity* Entity::graphicObject() const {
+Graphic::Entity* Entity::graphicObject() const {
     return m_graphicEntity ;
 }
 
-void Entity::setGraphicObject(GraphicEntity *gEntity) {
+void Logic::Entity::setGraphicObject(Graphic::Entity *gEntity) {
     m_graphicEntity = gEntity;
 }

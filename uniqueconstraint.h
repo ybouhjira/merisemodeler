@@ -1,10 +1,12 @@
 #ifndef UNIQUECONSTRAINT_H
 #define UNIQUECONSTRAINT_H
 
-#include <QList>
+#include "logic/namespace.h"
 #include "logic/property.h"
 
-class UniqueConstraint
+#include <QList>
+
+class Logic::UniqueConstraint
 {
 public:
     /**

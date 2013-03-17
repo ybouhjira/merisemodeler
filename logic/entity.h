@@ -4,7 +4,7 @@
 #include "logic/namespace.h"
 #include "item.h"
 #include "uniqueconstraint.h"
-#include "graphicentity.h"
+#include "graphic/entity.h"
 
 // Qt
 #include <QList>
@@ -20,13 +20,14 @@ class Logic::Entity : public Logic::Item
 public:
     /**
      * @brief Constructeur
-     * @param name : Nom de l'entité
-     * @param uniqueConstraints : Contraints de type UNIQUE
+     * @param name Nom de l'entité
+     * @param uniqueConstraints Contraints de type UNIQUE
      */
-    Entity(QString const &name
-           , QList<Entity*> parents = QList<Entity*>()
-           , QList<UniqueConstraint*> uniqueConstraints = QList<UniqueConstraint*>()
-           );
+    Entity(
+            QString const &name,
+            QList<Entity*> parents = QList<Entity*>(),
+            QList<Logic::UniqueConstraint*> uniqueConstraints = QList<UniqueConstraint*>()
+            );
 
     /**
      * @brief Destructeur
@@ -37,20 +38,19 @@ public:
     /**
      * @reimp Item::graphicObject()
      */
-    GraphicEntity* graphicObject() const ;
+    Graphic::Entity* graphicObject() const override;
 
-    // Accesseurs et mutataurs
-
+    // Accesseurs et mutateurs
     /**
      * @brief Mutateur
      * @param gEntity GraphicEntity representant cette entité
      */
-    void setGraphicObject(GraphicEntity* gEntity);
+    void setGraphicObject(Graphic::Entity* gEntity) ;
 
     /**
      * @brief Ajouter un parent a l'entité
      */
-    void addParent(Entity *parent);
+    void addParent(Logic::Entity *parent);
 
     /**
      * @brief Supprimer un parent
@@ -62,17 +62,17 @@ public:
      * @brief Supprimer un parent
      * @param parent Parent a supprimer
      */
-    void removeParent(Entity* parent);
+    void removeParent(Logic::Entity* parent);
 
     /**
      * @brief retourne une liste des parents de l'entité
      */
-    QList<Entity*> parents();
+    QList<Logic::Entity*> parents();
 
     /**
      * @brief retourne une liste des contraints uniques de l'entité
      */
-    QList<UniqueConstraint*> uniqueConstraints();
+    QList<Logic::UniqueConstraint*> uniqueConstraints();
 
     /**
      * @brief ajouter une contrainte unique a l'entité
@@ -104,7 +104,7 @@ private:
     /**
      * @brief Representation graphique
      */
-    GraphicEntity* m_graphicEntity;
+    Graphic::Entity* m_graphicEntity;
 
 };
 

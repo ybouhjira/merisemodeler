@@ -1,13 +1,13 @@
 
 #include "mcdmodel.h"
-#include "graphicstyle.h"
-#include "entity.h"
 
+#include "logic/entity.h"
 #include "mcdgraphicsscene.h"
 
-#include "graphicentity.h"
-#include "graphicassociation.h"
-#include "graphicinheritencearrowobject.h"
+#include "graphic/style.h"
+#include "graphic/entity.h"
+#include "graphic/association.h"
+#include "graphic/inheritencearrowobject.h"
 
 // Qt
 #include <QGraphicsSceneMouseEvent>
@@ -38,12 +38,12 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     // AJOUTER UNE ENTITE
     if(m_mode == AddEntity) {
         Logic::Entity *entity = m_mcd->createEntity();
-        addItem(new GraphicEntity(entity, x, y));
+        addItem(new Graphic::Entity(entity, x, y));
         setMode(None);
     }// AJOUTER UNE ASSOCIATION
     else if(m_mode == AddAssociation) {
         QGraphicsItem *clickedItem = itemAt(x,y, QTransform());
-        auto *clickedEntity = dynamic_cast<GraphicEntity*>(clickedItem);
+        auto *clickedEntity = dynamic_cast<Graphic::Entity*>(clickedItem);
 
         if(clickedEntity != nullptr) {
             static Logic::Entity *entity1 = nullptr;
@@ -57,11 +57,11 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
                 Logic::Association *assoc = m_mcd->createAssociation(entity1, entity2);
 
                 // Ajout l'association au centre
-                GraphicEntity* gEnt1 = entity1->graphicObject();
-                GraphicEntity* gEnt2 = entity2->graphicObject();
+                Graphic::Entity* gEnt1 = entity1->graphicObject();
+                Graphic::Entity* gEnt2 = entity2->graphicObject();
                 qreal assocX = (gEnt1->x() + gEnt2->x()) / 2 ;
                 qreal assocY = (gEnt1->y() + gEnt2->y()) / 2 ;
-                auto gAssoc = new GraphicAssociation(assoc, assocX, assocY);
+                auto gAssoc = new Graphic::Association(assoc, assocX, assocY);
                 addItem(gAssoc);
 
                 // Clean up
@@ -73,7 +73,7 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     else if(m_mode == Inheritence) {
         // !! COPIER COLLER !!
         QGraphicsItem *clickedItem = itemAt(x,y, QTransform());
-        auto *clickedEntity = dynamic_cast<GraphicEntity*>(clickedItem);
+        auto *clickedEntity = dynamic_cast<Graphic::Entity*>(clickedItem);
 
         if(clickedEntity != nullptr) {
             static Logic::Entity *entity1 = nullptr;
@@ -87,7 +87,7 @@ void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
                 entity1->addParent(entity2);
 
                 // Ajout de la fléche d'héritage
-                auto arrow = new GraphicInheritenceArrowObject(
+                auto arrow = new Graphic::InheritenceArrowObject(
                             entity1->graphicObject(),
                             entity2->graphicObject()
                             );
