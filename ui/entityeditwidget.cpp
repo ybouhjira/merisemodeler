@@ -2,6 +2,7 @@
 #include "logic/entity.h"
 #include "entitytablemodel.h"
 #include "comboboxdelegate.h"
+#include "logic/typefactory.h"
 
 // Qt
 #include <QLineEdit>
@@ -82,6 +83,8 @@ Logic::Entity* EntityEditWidget::entity() const {
 }
 
 void EntityEditWidget::addProperty() {
-    m_tableModel->addProperty(new Logic::Property(tr("property"), Logic::Type("SomeTYpe")));
+    m_tableModel->addProperty(
+                new Logic::Property(tr("property"),
+                                    Logic::TypeFactory().buildType()));
     emit entityEdited(m_entity);
 }

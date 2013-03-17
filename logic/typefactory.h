@@ -20,9 +20,10 @@ public:
     // non static
     /**
      * @brief Constructeur
-     * @param typeString chaine de caractères decrivant le type
+     * @param typeString chaine de caractères decrivant le type, si typeString
+     * est vide le type retourné par TypeFactory::buildType est Text
      */
-    TypeFactory(QString const& typeString );
+    TypeFactory(QString const& typeString = "" );
 
 
     Logic::Type buildType() const;
