@@ -3,9 +3,10 @@
 
 #include "logic/namespace.h"
 #include "namespace.h"
+#include "itemeditwidget.h"
+#include "entitytablemodel.h"
 
 // Qt
-#include <QWidget>
 class QLineEdit;
 class QVBoxLayout;
 class QTableView;
@@ -15,7 +16,7 @@ class QPushButton;
 /**
  * @brief EntityEditWidget est le widget qui permet d'éditer une entité
  */
-class Ui::EntityEditWidget : public QWidget
+class Ui::EntityEditWidget : public Ui::ItemEditWidget
 {
     Q_OBJECT
 public:
@@ -30,19 +31,17 @@ public:
      * @brief Accesseur
      * @return L'Entité
      */
-    Logic::Entity* entity() const;
-signals:
-    /**
-     * @brief L'entité à été changé par une autre
-     * @param entity Nouvelle entité
-     */
-    void entityChanged(Logic::Entity* entity);
+    Logic::Entity* item() const;
 
     /**
-     * @brief Emit lorsque l'entité est éditée
-     * @param entity L'entité edité
+     * @reimp
      */
-    void entityEdited(Logic::Entity* entity);
+    Ui::EntityTableModel* propertiesModel() const;
+
+    /**
+     * @reimp
+     */
+    void removeSelectedProperties();
     
 public slots:
     /**
@@ -75,11 +74,6 @@ private:
     QTabWidget *m_tabWidget;
 
     /**
-     * @brief Case su nom
-     */
-    QLineEdit *m_nameLineEdit;
-
-    /**
      * @brief Table qui affiche les propriétés
      */
     QTableView *m_tableView;
@@ -87,7 +81,7 @@ private:
     /**
      * @brief Model qui sert à représenter les donnés pour le QTableView
      */
-    EntityTableModel *m_tableModel;
+    Ui::EntityTableModel *m_tableModel;
 
     /**
      * @brief Bouton Ajouter proriété

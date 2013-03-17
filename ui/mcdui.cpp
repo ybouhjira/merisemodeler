@@ -62,7 +62,7 @@ McdUi::McdUi(QWidget *parent)
     auto updateFunc = [=](){
         m_graphicsView->viewport()->update();
     };
-    connect(m_entityWidget, &EntityEditWidget::entityEdited, updateFunc);
+    connect(m_entityWidget, &ItemEditWidget::itemEdited, updateFunc);
 
 }
 

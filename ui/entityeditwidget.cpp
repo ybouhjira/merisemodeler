@@ -11,17 +11,15 @@
 #include <QTableView>
 #include <QTabWidget>
 #include <QFormLayout>
-#include <QRegExpValidator>
 #include <QPushButton>
 
 using namespace Ui;
 
 EntityEditWidget::EntityEditWidget(Logic::Entity *entity, QWidget *parent)
-    : QWidget(parent)
+    : ItemEditWidget(parent)
     , m_entity(entity)
     , m_entityPageWidget(new QWidget)
     , m_tabWidget(new QTabWidget)
-    , m_nameLineEdit(new QLineEdit)
     , m_tableView(new QTableView)
     , m_tableModel(new EntityTableModel(m_entity, this))
     , m_addButton(new QPushButton(tr("Add")))
@@ -38,9 +36,7 @@ EntityEditWidget::EntityEditWidget(Logic::Entity *entity, QWidget *parent)
 
     // Case Nom
     QFormLayout *nameLayout = new QFormLayout;
-    nameLayout->addRow(tr("Name"), m_nameLineEdit);
-    auto validr = new QRegExpValidator(QRegExp("^[a-zA-Z_][a-zA-Z0-9_]*$"));
-    m_nameLineEdit->setValidator(validr);
+    nameLayout->addRow(tr("Name"), nameLineEdit());
     horzlayout->addLayout(nameLayout);
 
     // Boutons ajouter & supprimer
@@ -53,32 +49,25 @@ EntityEditWidget::EntityEditWidget(Logic::Entity *entity, QWidget *parent)
     m_tableView->setItemDelegateForColumn(1, new ComboBoxDelegate(m_tableView));
 
     // Connections
-    // case de nom
-    connect(m_nameLineEdit, &QLineEdit::textChanged, [=](QString const& text) {
-        m_entity->setName(text);
-        emit entityEdited(m_entity);
-    });
     // Bouton ajouter
     connect(m_addButton, SIGNAL(clicked()), this, SLOT(addProperty()) );
 
     // connection avec le model
-    connect(m_tableModel, &QAbstractItemModel::dataChanged, [=]() {
-        emit entityEdited(m_entity);
-    });
+    connect(propertiesModel(), &QAbstractItemModel::dataChanged,
+            this, &ItemEditWidget::itemEdited);
 }
 
 void EntityEditWidget::setEntity(Logic::Entity *entity) {
     if(entity != m_entity) {
         m_entity = entity ;
-        emit entityChanged(m_entity);
+        emit itemChanged();
 
         // Mettre à jour l'affichage
-        m_nameLineEdit->setText(entity->name());
         m_tableModel->setEntity(entity);
     }
 }
 
-Logic::Entity* EntityEditWidget::entity() const {
+Logic::Entity* EntityEditWidget::item() const {
     return m_entity;
 }
 
@@ -86,5 +75,13 @@ void EntityEditWidget::addProperty() {
     m_tableModel->addProperty(
                 new Logic::Property(tr("property"),
                                     Logic::TypeFactory().buildType()));
-    emit entityEdited(m_entity);
+    emit itemEdited();
+}
+
+EntityTableModel* EntityEditWidget::propertiesModel() const {
+    return m_tableModel;
+}
+
+void EntityEditWidget::removeSelectedProperties() {
+    qWarning("EntityEditWidget::removeSelectedProperties() not yet implemented");
 }

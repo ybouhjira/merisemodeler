@@ -15,5 +15,6 @@ class SceneExporter;
 class EntityTableModel;
 class EntityEditWidget;
 class ComboBoxDelegate;
+class ItemEditWidget;
 }
 #endif // NAMESPACE_H
