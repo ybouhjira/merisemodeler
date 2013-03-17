@@ -1,6 +1,7 @@
-#ifndef NAMESPACE_H
-#define NAMESPACE_H
-
+/*!
+ * @brief Namespace qui regroupe les classes representant graphiquement les
+ * elements du modél
+ */
 namespace Graphic {
 class Object;
 class ResizableRoundedRectObject;
@@ -13,5 +14,3 @@ class InheritenceArrowObject;
 class Style;
 class RoundedRectObject;
 }
-
-#endif // NAMESPACE_H

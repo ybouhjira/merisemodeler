@@ -1,7 +1,8 @@
 #ifndef GRAPHICOBJECT_H
 #define GRAPHICOBJECT_H
 
-#include "graphic/namespace.h"
+
+#include "namespace.h"
 
 // Qt
 #include <QGraphicsObject>

@@ -13,32 +13,10 @@ TEMPLATE = app
 
 include(logic/logic.pri)
 include(graphic/graphic.pri)
-
-SOURCES += main.cpp\
-        mainwindow.cpp \
-        mcdui.cpp \
-        modelui.cpp \
-    mcdmodel.cpp \
-    mcdgraphicsscene.cpp \
-    modelstabwidget.cpp \
-    pdfsceneexporter.cpp \
-    svgsceneexporter.cpp \
-    entityeditwidget.cpp \
-    entitytablemodel.cpp \
-    graphicssceneexporter.cpp
-
-HEADERS  += mainwindow.h \
-    modelui.h \
-    mcdui.h \
-    mcdmodel.h \
-    mcdgraphicsscene.h \
-    modelstabwidget.h \
-    pdfsceneexporter.h \
-    svgsceneexporter.h \
-    entityeditwidget.h \
-    entitytablemodel.h \
-    graphicssceneexporter.h
+include(ui/ui.pri)
 
 RESOURCES += \
     ressourceFile.qrc
 
+SOURCES += \
+    main.cpp

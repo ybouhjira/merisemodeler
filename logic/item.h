@@ -2,8 +2,7 @@
 #define ITEM_H
 
 #include "logic/namespace.h"
-#include "graphic/namespace.h"
-class Object;
+#include "graphic/object.h"
 
 // Qt
 #include <QString>
