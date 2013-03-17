@@ -9,7 +9,8 @@ SOURCES += \
     ui/mainwindow.cpp \
     ui/graphicssceneexporter.cpp \
     ui/entitytablemodel.cpp \
-    ui/entityeditwidget.cpp
+    ui/entityeditwidget.cpp \
+    ui/comboboxdelegate.cpp
 
 HEADERS += \
     ui/svgsceneexporter.h \
@@ -23,4 +24,5 @@ HEADERS += \
     ui/graphicssceneexporter.h \
     ui/entitytablemodel.h \
     ui/entityeditwidget.h \
-    ui/namespace.h
+    ui/namespace.h \
+    ui/comboboxdelegate.h

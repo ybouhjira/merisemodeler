@@ -1,5 +1,3 @@
-#ifndef NAMESPACE_LOGIC_H
-#define NAMESPACE_LOGIC_H
 
 namespace Logic {
  class Item;
@@ -15,6 +13,9 @@ namespace Logic {
 
  class Property;
  class UniqueConstraint;
+
+ class TypeFactory;
+ class InvalidTypeStringException;
+
 }
 
-#endif // NAMESPACE_LOGIC_H

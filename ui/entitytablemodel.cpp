@@ -1,5 +1,7 @@
 #include "entitytablemodel.h"
 #include "logic/property.h"
+#include "logic/typefactory.h"
+#include "logic/invalidtypestringexception.h"
 
 using namespace Logic;
 using namespace Ui;
@@ -115,7 +117,7 @@ Qt::ItemFlags EntityTableModel::flags(const QModelIndex &index) const {
         return Qt::ItemIsEditable | Qt::ItemIsEnabled;
         break;
     case 2: //< id
-    case 3: // oblig
+    case 3: //< oblig
         return Qt::ItemIsEnabled
                 | Qt::ItemIsUserCheckable;
         break;
@@ -127,35 +129,40 @@ Qt::ItemFlags EntityTableModel::flags(const QModelIndex &index) const {
 bool EntityTableModel::setData
 (const QModelIndex &index, const QVariant &value, int role)
 {
-    // La properiété à changer
-    Property* property = m_entity->properties()[index.row()] ;
+    try {
+        // La properiété à changer
+        Property* property = m_entity->properties()[index.row()] ;
 
-    bool sucssesfulChange = false;
+        bool sucssesfulChange = false;
 
-    switch(index.column()) {
-    case 0:
-        property->setName(value.toString());
-        sucssesfulChange = true;
-        break;
-    case 1:
+        switch(index.column()) {
+        case 0:
+            property->setName(value.toString());
+            sucssesfulChange = true;
+            break;
+        case 1:
+            property->setType(Logic::TypeFactory(value.toString()).buildType());
+            return true;
+            break;
+        case 2:
+            property->setIsIdentifier(value.toBool());
+            sucssesfulChange = true;
+            break;
+        case 3:
+            property->setIsObligatory(value.toBool());
+            sucssesfulChange = true;
+            break;
+        case 4:
+            property->setDefaultValue(value.toString());
+            sucssesfulChange = true;
+            break;
+        }
+        if(sucssesfulChange) {
+            emit dataChanged(index, index, {role});
+            return true;
+        }
         return false;
-        break;
-    case 2:
-        property->setIsIdentifier(value.toBool());
-        sucssesfulChange = true;
-        break;
-    case 3:
-        property->setIsObligatory(value.toBool());
-        sucssesfulChange = true;
-        break;
-    case 4:
-        property->setDefaultValue(value.toString());
-        sucssesfulChange = true;
-        break;
+    } catch (Logic::InvalidTypeStringException &) {
+        return false;
     }
-    if(sucssesfulChange) {
-        emit dataChanged(index, index, {role});
-        return true;
-    }
-    return false;
 }

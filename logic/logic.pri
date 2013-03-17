@@ -8,7 +8,9 @@ HEADERS += \
     logic/numeriquetype.h \
     logic/maxsizetype.h \
     logic/enumtype.h \
-    logic/property.h
+    logic/property.h \
+    logic/invalidtypestringexception.h \
+    logic/typefactory.h
 
 SOURCES += \
     logic/item.cpp \
@@ -19,4 +21,6 @@ SOURCES += \
     logic/numeriquetype.cpp \
     logic/maxsizetype.cpp \
     logic/enumtype.cpp \
-    logic/property.cpp
+    logic/property.cpp \
+    logic/invalidtypestringexception.cpp \
+    logic/typefactory.cpp

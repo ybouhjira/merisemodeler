@@ -27,7 +27,6 @@ public:
      * @param name : name of the type
      */
     Type(QString const &name);
-    Type();
 
     /**
      * @brief Destructs a type

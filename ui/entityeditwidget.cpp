@@ -1,6 +1,7 @@
 #include "entityeditwidget.h"
 #include "logic/entity.h"
 #include "entitytablemodel.h"
+#include "comboboxdelegate.h"
 
 // Qt
 #include <QLineEdit>
@@ -48,6 +49,7 @@ EntityEditWidget::EntityEditWidget(Logic::Entity *entity, QWidget *parent)
     // Table des propriétés
     page1Layout->addWidget(m_tableView);
     m_tableView->setModel(m_tableModel);
+    m_tableView->setItemDelegateForColumn(1, new ComboBoxDelegate(m_tableView));
 
     // Connections
     // case de nom
