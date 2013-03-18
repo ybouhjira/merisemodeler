@@ -2,7 +2,6 @@
 #define ENTITYEDITWIDGET_H
 
 #include "logic/namespace.h"
-#include "namespace.h"
 #include "itemeditwidget.h"
 #include "entitytablemodel.h"
 

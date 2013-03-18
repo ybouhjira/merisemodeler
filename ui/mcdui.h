@@ -96,9 +96,14 @@ private:
     QAction *m_inheritanceAction;
 
     /**
-     * @brief Widget qui edit l'entité
+     * @brief Widget qui edite l'entité
      */
     Ui::EntityEditWidget *m_entityWidget;
+
+    /**
+     * @brief Widget qui edite l'association
+     */
+    Ui::AssociationEditWidget *m_associationWidget;
 
     /**
      * @brief Panneau qui contient les widgets qui permettent

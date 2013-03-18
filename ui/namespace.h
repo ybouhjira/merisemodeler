@@ -16,5 +16,8 @@ class EntityTableModel;
 class EntityEditWidget;
 class ComboBoxDelegate;
 class ItemEditWidget;
+class AssociationEditWidget;
+class ItemTableModel;
+class AssociationTableModel;
 }
 #endif // NAMESPACE_H

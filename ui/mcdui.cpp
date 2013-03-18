@@ -3,9 +3,10 @@
 #include "logic/entity.h"
 #include "mainwindow.h"
 #include "mcdgraphicsscene.h"
-#include "entityeditwidget.h"
+#include "itemeditors/entityeditwidget.h"
 #include "graphic/entity.h"
 #include "graphic/association.h"
+#include "itemeditors/associationeditwidget.h"
 
 // Qt
 #include <QToolBar>
@@ -30,6 +31,7 @@ McdUi::McdUi(QWidget *parent)
     , m_associationAction(new QAction(QIcon(":/assoc"),tr("Association"),this))
     , m_inheritanceAction(new QAction(QIcon(":/inherit"),tr("Inheritance"),this))
     , m_entityWidget(new EntityEditWidget)
+    , m_associationWidget(new AssociationEditWidget)
     , m_itemEditDock(new QDockWidget(tr("Item editing")))
 {
     // Barre d'outils
@@ -63,6 +65,7 @@ McdUi::McdUi(QWidget *parent)
         m_graphicsView->viewport()->update();
     };
     connect(m_entityWidget, &ItemEditWidget::itemEdited, updateFunc);
+    connect(m_associationWidget, &ItemEditWidget::itemEdited, updateFunc);
 
 }
 
@@ -109,6 +112,13 @@ void McdUi::sceneSelectionChanged() {
             if(gEntity != nullptr) {
                 m_itemEditDock->setWidget(m_entityWidget);
                 m_entityWidget->setEntity(gEntity->entity());
+            }
+
+            // Tester si c'est une association
+            auto gAssoc = dynamic_cast<Graphic::Association*>(item);
+            if(gAssoc != nullptr) {
+                m_itemEditDock->setWidget(m_associationWidget);
+                m_associationWidget->setAssociation(gAssoc->association());
             }
         }
     }

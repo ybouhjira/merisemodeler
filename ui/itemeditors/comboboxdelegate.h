@@ -1,7 +1,7 @@
 #ifndef COMBOBOXDELEGATE_H
 #define COMBOBOXDELEGATE_H
 
-#include "namespace.h"
+#include "ui/namespace.h"
 
 // Qt
 #include <QStyledItemDelegate>

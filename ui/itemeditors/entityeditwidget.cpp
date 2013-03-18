@@ -46,7 +46,7 @@ EntityEditWidget::EntityEditWidget(Logic::Entity *entity, QWidget *parent)
     // Table des propriétés
     page1Layout->addWidget(m_tableView);
     m_tableView->setModel(m_tableModel);
-    m_tableView->setItemDelegateForColumn(1, new ComboBoxDelegate(m_tableView));
+    m_tableView->setItemDelegateForColumn(2, new ComboBoxDelegate(m_tableView));
 
     // Connections
     // Bouton ajouter

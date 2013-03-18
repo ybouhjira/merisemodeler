@@ -1,7 +1,7 @@
 #ifndef ITEMEDITWIDGET_H
 #define ITEMEDITWIDGET_H
 
-#include "namespace.h"
+#include "ui/namespace.h"
 #include "logic/namespace.h"
 
 // Qt
@@ -32,6 +32,7 @@ public:
      */
     virtual QAbstractItemModel* propertiesModel() const = 0 ;
 
+public slots:
     /**
      * @brief Ajoute une propriété à l'élément
      * @remarks Vous devez emettre le signal itemEdited() si l'element à été

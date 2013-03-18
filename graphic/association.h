@@ -26,6 +26,14 @@ public:
                const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
 
+    /**
+     * @brief Accesseur
+     * @return
+     */
+    Logic::Association* association() const;
+
+    void setAssociation(Logic::Association* assoc);
+
     // ATTRIBUTS
 private:
     // static

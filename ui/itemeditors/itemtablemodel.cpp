@@ -1,4 +1,4 @@
-#include "entitytablemodel.h"
+#include "itemtablemodel.h"
 #include "logic/property.h"
 #include "logic/typefactory.h"
 #include "logic/invalidtypestringexception.h"
@@ -6,15 +6,18 @@
 using namespace Logic;
 using namespace Ui;
 
-EntityTableModel::EntityTableModel(Entity* entity, QObject* parent)
+ItemTableModel::ItemTableModel( QObject* parent)
     : QAbstractTableModel(parent)
 {
-    setEntity(entity);
 }
 
-QVariant EntityTableModel::data(const QModelIndex &index, int role) const {
-    if(m_entity != nullptr) {
-        Property* pty = m_entity->properties()[index.row()];
+ItemTableModel::~ItemTableModel() {
+
+}
+
+QVariant ItemTableModel::data(const QModelIndex &index, int role) const {
+    if(item() != nullptr) {
+        Property* pty = item()->properties()[index.row()];
         switch(role) {
         case Qt::DisplayRole:
             switch(index.column()) {
@@ -32,9 +35,6 @@ QVariant EntityTableModel::data(const QModelIndex &index, int role) const {
         case Qt::CheckStateRole:
             switch(index.column()) {
             case 2:
-                return pty->isIdentifier()? Qt::Checked : Qt::Unchecked;
-                break;
-            case 3:
                 return pty->isObligatory()? Qt::Checked : Qt::Unchecked;
                 break;
             default:
@@ -48,18 +48,18 @@ QVariant EntityTableModel::data(const QModelIndex &index, int role) const {
     }
 }
 
-int EntityTableModel::rowCount(const QModelIndex &/*parent*/) const {
-    if(m_entity != nullptr)
-        return m_entity->properties().size();
+int ItemTableModel::rowCount(const QModelIndex &/*parent*/) const {
+    if(item() != nullptr)
+        return item()->properties().size();
     else
         return 0;
 }
 
-int EntityTableModel::columnCount(const QModelIndex &/*parent*/) const {
-    return 5;
+int ItemTableModel::columnCount(const QModelIndex &/*parent*/) const {
+    return 4;
 }
 
-QVariant EntityTableModel::headerData
+QVariant ItemTableModel::headerData
 (int section, Qt::Orientation orientation, int role) const {
     switch(role) {
     case Qt::DisplayRole:
@@ -76,12 +76,9 @@ QVariant EntityTableModel::headerData
                 return tr("Type");
                 break;
             case 2:
-                return tr("id");
-                break;
-            case 3:
                 return tr("Obligatory");
                 break;
-            case 4:
+            case 3:
                 return tr("Default");
             default:
                 return QVariant();
@@ -97,27 +94,22 @@ QVariant EntityTableModel::headerData
     }
 }
 
-void EntityTableModel::setEntity(Entity *entity) {
-    m_entity = entity;
-}
-
-void EntityTableModel::addProperty(Property *property) {
-    if(m_entity != nullptr) {
+void ItemTableModel::addProperty(Property *property) {
+    if(item() != nullptr) {
         beginResetModel();
-        m_entity->addProperty(property);
+        item()->addProperty(property);
         endResetModel();
     }
 }
 
-Qt::ItemFlags EntityTableModel::flags(const QModelIndex &index) const {
+Qt::ItemFlags ItemTableModel::flags(const QModelIndex &index) const {
     switch(index.column()) {
     case 0: //< Nom
     case 1: //< Type
     case 4: //< Default
         return Qt::ItemIsEditable | Qt::ItemIsEnabled;
         break;
-    case 2: //< id
-    case 3: //< oblig
+    case 2: //< oblig
         return Qt::ItemIsEnabled
                 | Qt::ItemIsUserCheckable;
         break;
@@ -126,33 +118,31 @@ Qt::ItemFlags EntityTableModel::flags(const QModelIndex &index) const {
     }
 }
 
-bool EntityTableModel::setData
+bool ItemTableModel::setData
 (const QModelIndex &index, const QVariant &value, int role)
 {
     try {
         // La properiété à changer
-        Property* property = m_entity->properties()[index.row()] ;
+        Property* property = item()->properties()[index.row()] ;
 
         bool sucssesfulChange = false;
 
         switch(index.column()) {
         case 0:
-            property->setName(value.toString());
-            sucssesfulChange = true;
+            if(!value.toString().isEmpty()) {
+                property->setName(value.toString());
+                sucssesfulChange = true;
+            }
             break;
         case 1:
             property->setType(Logic::TypeFactory(value.toString()).buildType());
             return true;
             break;
         case 2:
-            property->setIsIdentifier(value.toBool());
-            sucssesfulChange = true;
-            break;
-        case 3:
             property->setIsObligatory(value.toBool());
             sucssesfulChange = true;
             break;
-        case 4:
+        case 3:
             property->setDefaultValue(value.toString());
             sucssesfulChange = true;
             break;

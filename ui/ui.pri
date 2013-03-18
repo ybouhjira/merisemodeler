@@ -8,14 +8,18 @@ SOURCES += \
     ui/mcdgraphicsscene.cpp \
     ui/mainwindow.cpp \
     ui/graphicssceneexporter.cpp \
-    ui/entitytablemodel.cpp \
-    ui/entityeditwidget.cpp \
-    ui/comboboxdelegate.cpp \
-    ui/itemeditwidget.cpp
+    ui/itemeditors/itemtablemodel.cpp \
+    ui/itemeditors/itemeditwidget.cpp \
+    ui/itemeditors/entitytablemodel.cpp \
+    ui/itemeditors/entityeditwidget.cpp \
+    ui/itemeditors/comboboxdelegate.cpp \
+    ui/itemeditors/associationtablemodel.cpp \
+    ui/itemeditors/associationeditwidget.cpp
 
 HEADERS += \
     ui/svgsceneexporter.h \
     ui/pdfsceneexporter.h \
+    ui/namespace.h \
     ui/modelui.h \
     ui/modelstabwidget.h \
     ui/mcdui.h \
@@ -23,8 +27,10 @@ HEADERS += \
     ui/mcdgraphicsscene.h \
     ui/mainwindow.h \
     ui/graphicssceneexporter.h \
-    ui/entitytablemodel.h \
-    ui/entityeditwidget.h \
-    ui/namespace.h \
-    ui/comboboxdelegate.h \
-    ui/itemeditwidget.h
+    ui/itemeditors/itemtablemodel.h \
+    ui/itemeditors/itemeditwidget.h \
+    ui/itemeditors/entitytablemodel.h \
+    ui/itemeditors/entityeditwidget.h \
+    ui/itemeditors/comboboxdelegate.h \
+    ui/itemeditors/associationtablemodel.h \
+    ui/itemeditors/associationeditwidget.h

@@ -89,3 +89,11 @@ void Association::paint(
         }
     }
 }
+
+void Association::setAssociation(Logic::Association *assoc) {
+    m_association = assoc;
+}
+
+Logic::Association* Association::association() const {
+    return m_association;
+}

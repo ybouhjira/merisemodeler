@@ -1,11 +1,11 @@
-#ifndef ENTITYTABLEMODEL_H
-#define ENTITYTABLEMODEL_H
+#ifndef ITEMTABLEMODEL_H
+#define ITEMTABLEMODEL_H
 
-#include "namespace.h"
-#include "logic/entity.h"
+#include "ui/namespace.h"
+#include "logic/item.h"
 #include <QAbstractTableModel>
 
-class Ui::EntityTableModel : public QAbstractTableModel
+class Ui::ItemTableModel : public QAbstractTableModel
 {
 public:
     /**
@@ -13,9 +13,15 @@ public:
      * @param entity L'entité qui va etre source des données de ce model
      * @param parent QObject parent
      */
-    explicit EntityTableModel(
-            Logic::Entity* entity = nullptr,
-            QObject* parent = nullptr);
+    explicit ItemTableModel(QObject* parent = nullptr);
+
+    /**
+     * @brief Destructeur
+     */
+    virtual ~ItemTableModel();
+
+    // Méthodes virtuelles
+    virtual Logic::Item* item() const = 0 ;
 
     // Redéfinitions
     /**
@@ -57,11 +63,6 @@ public:
 
 
 public slots:
-    /**
-     * @brief Change l'entité en plus d'établir la connexion avec les
-     * signaux qui sont emis lors du changement de cette dernière
-     */
-    void setEntity(Logic::Entity* entity);
 
     /**
      * @brief Ajoute la propriété a l'entité
@@ -69,11 +70,6 @@ public slots:
      */
     void addProperty(Logic::Property* property);
 
-private:
-    /**
-     * @brief Entité
-     */
-    Logic::Entity *m_entity;
 };
 
-#endif // ENTITYTABLEMODEL_H
+#endif // ITEMTABLEMODEL_H
