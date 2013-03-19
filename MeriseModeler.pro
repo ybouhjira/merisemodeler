@@ -15,6 +15,7 @@ include(logic/logic.pri)
 include(graphic/graphic.pri)
 include(ui/ui.pri)
 include(pugixml/pugixml.pri)
+include(xml/xml.pri)
 
 RESOURCES += \
     ressourceFile.qrc
