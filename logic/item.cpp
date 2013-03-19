@@ -22,6 +22,7 @@ QString Item::name() const
 void Item::setName(QString const &name)
 {
     m_name = name;
+    emit nameChanged();
 }
 
 void Item::addProperty(Property *property)

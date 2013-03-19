@@ -97,3 +97,11 @@ void Association::setAssociation(Logic::Association *assoc) {
 Logic::Association* Association::association() const {
     return m_association;
 }
+
+void Association::updateCardinalities() {
+    m_arrows.first->setMin(m_association->links().first->min());
+    m_arrows.first->setMax(m_association->links().first->max());
+
+    m_arrows.second->setMin(m_association->links().second->min());
+    m_arrows.second->setMax(m_association->links().second->max());
+}

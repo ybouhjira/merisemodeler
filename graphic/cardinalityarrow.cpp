@@ -18,7 +18,6 @@ CardinalityArrow::CardinalityArrow(
   , m_max(max)
   , m_text(new CardinalityTextItem(this, min, max))
 {
-
 }
 
 CardinalityArrow::~CardinalityArrow() {
@@ -26,10 +25,14 @@ CardinalityArrow::~CardinalityArrow() {
 
 void CardinalityArrow::setMin(Logic::Link::Cardinality min) {
     m_min = min;
+    m_text->setMin(min);
+    m_text->updateText();
 }
 
 void CardinalityArrow::setMax(Logic::Link::Cardinality max) {
     m_max = max ;
+    m_text->setMax(max);
+    m_text->updateText();
 }
 
 Logic::Link::Cardinality CardinalityArrow::min() const {
