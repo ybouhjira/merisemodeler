@@ -69,6 +69,12 @@ public:
     QList<Entity*> parents();
 
     /**
+     * @brief retourne si l'entité a des parents ou non
+     */
+
+    bool hasParents();
+
+    /**
      * @brief retourne une liste des contraints uniques de l'entité
      */
     QList<UniqueConstraint*> uniqueConstraints();

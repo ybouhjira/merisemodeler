@@ -18,7 +18,7 @@ class McdGraphicsScene : public QGraphicsScene
     // TYPES
 public:
     /**
-     * @brief Définit le model actuel de McdGraphicsScene
+     * @brief Définit le mode actuel de McdGraphicsScene
      */
     enum Mode {
         AddEntity,       //! Mode d'ajout d'une entité

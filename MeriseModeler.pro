@@ -42,7 +42,11 @@ SOURCES += main.cpp\
     graphicssceneexporter.cpp \
     svgsceneexporter.cpp \
     entityeditwidget.cpp \
-    entitytablemodel.cpp
+    entitytablemodel.cpp \
+    XML/xmlitem.cpp \
+    XML/xmlentity.cpp \
+    XML/xmlassociation.cpp \
+    XML/xmlconverter.cpp
 
 HEADERS  += mainwindow.h \
     modelui.h \
@@ -74,8 +78,15 @@ HEADERS  += mainwindow.h \
     pdfsceneexporter.h \
     svgsceneexporter.h \
     entityeditwidget.h \
-    entitytablemodel.h
+    entitytablemodel.h \
+    XML/xmlitem.h \
+    XML/xmlentity.h \
+    XML/xmlassociation.h \
+    XML/xmlconverter.h
 
 RESOURCES += \
     ressourceFile.qrc
+
+OTHER_FILES += \
+    XML/xml.pri
 

@@ -49,6 +49,14 @@ void Entity::removeUniqueConstraint(UniqueConstraint *uniqueConstraint)
     m_uniqueConstraints.removeOne(uniqueConstraint);
 }
 
+bool Entity::hasParents()
+{
+    if(m_parents.count() == 0)
+        return false;
+    else
+        return true;
+}
+
 GraphicEntity* Entity::graphicObject() const {
     return m_graphicEntity ;
 }

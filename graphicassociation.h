@@ -26,6 +26,11 @@ public:
     void paint(QPainter *painter,
                const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
+    /**
+     * @brief retourne m_arrows
+     * @return
+     */
+    QPair<GraphicArrow*,GraphicArrow*> arrows();
 
     // ATTRIBUTS
 private:

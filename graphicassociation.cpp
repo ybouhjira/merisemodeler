@@ -53,7 +53,10 @@ GraphicAssociation::GraphicAssociation (
     m_arrows.first->setPosOnSrc((this->x() > xEnt1)? 0.97 : 0.53);
     m_arrows.second->setPosOnSrc((this->x() > xEnt2)? 0.97 : 0.53);
 }
-
+QPair<GraphicArrow*,GraphicArrow*> GraphicAssociation::arrows()
+{
+    return m_arrows;
+}
 void GraphicAssociation::paint(
         QPainter *painter,
         const QStyleOptionGraphicsItem *option,
