@@ -14,6 +14,7 @@ TEMPLATE = app
 include(logic/logic.pri)
 include(graphic/graphic.pri)
 include(ui/ui.pri)
+include(pugixml/pugixml.pri)
 
 RESOURCES += \
     ressourceFile.qrc
