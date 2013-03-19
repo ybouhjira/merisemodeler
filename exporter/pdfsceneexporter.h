@@ -4,7 +4,7 @@
 #include "namespace.h"
 #include "graphicssceneexporter.h"
 
-class Ui::PdfSceneExporter : public Ui::SceneExporter
+class Exporter::PdfSceneExporter : public Exporter::SceneExporter
 {
 public:
 

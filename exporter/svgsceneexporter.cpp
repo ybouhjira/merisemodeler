@@ -4,7 +4,9 @@
 #include <QGraphicsScene>
 #include <QPainter>
 
-void Ui::SvgSceneExporter::exportScene(QGraphicsScene *scene, const QString &fileName)
+using namespace Exporter;
+
+void SvgSceneExporter::exportScene(QGraphicsScene *scene, const QString &fileName)
 {
     QSizeF sizeF = scene->itemsBoundingRect().size();
 

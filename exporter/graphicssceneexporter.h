@@ -9,7 +9,7 @@ class QString;
 /**
  * @brief Une iterface définissant une méthode d'exportation d'un modéle
  */
-class Ui::SceneExporter
+class Exporter::SceneExporter
 {
 public:
 

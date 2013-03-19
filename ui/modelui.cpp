@@ -1,7 +1,7 @@
 #include "modelui.h"
 #include "mainwindow.h"
-#include "pdfsceneexporter.h"
-#include "svgsceneexporter.h"
+#include "exporter/pdfsceneexporter.h"
+#include "exporter/svgsceneexporter.h"
 
 // Qt
 #include <QGraphicsView>
@@ -54,12 +54,12 @@ void ModelUi::showExportDialog() {
         return;
 
     // Exportation du model
-    SceneExporter* exporter = nullptr;
+    Exporter::SceneExporter* exporter = nullptr;
 
     if(selectedFormat == "PDF(*.pdf)")
-        exporter = new PdfSceneExporter;
+        exporter = new Exporter::PdfSceneExporter;
     else if(selectedFormat == "SVG(*.svg)")
-        exporter = new SvgSceneExporter;
+        exporter = new Exporter::SvgSceneExporter;
 
         exporter->exportScene(modelScene, filename);
     delete exporter;
