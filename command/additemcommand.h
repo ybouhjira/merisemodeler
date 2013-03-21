@@ -24,16 +24,50 @@ protected:
             QUndoCommand* parent = nullptr
             );
 
+public:
     /**
      * @brief Destructeur
      */
     virtual ~AddItemCommand();
-    
-public:
+
     /**
      * @return Retourne l'element ajouté
      */
     virtual Logic::Item* item() const = 0;
+
+    // Accesseurs
+    /**
+     * @brief Accesseur
+     */
+    qreal x() const ;
+
+    /**
+     * @brief Accesseur
+     */
+    qreal y() const ;
+
+protected:
+    // Mutateur
+    /**
+     * @brief Mutateur
+     */
+    void setX(qreal x) ;
+
+    /**
+     * @brief Mutateur
+     */
+    void setY(qreal y);
+
+private:
+    /**
+     * @brief Ordonnée
+     */
+    qreal m_x;
+
+    /**
+     * @brief Abssice
+     */
+    qreal m_y;
 };
 
 #endif // ADDITEMCOMMAND_H

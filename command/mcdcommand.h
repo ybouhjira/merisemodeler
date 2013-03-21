@@ -21,7 +21,7 @@ public:
      */
     explicit McdCommand(
             Ui::McdModel* mcd,
-            QString const& text,
+            QString const& text = "",
             QUndoCommand* parent = nullptr);
 
     /**
@@ -35,12 +35,40 @@ public:
      */
     Ui::McdModel* mcd() const;
 
+    // Redéfinitions
+    /**
+     * @brief m_applied = false et appelle QUndoCommand::undo()
+     */
+    void undo();
+
+    /**
+     * @brief m_applied = true et appelle QUndoCommand::redo()
+     */
+    void redo();
+
+    // Accesseurs et mutateurs
+    /**
+     * @brief Mutateur
+     */
+    void setApplied(bool applied);
+
+    /**
+     * @brief Accesseur
+     */
+    bool isApplied() const;
+
     // ATTRIBUTS
 private:
     /**
      * @brief La scene sur laquelle doit etre appliqué la commande
      */
     Ui::McdModel* m_mcd;
+
+    /**
+     * @brief Indique que la commande est appliqué sur le modèle, ça veut
+     * dire que m_applied apprés l'appel de undo()
+     */
+    bool m_applied;
 };
 
 #endif // MCDGRAPHICSSCENECOMMAND_H
