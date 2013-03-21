@@ -1,6 +1,6 @@
 #include "modelstabwidget.h"
 #include "mcdui.h"
-#include "mcdmodel.h"
+#include "model/mcdmodel.h"
 
 // Qt
 #include <QTabBar>
@@ -21,7 +21,7 @@ ModelsTabWidget::ModelsTabWidget(QWidget *parent)
             this, SLOT(removeModel(int)) );
 }
 
-void ModelsTabWidget::addModel(const QString &label, McdModel *model) {
+void ModelsTabWidget::addModel(const QString &label, Model::McdModel *model) {
     m_models.append(model);
     if(layout()->count() > 1)
         layout()->removeItem(layout()->itemAt(layout()->count() - 1));

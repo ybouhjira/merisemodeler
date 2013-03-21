@@ -1,7 +1,7 @@
 #ifndef MCDMODEL_H
 #define MCDMODEL_H
 
-#include "ui/namespace.h"
+#include "namespace.h"
 #include "logic/namespace.h"
 
 // Qt
@@ -11,7 +11,7 @@
 /**
  * @brief La classe du modèle conceptuel de donnée Merise
  */
-class Ui::McdModel : public QObject
+class Model::McdModel : public QObject
 {
     Q_OBJECT
     //METHODES
@@ -31,7 +31,7 @@ public:
      * @brief Accesseur
      * @return
      */
-    Ui::McdGraphicsScene* scene() const;
+    Model::McdScene* scene() const;
 
 public slots:
     /**
@@ -99,7 +99,7 @@ private:
      * @brief Respresentation graphique du Model MCD
      * Cette attribut est en lecture seul, il n'a pas de mutateur
      */
-    McdGraphicsScene *m_scene;
+    Model::McdScene *m_scene;
 };
 
 #endif // MCDMODEL_H
