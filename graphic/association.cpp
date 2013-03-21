@@ -12,16 +12,14 @@
 
 using namespace Graphic;
 
-Association::Association (
-        Logic::Association *association,
+Association::Association (Logic::Association *association,
         qreal x,
         qreal y,
         qreal width,
         qreal height,
-        qreal radius,
         QGraphicsItem* parent
         )
-    : ResizableRoundedRectObject(x, y, width, height, radius, parent)
+    : ResizableRoundedRectObject(x, y, width, height, RADIUS, parent)
     , m_association(association)
     , m_arrows(new CardinalityArrow(
                    association->links().first->min(),

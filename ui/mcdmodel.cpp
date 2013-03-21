@@ -30,7 +30,6 @@ void McdModel::addItem(Item *item) {
 }
 
 void McdModel::removeItem(int index) {
-    delete m_items[index];
     m_items.removeAt(index);
     emit itemRemoved(index);
 }
@@ -38,7 +37,6 @@ void McdModel::removeItem(int index) {
 void McdModel::removeItem(Item *item) {
     for (int i = 0; i < m_items.size(); ++i) {
         if( item == m_items[i]) {
-            delete m_items[i];
             m_items.removeAt(i);
             emit itemRemoved(i);
             return;

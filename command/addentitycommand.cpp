@@ -24,10 +24,14 @@ AddEntityCommand::~AddEntityCommand() {
 }
 
 void AddEntityCommand::undo() {
-    this->mcd()->scene()->removeItem(m_entity->graphicObject());
+    AddItemCommand::undo();
+    mcd()->scene()->removeItem(m_entity->graphicObject());
+    mcd()->removeItem(m_entity);
 }
 
 void AddEntityCommand::redo() {
+    AddItemCommand::redo();
+    mcd()->addItem(m_entity);
     auto graphicEntity = new Graphic::Entity(m_entity, x(), y());
     mcd()->scene()->addItem(graphicEntity);
 }

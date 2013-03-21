@@ -9,13 +9,21 @@ class Graphic::Association : public Graphic::ResizableRoundedRectObject
 {
     // METHODES
 public:
-    // COnstructeur
-    Association(Logic::Association *association,
+    /**
+     * @brief Constructeur
+     * @param association L'association representée
+     * @param x Abssice
+     * @param y Ordonnée
+     * @param width Largeur
+     * @param height Hauteur
+     * @param parent Element parent
+     */
+    Association(
+            Logic::Association *association,
             qreal x = 0,
             qreal y = 0,
             qreal width = DEFAULT_WIDTH,
             qreal height = DEFAULT_HEIGHT,
-            qreal radius = RADIUS,
             QGraphicsItem *parent = nullptr);
 
     // Redefinition

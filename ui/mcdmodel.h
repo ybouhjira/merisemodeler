@@ -53,7 +53,7 @@ public slots:
     void removeItem(Logic::Item* item);
 
     /**
-     * @brief Supprimer un element du model
+     * @brief Supprimer un element de la liste
      * @param index Indice de l'element à supprimer
      */
     void removeItem(int index);
