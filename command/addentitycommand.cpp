@@ -1,15 +1,15 @@
 #include "addentitycommand.h"
 #include "logic/entity.h"
 #include "graphic/entity.h"
-#include "ui/mcdmodel.h"
-#include "ui/mcdgraphicsscene.h"
+#include "model/mcdmodel.h"
+#include "model/mcdscene.h"
 
 using namespace Command;
 
 AddEntityCommand::AddEntityCommand(
         qreal x,
         qreal y,
-        Ui::McdModel* mcd,
+        Model::McdModel* mcd,
         QUndoCommand* parent)
     : AddItemCommand(mcd, QObject::tr("Added an entity"), parent)
 {

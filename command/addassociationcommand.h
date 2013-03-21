@@ -21,7 +21,7 @@ public:
     AddAssociationCommand(
             Logic::Entity* entity1,
             Logic::Entity* entity2,
-            Ui::McdModel* mcd,
+            Model::McdModel* mcd,
             QUndoCommand* parent = nullptr
             );
 

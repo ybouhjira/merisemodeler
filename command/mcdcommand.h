@@ -2,7 +2,7 @@
 #define MCDGRAPHICSSCENECOMMAND_H
 
 #include "namespace.h"
-#include "ui/namespace.h"
+#include "model/namespace.h"
 #include <QUndoCommand>
 
 /**
@@ -20,7 +20,7 @@ public:
      * @param parent Commande mère
      */
     explicit McdCommand(
-            Ui::McdModel* mcd,
+            Model::McdModel* mcd,
             QString const& text = "",
             QUndoCommand* parent = nullptr);
 
@@ -33,7 +33,7 @@ public:
      * @brief Accesseur
      * @return Le MCD
      */
-    Ui::McdModel* mcd() const;
+    Model::McdModel* mcd() const;
 
     // Redéfinitions
     /**
@@ -62,7 +62,7 @@ private:
     /**
      * @brief La scene sur laquelle doit etre appliqué la commande
      */
-    Ui::McdModel* m_mcd;
+    Model::McdModel* m_mcd;
 
     /**
      * @brief Indique que la commande est appliqué sur le modèle, ça veut

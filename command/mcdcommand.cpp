@@ -2,7 +2,7 @@
 
 using namespace Command;
 
-McdCommand::McdCommand(Ui::McdModel* mcd,
+McdCommand::McdCommand(Model::McdModel* mcd,
                        QString const& text,
                        QUndoCommand* parent)
     : QUndoCommand(text, parent)
@@ -15,7 +15,7 @@ McdCommand::~McdCommand()
 {
 }
 
-Ui::McdModel* McdCommand::mcd() const{
+Model::McdModel* McdCommand::mcd() const{
     return m_mcd;
 }
 

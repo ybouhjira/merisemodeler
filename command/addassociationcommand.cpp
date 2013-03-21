@@ -2,15 +2,15 @@
 #include "graphic/association.h"
 #include "logic/association.h"
 #include "logic/entity.h"
-#include "ui/mcdmodel.h"
-#include "ui/mcdgraphicsscene.h"
+#include "model/mcdmodel.h"
+#include "model/mcdscene.h"
 
 using namespace Command;
 
 AddAssociationCommand::AddAssociationCommand(
         Logic::Entity *entity1,
         Logic::Entity *entity2,
-        Ui::McdModel* mcd,
+        Model::McdModel* mcd,
         QUndoCommand* parent)
     : AddItemCommand(mcd, QObject::tr("Added an association"), parent)
 {

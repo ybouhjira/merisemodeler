@@ -3,6 +3,7 @@
 
 #include "mcdcommand.h"
 #include "namespace.h"
+#include "model/namespace.h"
 #include "logic/namespace.h"
 
 // Qt
@@ -19,7 +20,7 @@ protected:
      * @brief Constructeur
      */
     explicit AddItemCommand(
-            Ui::McdModel* mcd,
+            Model::McdModel* mcd,
             QString const& text,
             QUndoCommand* parent = nullptr
             );

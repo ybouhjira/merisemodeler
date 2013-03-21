@@ -19,7 +19,7 @@ public:
     AddEntityCommand(
             qreal x,
             qreal y,
-            Ui::McdModel* mcd,
+            Model::McdModel* mcd,
             QUndoCommand* parent = nullptr);
 
     /**

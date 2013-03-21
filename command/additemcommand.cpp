@@ -3,7 +3,7 @@
 using namespace Command;
 
 AddItemCommand::AddItemCommand(
-        Ui::McdModel* mcd,
+        Model::McdModel* mcd,
         QString const& text,
         QUndoCommand* parent)
     : McdCommand(mcd, text, parent)
