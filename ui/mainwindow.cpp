@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "mcdui.h"
 #include "modelstabwidget.h"
-#include "mcdmodel.h"
+#include "model/mcdmodel.h"
 
 //Qt
 #include <QMenuBar>
@@ -66,7 +66,7 @@ MainWindow::MainWindow()
 }
 
 void MainWindow::createNewMcd() const{
-    m_tabWidget->addModel(tr("unamed"), new McdModel);
+    m_tabWidget->addModel(tr("unamed"), new Model::McdModel);
 }
 
 QMenu* MainWindow::fileMenu() {

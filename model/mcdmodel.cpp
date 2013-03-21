@@ -2,18 +2,18 @@
 #include "logic/entity.h"
 #include "logic/association.h"
 #include "logic/associationlink.h"
-#include "mcdgraphicsscene.h"
+#include "model/mcdscene.h"
 
 // Qt
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
 using namespace Logic;
-using namespace Ui;
+using namespace Model;
 
 McdModel::McdModel(QObject *parent)
     : QObject(parent)
-    , m_scene(new McdGraphicsScene(this))
+    , m_scene(new Model::McdScene(this))
 {
 }
 
@@ -44,7 +44,7 @@ void McdModel::removeItem(Item *item) {
     }
 }
 
-McdGraphicsScene* McdModel::scene() const {
+McdScene* McdModel::scene() const {
     return m_scene;
 }
 

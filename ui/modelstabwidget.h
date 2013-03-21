@@ -2,6 +2,8 @@
 #define MODELSTABWIDGET_H
 
 #include "namespace.h"
+#include "model/namespace.h"
+#include "model/namespace.h"
 
 // Qt
 #include <QWidget>
@@ -25,7 +27,7 @@ public slots:
      * @param label Nom affiché dans l'onglet
      * @param model Model
      */
-    void addModel(QString const& label, McdModel* model);
+    void addModel(QString const& label, Model::McdModel* model);
 
     /**
      * @brief Supprime une model
@@ -43,7 +45,7 @@ private:
     /**
      * @brief Models
      */
-    QList<McdModel*> m_models;
+    QList<Model::McdModel*> m_models;
 };
 
 #endif // MODELSTABWIDGET_H

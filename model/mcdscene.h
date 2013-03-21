@@ -13,7 +13,7 @@
  *
  * @todo Refactor to a controller and a View
  */
-class Ui::McdGraphicsScene : public QGraphicsScene
+class Model::McdScene : public QGraphicsScene
 {
     Q_OBJECT
     // TYPES
@@ -37,12 +37,12 @@ public:
      * @param parent QObject parent qui se charge de la destruction de
      * cet objet
      */
-    McdGraphicsScene(McdModel *mcd = nullptr);
+    McdScene(Model::McdModel *mcd = nullptr);
 
     /**
      * @brief Destructeur
      */
-    virtual ~McdGraphicsScene();
+    virtual ~McdScene();
 
     /**
      * @brief Accesseur
@@ -69,7 +69,7 @@ private:
     /**
      * @brief Le MCD
      */
-    Ui::McdModel *m_mcd;
+    Model::McdModel *m_mcd;
 
     /**
      * @brief Mode
