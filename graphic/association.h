@@ -32,7 +32,16 @@ public:
      */
     Logic::Association* association() const;
 
+    /**
+     * @brief Mutateur
+     * @param assoc Association
+     */
     void setAssociation(Logic::Association* assoc);
+
+    /**
+     * @brief Met à jour le texte représentant les cardinalités
+     */
+    void updateCardinalities();
 
     // ATTRIBUTS
 private:
@@ -61,9 +70,7 @@ private:
     /**
      * @brief Flèches
      */
-    QPair<Graphic::Arrow*, Graphic::Arrow*> m_arrows;
-
-
+    QPair<Graphic::CardinalityArrow*, Graphic::CardinalityArrow*> m_arrows;
 };
 
 #endif // GRAPHICASSOCIATION_H

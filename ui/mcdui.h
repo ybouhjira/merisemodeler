@@ -2,6 +2,7 @@
 #define MCDUI_H
 
 #include "namespace.h"
+#include "model/namespace.h"
 #include "modelui.h"
 
 /**
@@ -22,14 +23,14 @@ public:
      * @brief Accesseur
      * @return MCD actuel
      */
-    Ui::McdModel* model() const ;
+    Model::McdModel* model() const ;
 
 public slots:
     /**
      * @brief Mutateur
      * @param mcd Model MCD
      */
-    void setModel(Ui::McdModel* mcd) ;
+    void setModel(Model::McdModel* mcd) ;
 
 private slots:
     /**
@@ -60,7 +61,7 @@ signals:
      * @reimp
      * @brief Model Changé avec McdUi::setModel
      */
-    void modelChanged(Ui::McdModel*) ;
+    void modelChanged(Model::McdModel*) ;
 
 private:
     /**
@@ -78,7 +79,7 @@ private:
     /**
      * @brief le MCD
      */
-    Ui::McdModel *m_model;
+    Model::McdModel *m_model;
 
     /**
      * @brief QAction qui ajoute une entité

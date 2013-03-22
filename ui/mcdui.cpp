@@ -1,11 +1,15 @@
 #include "mcdui.h"
-#include "mcdmodel.h"
-#include "logic/entity.h"
 #include "mainwindow.h"
-#include "mcdgraphicsscene.h"
-#include "itemeditors/entityeditwidget.h"
+
+#include "logic/entity.h"
+
+#include "model/mcdmodel.h"
+#include "model/mcdscene.h"
+
 #include "graphic/entity.h"
 #include "graphic/association.h"
+
+#include "itemeditors/entityeditwidget.h"
 #include "itemeditors/associationeditwidget.h"
 
 // Qt
@@ -69,7 +73,7 @@ McdUi::McdUi(QWidget *parent)
 
 }
 
-void McdUi::setModel(McdModel *mcd) {
+void McdUi::setModel(Model::McdModel *mcd) {
     // Deconnections de l'ancienne McdGraphicsScene
     if(m_model != nullptr && m_model->scene() != nullptr) {
         disconnect(mcd->scene(), &QGraphicsScene::selectionChanged,
@@ -86,20 +90,20 @@ void McdUi::setModel(McdModel *mcd) {
     emit modelChanged(mcd);
 }
 
-McdModel* McdUi::model() const {
+Model::McdModel* McdUi::model() const {
     return m_model ;
 }
 
 void McdUi::setAddEntityModeOnScene() const {
-    m_model->scene()->setMode(McdGraphicsScene::AddEntity);
+    m_model->scene()->setMode(Model::McdScene::AddEntity);
 }
 
 void McdUi::setAddAssocModeOnScene() const {
-    m_model->scene()->setMode(McdGraphicsScene::AddAssociation);
+    m_model->scene()->setMode(Model::McdScene::AddAssociation);
 }
 
 void McdUi::setInheritenceModeOnScene() const {
-    m_model->scene()->setMode(McdGraphicsScene::Inheritence);
+    m_model->scene()->setMode(Model::McdScene::Inheritence);
 }
 
 void McdUi::sceneSelectionChanged() {

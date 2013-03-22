@@ -55,11 +55,17 @@ void Association::setGraphicObject(Graphic::Association *gassoc) {
 }
 
 Entity* Association::entity1() const {
-    return m_links.first->entity();
+    if(m_links.first != nullptr)
+        return m_links.first->entity();
+    else
+        return nullptr;
 }
 
 Entity* Association::entity2() const {
-    return m_links.second->entity();
+    if(m_links.second != nullptr)
+        return m_links.second->entity();
+    else
+        return nullptr;
 }
 xml_node Association::toXml()
 {

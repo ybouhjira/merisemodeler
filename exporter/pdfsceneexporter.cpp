@@ -6,7 +6,9 @@
 #include <QGraphicsScene>
 #include <QPainter>
 
-void Ui::PdfSceneExporter::exportScene
+using namespace Exporter;
+
+void PdfSceneExporter::exportScene
 (QGraphicsScene *scene, const QString &fileName) {
 
     QSizeF sizeF = scene->itemsBoundingRect().size();

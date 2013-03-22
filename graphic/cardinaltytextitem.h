@@ -59,7 +59,7 @@ public:
      */
     void updatePosOnDestCoordinates();
 
-private:
+public:
     /**
      * @brief Met à jour le texte
      */
@@ -67,8 +67,6 @@ private:
 
     // ATTRIBUTS
 private:
-
-
 
     /**
      * Cardinalité minimum

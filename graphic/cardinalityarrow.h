@@ -85,7 +85,7 @@ private:
     /**
      * @brief Le texte represnetant les cardinalité
      */
-    CardinalityTextItem *m_text;
+    Graphic::CardinalityTextItem *m_text;
 
     
 };

@@ -1,8 +1,7 @@
-
 #include "mcdmodel.h"
 
 #include "logic/entity.h"
-#include "mcdgraphicsscene.h"
+#include "mcdscene.h"
 
 #include "graphic/style.h"
 #include "graphic/entity.h"
@@ -12,27 +11,27 @@
 // Qt
 #include <QGraphicsSceneMouseEvent>
 
-using namespace Ui;
+using namespace Model;
 
-McdGraphicsScene::McdGraphicsScene(McdModel *mcd)
+McdScene::McdScene(McdModel *mcd)
     : QGraphicsScene((QObject*)mcd)
     , m_mcd(mcd)
     , m_mode(None)
 {
 }
 
-McdGraphicsScene::~McdGraphicsScene() {
+McdScene::~McdScene() {
 }
 
-McdGraphicsScene::Mode McdGraphicsScene::mode() const {
+McdScene::Mode McdScene::mode() const {
     return m_mode;
 }
 
-void McdGraphicsScene::setMode(Mode const& mode) {
+void McdScene::setMode(Mode const& mode) {
     m_mode = mode ;
 }
 
-void McdGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+void McdScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     // position de la souris dans la QGraphicsScene
     qreal x = event->scenePos().x();
     qreal y = event->scenePos().y();

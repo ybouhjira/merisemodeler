@@ -1,9 +1,10 @@
 #ifndef SVGSCENEEXPORTER_H
 #define SVGSCENEEXPORTER_H
 
+#include "namespace.h"
 #include "graphicssceneexporter.h"
 
-class Ui::SvgSceneExporter : public Ui::SceneExporter
+class Exporter::SvgSceneExporter : public Exporter::SceneExporter
 {
 public:
     void exportScene(QGraphicsScene* scene, QString const& fileName) override;

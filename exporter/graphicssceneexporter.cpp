@@ -1,6 +1,7 @@
 #include "graphicssceneexporter.h"
 
-using namespace Ui;
+using namespace Exporter;
+
 SceneExporter::~SceneExporter () {
 
 }
