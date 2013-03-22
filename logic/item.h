@@ -12,7 +12,7 @@
 #include <QObject>
 
 
-class Logic::Item : public QObject, public serializable
+class Logic::Item : public QObject, public Serializable
 {
     Q_OBJECT
     //METHODS
@@ -83,6 +83,12 @@ protected:
      */
     Item(QString const &Name);
 
+    /**
+     * @brief
+     * @return
+     */
+    xml_node toXml();
+    void fromXml(xml_node entity);
     /**
      * @brief writeProperties
      * @return

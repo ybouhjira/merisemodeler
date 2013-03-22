@@ -61,3 +61,12 @@ Entity* Association::entity1() const {
 Entity* Association::entity2() const {
     return m_links.second->entity();
 }
+xml_node Association::toXml()
+{
+    xml_node node;
+    return node;
+}
+void Association::fromXml(xml_node node)
+{
+
+}

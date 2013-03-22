@@ -1,0 +1,4 @@
+namespace xml
+{
+    class Serializable;
+}

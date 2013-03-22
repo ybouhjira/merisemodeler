@@ -46,10 +46,10 @@ QList<Logic::Property*> Item::properties() {
 
 xml_node Item::toXml()
 {
-    return new xml_node();
+
 }
 
-void Item::fromXml(xml_node node)
+void Item::fromXml(xml_node entity)
 {
 }
 
@@ -72,7 +72,8 @@ xml_node Item::writeProperties()
             Id = "true";
         else
             Id = "false";
-        Xpte.append_attribute("name") = Pte->name().toStdString();
+        Xpte.append_attribute("name") = "name";
+        Xpte.append_attribute("value") = Pte->name().toStdString();
         Xpte.append_attribute("identifier") = Id;
         Xpte.append_attribute("obligatory") = Ob;
         Xpte.append_attribute("check") = Pte->check().toStdString();

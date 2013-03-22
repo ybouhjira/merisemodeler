@@ -5,6 +5,7 @@
 #include "item.h"
 #include "uniqueconstraint.h"
 #include "graphic/entity.h"
+#include "xml/serializable.h"
 
 // Qt
 #include <QList>
@@ -88,6 +89,12 @@ public:
      * @brief Supprimer une contrainte UNIQUE
      */
     void removeUniqueConstraint(UniqueConstraint* uniqueConstraint);
+
+    /**
+     * @brief retourne un objet xml_node representant une entité
+     * @return xml_node
+     */
+    xml_node toXml();
 
     //ATTRIBUTS
 private:

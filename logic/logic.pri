@@ -10,7 +10,8 @@ HEADERS += \
     logic/enumtype.h \
     logic/property.h \
     logic/invalidtypestringexception.h \
-    logic/typefactory.h
+    logic/typefactory.h \
+    logic/uniqueconstraint.h
 
 SOURCES += \
     logic/item.cpp \
@@ -23,4 +24,5 @@ SOURCES += \
     logic/enumtype.cpp \
     logic/property.cpp \
     logic/invalidtypestringexception.cpp \
-    logic/typefactory.cpp
+    logic/typefactory.cpp \
+    logic/uniqueconstraint.cpp

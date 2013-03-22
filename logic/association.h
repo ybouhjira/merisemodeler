@@ -5,6 +5,7 @@
 #include "graphic/association.h"
 #include "associationlink.h"
 #include "logic/namespace.h"
+#include "xml/serializable.h"
 
 // Qt
 #include <QPair>
@@ -16,7 +17,7 @@ typedef QPair<Logic::Link*, Logic::Link*> LinksPair;
 /**
  * @brief La classe Association decris le lien sémantique entre 2 entités
  */
-class Logic::Association : public Logic::Item
+class Logic::Association : public Logic::Item , public serializable
 {
 public:
     /**
@@ -95,6 +96,19 @@ public:
      * @see Association::firstEntity()
      */
     Logic::Entity* entity2() const;
+
+    /**
+     * @brief Serialiser un Item en un xml_node classe de la librrie
+     * @return
+     */
+    xml_node toXml();
+
+    /**
+     * @brief Obtenir l'objet du XML
+     * @param node
+     */
+    void fromXml(xml_node node);
+
 
 private:
     /**
