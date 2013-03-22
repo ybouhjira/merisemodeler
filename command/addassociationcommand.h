@@ -29,8 +29,12 @@ public:
      * @brief Destructeur
      */
     ~AddAssociationCommand();
-
     // Redéfinitions
+    /**
+     * @reimp
+     */
+    Logic::Association* item() const;
+
     /**
      * @reimp
      */

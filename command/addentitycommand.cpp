@@ -35,3 +35,7 @@ void AddEntityCommand::redo() {
     auto graphicEntity = new Graphic::Entity(m_entity, x(), y());
     mcd()->scene()->addItem(graphicEntity);
 }
+
+Logic::Entity* AddEntityCommand::item() const {
+    return m_entity;
+}

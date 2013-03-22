@@ -5,6 +5,7 @@
 
 // Qt
 #include <QGraphicsScene>
+class QUndoStack;
 
 /**
  * @brief Cette class est une sous class de QGraphicsScene qui contient
@@ -75,6 +76,11 @@ private:
      * @brief Mode
      */
     Mode m_mode;
+
+    /**
+     * @brief Pile des commandes
+     */
+    QUndoStack *m_undoStack;
 
 };
 

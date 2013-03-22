@@ -5,6 +5,7 @@
 #include "model/namespace.h"
 #include "modelui.h"
 
+
 /**
  * @brief L'interface graphique du MCD
  */

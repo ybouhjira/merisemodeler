@@ -15,10 +15,10 @@ AddAssociationCommand::AddAssociationCommand(
     : AddItemCommand(mcd, QObject::tr("Added an association"), parent)
 {
     m_association = this->mcd()->createAssociation(entity1, entity2);
-    qreal x = entity1->graphicObject()->x() + entity2->graphicObject()->x() / 2;
-    qreal y = entity1->graphicObject()->y() + entity2->graphicObject()->y() / 2;
-    setX(x);
-    setY(y);
+    QGraphicsItem* gEnt1 = entity1->graphicObject() ;
+    QGraphicsItem* gEnt2 = entity2->graphicObject() ;
+    setX((gEnt1->x() + gEnt2->x()) / 2);
+    setY((gEnt1->y() + gEnt2->y()) / 2);
 }
 
 AddAssociationCommand::~AddAssociationCommand() {
@@ -35,6 +35,10 @@ void AddAssociationCommand::undo() {
 void AddAssociationCommand::redo() {
     AddItemCommand::redo();
     mcd()->addItem(m_association);
-    auto graphicEntity = new Graphic::Association(m_association, x(), y());
-    mcd()->scene()->addItem(graphicEntity);
+    auto graphicAssoc = new Graphic::Association(m_association, x(), y());
+    mcd()->scene()->addItem(graphicAssoc);
+}
+
+Logic::Association* AddAssociationCommand::item() const {
+    return m_association;
 }

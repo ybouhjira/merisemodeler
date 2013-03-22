@@ -18,6 +18,7 @@
 #include <QSignalMapper>
 #include <QGraphicsView>
 #include <QDockWidget>
+#include <QUndoStack>
 
 using namespace Ui;
 

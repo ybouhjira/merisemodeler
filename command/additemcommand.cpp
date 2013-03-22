@@ -11,7 +11,6 @@ AddItemCommand::AddItemCommand(
 }
 
 AddItemCommand::~AddItemCommand() {
-
 }
 
 qreal AddItemCommand::x() const {

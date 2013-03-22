@@ -2,7 +2,7 @@
 #define ADDENTITYCOMMAND_H
 
 #include "additemcommand.h"
-#include "logic/namespace.h"
+#include "logic/entity.h"
 
 /**
  * @brief Commande d'ajout d'une entité
@@ -28,6 +28,11 @@ public:
     virtual ~AddEntityCommand();
 
     // Redéfinitions
+    /**
+     * @reimp
+     */
+    Logic::Entity* item() const;
+
     /**
      * @reimp
      */

@@ -8,8 +8,12 @@
 #include "graphic/association.h"
 #include "graphic/inheritencearrowobject.h"
 
+#include "command/addentitycommand.h"
+#include "command/addassociationcommand.h"
+
 // Qt
 #include <QGraphicsSceneMouseEvent>
+#include <QUndoStack>
 
 using namespace Model;
 
@@ -17,6 +21,7 @@ McdScene::McdScene(McdModel *mcd)
     : QGraphicsScene((QObject*)mcd)
     , m_mcd(mcd)
     , m_mode(None)
+    , m_undoStack(new QUndoStack(this))
 {
 }
 
@@ -36,10 +41,11 @@ void McdScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     qreal x = event->scenePos().x();
     qreal y = event->scenePos().y();
 
+
     // AJOUTER UNE ENTITE
     if(m_mode == AddEntity) {
-        Logic::Entity *entity = m_mcd->createEntity();
-        addItem(new Graphic::Entity(entity, x, y));
+        auto cmd = new Command::AddEntityCommand(x, y, m_mcd);
+        m_undoStack->push(cmd);
         setMode(None);
     }// AJOUTER UNE ASSOCIATION
     else if(m_mode == AddAssociation) {
@@ -55,15 +61,8 @@ void McdScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             }// Clique sur la seconde entité
             else {
                 Logic::Entity *entity2 = clickedEntity->entity();
-                Logic::Association *assoc = m_mcd->createAssociation(entity1, entity2);
-
-                // Ajout l'association au centre
-                Graphic::Entity* gEnt1 = entity1->graphicObject();
-                Graphic::Entity* gEnt2 = entity2->graphicObject();
-                qreal assocX = (gEnt1->x() + gEnt2->x()) / 2 ;
-                qreal assocY = (gEnt1->y() + gEnt2->y()) / 2 ;
-                auto gAssoc = new Graphic::Association(assoc, assocX, assocY);
-                addItem(gAssoc);
+                auto cmd = new Command::AddAssociationCommand(entity1, entity2, m_mcd);
+                m_undoStack->push(cmd);
 
                 // Clean up
                 entity1 = nullptr;
