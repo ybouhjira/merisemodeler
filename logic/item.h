@@ -3,13 +3,16 @@
 
 #include "logic/namespace.h"
 #include "graphic/object.h"
+#include "xml/serializable.h"
+#include "logic/uniqueconstraint.h"
 
 // Qt
 #include <QString>
 #include <QList>
 #include <QObject>
 
-class Logic::Item : public QObject
+
+class Logic::Item : public QObject, public serializable
 {
     Q_OBJECT
     //METHODS
@@ -79,6 +82,18 @@ protected:
      * @param Name : name of the item
      */
     Item(QString const &Name);
+
+    /**
+     * @brief writeProperties
+     * @return
+     */
+    xml_node writeProperties();
+
+    /**
+     * @brief writeUK
+     * @return
+     */
+    xml_node writeUK(QList<UniqueConstraint *> uniqueConstraints);
 
     //ATTRIBUTS
 private:
