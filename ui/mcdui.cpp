@@ -4,7 +4,8 @@
 #include "logic/entity.h"
 
 #include "model/mcdmodel.h"
-#include "model/mcdscene.h"
+#include "model/modelview.h"
+#include "model/mcdcontroller.h"
 
 #include "graphic/entity.h"
 #include "graphic/association.h"
@@ -19,6 +20,8 @@
 #include <QGraphicsView>
 #include <QDockWidget>
 #include <QUndoStack>
+#include <QGraphicsScene>
+#include <QActionGroup>
 
 using namespace Ui;
 
@@ -32,22 +35,23 @@ McdUi* McdUi::getInstance() {
 McdUi::McdUi(QWidget *parent)
     : ModelUi(parent)
     , m_model(nullptr)
-    , m_entityAction(new QAction(QIcon(":/entity"),tr("Entity"),this))
-    , m_associationAction(new QAction(QIcon(":/assoc"),tr("Association"),this))
-    , m_inheritanceAction(new QAction(QIcon(":/inherit"),tr("Inheritance"),this))
+    , m_scene(new QGraphicsScene)
+    , m_controller(new Model::McdController(m_model, m_scene))
+    , m_actionGroup(new QActionGroup(this))
+    , m_entityAction(new QAction(QIcon(":/entity"), tr("Entity"),
+                                 m_actionGroup))
+    , m_assocAction(new QAction(QIcon(":/assoc"), tr("Association"),
+                                      m_actionGroup))
+    , m_inheriAction(new QAction(QIcon(":/inherit"), tr("Inheritance"),
+                                      m_actionGroup))
     , m_entityWidget(new EntityEditWidget)
     , m_associationWidget(new AssociationEditWidget)
     , m_itemEditDock(new QDockWidget(tr("Item editing")))
 {
     // Barre d'outils
-    m_toolBar->addAction(m_entityAction);
-    m_toolBar->addAction(m_associationAction);
-    m_toolBar->addSeparator();
-    m_toolBar->addAction(m_inheritanceAction);
-
-    // Graphics View
-    m_graphicsView->setSceneRect(0,0,2000,2000);
-    m_graphicsView->scroll(-1000, -1000);
+    m_toolBar->addActions(m_actionGroup->actions());
+    for(QAction* action : m_actionGroup->actions())
+        action->setCheckable(true);
 
     // DockWidget
     addDockWidget(Qt::BottomDockWidgetArea, m_itemEditDock);
@@ -60,32 +64,40 @@ McdUi::McdUi(QWidget *parent)
     // Connections
     // Bouttons de la barre d'outils
     connect(m_entityAction, SIGNAL(triggered()),
-            this, SLOT(setAddEntityModeOnScene()) );
-    connect(m_associationAction, SIGNAL(triggered()),
-            this, SLOT(setAddAssocModeOnScene()) );
-    connect(m_inheritanceAction, SIGNAL(triggered()),
-            this, SLOT(setInheritenceModeOnScene()) );
+            this, SLOT(setAddEntityClickAction()) );
+    connect(m_assocAction, SIGNAL(triggered()),
+            this, SLOT(setAddAssociationClickAction()) );
+    connect(m_inheriAction, SIGNAL(triggered()),
+            this, SLOT(setInheritencClickAction()) );
 
+    // Mise à jour auto de la vues
     auto updateFunc = [=](){
         m_graphicsView->viewport()->update();
     };
     connect(m_entityWidget, &ItemEditWidget::itemEdited, updateFunc);
     connect(m_associationWidget, &ItemEditWidget::itemEdited, updateFunc);
 
+    // connection de la vue avec le controlleur
+    connect(m_graphicsView, SIGNAL(clicked(qreal,qreal)),
+            m_controller, SLOT(viewClicked(qreal, qreal)));
+
 }
 
-void McdUi::setModel(Model::McdModel *mcd) {
+void McdUi::setModel(Model::McdModel *mcd, QGraphicsScene* scene) {
     // Deconnections de l'ancienne McdGraphicsScene
-    if(m_model != nullptr && m_model->scene() != nullptr) {
-        disconnect(mcd->scene(), &QGraphicsScene::selectionChanged,
+    if(m_model != nullptr && m_scene != nullptr) {
+        disconnect(m_scene, &QGraphicsScene::selectionChanged,
                    this, &McdUi::sceneSelectionChanged );
     }
 
     m_model = mcd ;
-    m_graphicsView->setScene(mcd->scene());
+    m_scene = scene;
+    m_controller->setModel(mcd);
+    m_controller->setScene(scene);
+    m_graphicsView->setScene(scene);
 
     // Connections
-    connect(m_model->scene(), &QGraphicsScene::selectionChanged,
+    connect(m_scene, &QGraphicsScene::selectionChanged,
             this, &McdUi::sceneSelectionChanged );
 
     emit modelChanged(mcd);
@@ -95,20 +107,20 @@ Model::McdModel* McdUi::model() const {
     return m_model ;
 }
 
-void McdUi::setAddEntityModeOnScene() const {
-    m_model->scene()->setMode(Model::McdScene::AddEntity);
+void McdUi::setAddEntityClickAction() const {
+    m_controller->setClickAction(Model::McdController::AddEntity);
 }
 
-void McdUi::setAddAssocModeOnScene() const {
-    m_model->scene()->setMode(Model::McdScene::AddAssociation);
+void McdUi::setAddAssociationClickAction() const {
+     m_controller->setClickAction(Model::McdController::AddAssociation);
 }
 
-void McdUi::setInheritenceModeOnScene() const {
-    m_model->scene()->setMode(Model::McdScene::Inheritence);
+void McdUi::setInheritencClickAction() const {
+     m_controller->setClickAction(Model::McdController::Inheritence);
 }
 
 void McdUi::sceneSelectionChanged() {
-    QList<QGraphicsItem*> items = m_model->scene()->selectedItems();
+    QList<QGraphicsItem*> items = m_scene->selectedItems();
 
     if(!items.empty()) {
         for(QGraphicsItem* item : items) {

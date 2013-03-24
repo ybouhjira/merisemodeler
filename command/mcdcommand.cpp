@@ -20,11 +20,13 @@ Model::McdModel* McdCommand::mcd() const{
 }
 
 void McdCommand::undo() {
+    QUndoCommand::undo();
     m_applied = false;
     QUndoCommand::undo();
 }
 
 void McdCommand::redo() {
+    QUndoCommand::redo();
     m_applied = true;
     QUndoCommand::redo();
 }

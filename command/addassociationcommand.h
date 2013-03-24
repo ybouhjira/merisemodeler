@@ -18,10 +18,9 @@ public:
      * @param mcd Modèle cible
      * @param parent Command mère
      */
-    AddAssociationCommand(
-            Logic::Entity* entity1,
+    AddAssociationCommand(Logic::Entity* entity1,
             Logic::Entity* entity2,
-            Model::McdModel* mcd,
+            Model::McdModel* mcd, QGraphicsScene *scene,
             QUndoCommand* parent = nullptr
             );
 
@@ -29,12 +28,8 @@ public:
      * @brief Destructeur
      */
     ~AddAssociationCommand();
-    // Redéfinitions
-    /**
-     * @reimp
-     */
-    Logic::Association* item() const;
 
+    // Redéfinitions
     /**
      * @reimp
      */

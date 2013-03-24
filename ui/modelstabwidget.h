@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <QList>
 class QTabBar;
+class QGraphicsScene;
 
 /**
  * @brief Widget qui permet de parcourir les models avec des onglets
@@ -27,7 +28,9 @@ public slots:
      * @param label Nom affiché dans l'onglet
      * @param model Model
      */
-    void addModel(QString const& label, Model::McdModel* model);
+    void addModel(QString const& label,
+                  Model::McdModel* model,
+                  QGraphicsScene *scene);
 
     /**
      * @brief Supprime une model

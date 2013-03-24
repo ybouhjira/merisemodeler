@@ -5,6 +5,9 @@
 #include "model/namespace.h"
 #include "modelui.h"
 
+// Qt
+class QGraphicsScene;
+class QActionGroup;
 
 /**
  * @brief L'interface graphique du MCD
@@ -31,26 +34,23 @@ public slots:
      * @brief Mutateur
      * @param mcd Model MCD
      */
-    void setModel(Model::McdModel* mcd) ;
+    void setModel(Model::McdModel* mcd, QGraphicsScene *scene) ;
 
 private slots:
     /**
-     * @brief Appelé lorsque le bouton Entity est cliqué, met la scene en Mode
-     * McdModelScene::AddEntity
+     * @brief Appelé lorsque le bouton Entity est cliqué
      */
-    void setAddEntityModeOnScene() const ;
+    void setAddEntityClickAction() const ;
 
     /**
-     * @brief Appelé lorsque le bouton Association est cliqué, met la scene
-     * en Mode McdModelScene::AddAssociation
+     * @brief Appelé lorsque le bouton Association est cliqué
      */
-    void setAddAssocModeOnScene() const ;
+    void setAddAssociationClickAction() const ;
 
     /**
-     * @brief Appelé lorsque le bouton Association est cliqué, met la scene
-     * en Mode McdModelScene::Enheritence
+     * @brief Appelé lorsque le bouton Association est cliqué
      */
-    void setInheritenceModeOnScene() const;
+    void setInheritencClickAction() const;
 
     /**
      * @brief Change l'element affiché dans le panneau selon la selection
@@ -83,19 +83,24 @@ private:
     Model::McdModel *m_model;
 
     /**
-     * @brief QAction qui ajoute une entité
+     * @brief La representation du modéle MCD
      */
-    QAction *m_entityAction;
+    QGraphicsScene *m_scene;
 
     /**
-      * @brief QAction qui ajoute une Associations
-      */
-    QAction *m_associationAction;
+     * @brief Controleur
+     */
+    Model::McdController* m_controller;
 
     /**
-      * @brief QAction qui Ajoute un relation d'hériatge entre deux entités
-      */
-    QAction *m_inheritanceAction;
+     * @brief Groupe les objets de type QAction
+     */
+    QActionGroup *m_actionGroup;
+
+    QAction
+        *m_entityAction,         //!< @brief Ajoute une entité
+        *m_assocAction,    //!< @brief Ajoute une association
+        *m_inheriAction;    //!< @brief Ahoute une héritage
 
     /**
      * @brief Widget qui edite l'entité

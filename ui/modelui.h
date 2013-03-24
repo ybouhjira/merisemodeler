@@ -2,7 +2,9 @@
 #define MODELUI_H
 
 #include "namespace.h"
+#include "model/namespace.h"
 
+// Qt
 #include <QMainWindow>
 class QGraphicsView;
 
@@ -36,7 +38,7 @@ protected:
     /**
       * @brief Le widget qui affiche le diagram
       */
-    QGraphicsView *m_graphicsView;
+    Model::ModelView *m_graphicsView;
 
     /**
       * @brief Barre d'outils

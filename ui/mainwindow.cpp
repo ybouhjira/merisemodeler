@@ -11,6 +11,7 @@
 #include <QTabBar>
 #include <QVBoxLayout>
 #include <QStatusBar>
+#include <QGraphicsScene>
 
 using namespace Ui;
 void MainWindow::showAboutDialog() {
@@ -66,7 +67,7 @@ MainWindow::MainWindow()
 }
 
 void MainWindow::createNewMcd() const{
-    m_tabWidget->addModel(tr("unamed"), new Model::McdModel);
+    m_tabWidget->addModel(tr("unamed"), new Model::McdModel, new QGraphicsScene);
 }
 
 QMenu* MainWindow::fileMenu() {

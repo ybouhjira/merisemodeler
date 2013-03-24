@@ -4,27 +4,17 @@ using namespace Command;
 
 AddItemCommand::AddItemCommand(
         Model::McdModel* mcd,
+        QGraphicsScene* scene,
         QString const& text,
         QUndoCommand* parent)
     : McdCommand(mcd, text, parent)
+    , m_scene(scene)
 {
 }
 
 AddItemCommand::~AddItemCommand() {
 }
 
-qreal AddItemCommand::x() const {
-    return m_x;
-}
-
-qreal AddItemCommand::y() const {
-    return m_y;
-}
-
-void AddItemCommand::setX(qreal x) {
-    m_x = x;
-}
-
-void AddItemCommand::setY(qreal y) {
-    m_y = y;
+QGraphicsScene* AddItemCommand::scene() const {
+    return m_scene;
 }

@@ -2,40 +2,57 @@
 #include "logic/entity.h"
 #include "graphic/entity.h"
 #include "model/mcdmodel.h"
-#include "model/mcdscene.h"
+
+// Qt
+#include <QGraphicsScene>
 
 using namespace Command;
 
 AddEntityCommand::AddEntityCommand(
         qreal x,
         qreal y,
-        Model::McdModel* mcd,
+        Model::McdModel* model,
+        QGraphicsScene* scene,
         QUndoCommand* parent)
-    : AddItemCommand(mcd, QObject::tr("Added an entity"), parent)
+    : AddItemCommand(model, scene, QObject::tr("Added an entity"), parent)
 {
-    m_entity = this->mcd()->createEntity();
-    setX(x);
-    setY(y);
+    // Recherche de nom similaire à entityName
+    // si trouvé on modifie nameSuffix
+    QString entityName = QObject::tr("Entity");
+    QString nameSuffix = "" ;
+    QListIterator<Logic::Item*> iterator(mcd()->items());
+    while(iterator.hasNext()) {
+        while(iterator.hasNext()) {
+            if(iterator.next()->name()  == entityName + nameSuffix) {
+                nameSuffix = QString::number(nameSuffix.toInt() + 1);
+                iterator.toFront(); //< revenir au premier
+                break;
+            }
+        }
+    }
+
+    // LOGIC
+    m_entity = new Logic::Entity(entityName + nameSuffix) ;
+
+    // GRAPHIC
+    m_entity->setGraphicObject(new Graphic::Entity(m_entity, x, y));
 }
 
 AddEntityCommand::~AddEntityCommand() {
-    if(!isApplied())
+    if(!isApplied()) {
+        delete m_entity->graphicObject();
         delete m_entity;
+    }
 }
 
 void AddEntityCommand::undo() {
     AddItemCommand::undo();
-    mcd()->scene()->removeItem(m_entity->graphicObject());
+    scene()->removeItem(m_entity->graphicObject());
     mcd()->removeItem(m_entity);
 }
 
 void AddEntityCommand::redo() {
     AddItemCommand::redo();
     mcd()->addItem(m_entity);
-    auto graphicEntity = new Graphic::Entity(m_entity, x(), y());
-    mcd()->scene()->addItem(graphicEntity);
-}
-
-Logic::Entity* AddEntityCommand::item() const {
-    return m_entity;
+    scene()->addItem(m_entity->graphicObject());
 }

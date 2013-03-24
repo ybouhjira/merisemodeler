@@ -1,8 +1,11 @@
 #ifndef ADDENTITYCOMMAND_H
 #define ADDENTITYCOMMAND_H
 
-#include "additemcommand.h"
-#include "logic/entity.h"
+#include "command/additemcommand.h"
+#include "logic/namespace.h"
+#include "graphic/namespace.h"
+
+class QGraphicsScene;
 
 /**
  * @brief Commande d'ajout d'une entité
@@ -16,10 +19,10 @@ public:
      * @param text Texte descriptif
      * @param parent commande mère
      */
-    AddEntityCommand(
-            qreal x,
+    AddEntityCommand(qreal x,
             qreal y,
-            Model::McdModel* mcd,
+            Model::McdModel* model,
+            QGraphicsScene *scene,
             QUndoCommand* parent = nullptr);
 
     /**
@@ -28,10 +31,6 @@ public:
     virtual ~AddEntityCommand();
 
     // Redéfinitions
-    /**
-     * @reimp
-     */
-    Logic::Entity* item() const;
 
     /**
      * @reimp

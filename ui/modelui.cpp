@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "exporter/pdfsceneexporter.h"
 #include "exporter/svgsceneexporter.h"
+#include "model/modelview.h"
 
 // Qt
 #include <QGraphicsView>
@@ -14,7 +15,7 @@ using namespace Ui;
 
 ModelUi::ModelUi(QWidget *parent) :
     QMainWindow(parent)
-  , m_graphicsView(new QGraphicsView)
+  , m_graphicsView(new Model::ModelView)
   , m_toolBar(new QToolBar(tr("ToolBar")))
   , m_exportAction(new QAction(tr("Export"), this))
 {

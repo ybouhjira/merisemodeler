@@ -27,12 +27,6 @@ public:
      */
     virtual ~McdModel();
 
-    /**
-     * @brief Accesseur
-     * @return
-     */
-    Model::McdScene* scene() const;
-
 public slots:
     /**
      * @brief items
@@ -58,24 +52,6 @@ public slots:
      */
     void removeItem(int index);
 
-    /**
-     * @brief Crée une nouvelle entité et l'ajoute au model.
-     * cette entité sera nommée Entity, si le model contient un elemnt du
-     * meme nom. Alors un siffix numerique sera ajouté au nom de l'entité,
-     * exemple : Entity1, Entity2, ... etc
-     * @return L'entité creée
-     */
-    Logic::Entity* createEntity();
-
-    /**
-     * @brief Crée une association nommée Association et l'ajoute au model.
-     * si ce nom existe déja une suffix numérique sera ajouté.
-     * @param first Entité liée avec cette association
-     * @param second Entité liée avec cette association
-     * @return L'association creée
-     */
-    Logic::Association* createAssociation(Logic::Entity* first, Logic::Entity* second);
-
 signals:
     /**
      * @brief Emit lors de l'ajout d'un element
@@ -95,11 +71,6 @@ private:
      */
     QList<Logic::Item*> m_items;
 
-    /**
-     * @brief Respresentation graphique du Model MCD
-     * Cette attribut est en lecture seul, il n'a pas de mutateur
-     */
-    Model::McdScene *m_scene;
 };
 
 #endif // MCDMODEL_H

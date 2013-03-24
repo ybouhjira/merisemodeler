@@ -3,4 +3,5 @@ namespace Command {
     class McdCommand;
     class AddEntityCommand;
     class AddAssociationCommand;
+    class RemoveItemsCommand;
 }

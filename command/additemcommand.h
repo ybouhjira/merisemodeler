@@ -7,7 +7,7 @@
 #include "logic/namespace.h"
 
 // Qt
-#include <QUndoCommand>
+class QGraphicsScene;
 
 /**
  * @brief Command d'ajout d'un élément à l'MCD
@@ -21,9 +21,15 @@ protected:
      */
     explicit AddItemCommand(
             Model::McdModel* mcd,
+            QGraphicsScene* scene,
             QString const& text,
             QUndoCommand* parent = nullptr
             );
+
+    /**
+     * @brief Accesseur
+     */
+    QGraphicsScene* scene() const;
 
 public:
     /**
@@ -31,44 +37,14 @@ public:
      */
     virtual ~AddItemCommand();
 
-    /**
-     * @return Retourne l'element ajouté
-     */
-    virtual Logic::Item* item() const = 0;
-
-    // Accesseurs
-    /**
-     * @brief Accesseur
-     */
-    qreal x() const ;
-
-    /**
-     * @brief Accesseur
-     */
-    qreal y() const ;
-
-protected:
-    // Mutateur
-    /**
-     * @brief Mutateur
-     */
-    void setX(qreal x) ;
-
-    /**
-     * @brief Mutateur
-     */
-    void setY(qreal y);
-
+    //ATTRIBUTS
 private:
     /**
-     * @brief Ordonnée
+     * @brief QGraphicsScene dans la quelle la commande doit ajouter un
+     * Graphic::Item
      */
-    qreal m_x;
+    QGraphicsScene* m_scene;
 
-    /**
-     * @brief Abssice
-     */
-    qreal m_y;
 };
 
 #endif // ADDITEMCOMMAND_H
