@@ -12,14 +12,14 @@ class QGraphicsScene;
 /**
  * @brief Command d'ajout d'un élément à l'MCD
  */
-class Command::AddItemCommand : public Command::McdCommand
+class Command::ItemCommand : public Command::McdCommand
 {
     // METHODES
 protected:
     /**
      * @brief Constructeur
      */
-    explicit AddItemCommand(
+    explicit ItemCommand(
             Model::McdModel* mcd,
             QGraphicsScene* scene,
             QString const& text,
@@ -35,7 +35,7 @@ public:
     /**
      * @brief Destructeur
      */
-    virtual ~AddItemCommand();
+    virtual ~ItemCommand();
 
     //ATTRIBUTS
 private:

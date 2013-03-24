@@ -55,6 +55,7 @@ void McdController::viewClicked(qreal x, qreal y) const {
         }*/
         break;
     }
+
     }
 }
 

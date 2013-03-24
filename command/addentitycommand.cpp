@@ -14,7 +14,7 @@ AddEntityCommand::AddEntityCommand(
         Model::McdModel* model,
         QGraphicsScene* scene,
         QUndoCommand* parent)
-    : AddItemCommand(model, scene, QObject::tr("Added an entity"), parent)
+    : ItemCommand(model, scene, QObject::tr("Added an entity"), parent)
 {
     // Recherche de nom similaire à entityName
     // si trouvé on modifie nameSuffix
@@ -46,13 +46,13 @@ AddEntityCommand::~AddEntityCommand() {
 }
 
 void AddEntityCommand::undo() {
-    AddItemCommand::undo();
+    ItemCommand::undo();
     scene()->removeItem(m_entity->graphicObject());
     mcd()->removeItem(m_entity);
 }
 
 void AddEntityCommand::redo() {
-    AddItemCommand::redo();
+    ItemCommand::redo();
     mcd()->addItem(m_entity);
     scene()->addItem(m_entity->graphicObject());
 }

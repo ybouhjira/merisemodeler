@@ -1,13 +1,13 @@
 #ifndef ADDASSOCIATIONCOMMAND_H
 #define ADDASSOCIATIONCOMMAND_H
 
-#include "additemcommand.h"
+#include "itemcommand.h"
 #include "logic/association.h"
 
 /**
  * @brief Commande d'ajout d'une association
  */
-class Command::AddAssociationCommand : public Command::AddItemCommand
+class Command::AddAssociationCommand : public Command::ItemCommand
 {
     // METHODES
 public:

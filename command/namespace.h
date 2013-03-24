@@ -1,7 +1,10 @@
 namespace Command {
-    class AddItemCommand;
+    class ItemCommand;
     class McdCommand;
     class AddEntityCommand;
     class AddAssociationCommand;
-    class RemoveItemsCommand;
+
+    class RemoveCommandFactory;
+    class RemoveCommand;
+    class UnsopportedItemException;
 }

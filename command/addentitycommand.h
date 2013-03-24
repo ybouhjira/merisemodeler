@@ -1,7 +1,7 @@
 #ifndef ADDENTITYCOMMAND_H
 #define ADDENTITYCOMMAND_H
 
-#include "command/additemcommand.h"
+#include "command/itemcommand.h"
 #include "logic/namespace.h"
 #include "graphic/namespace.h"
 
@@ -10,7 +10,7 @@ class QGraphicsScene;
 /**
  * @brief Commande d'ajout d'une entité
  */
-class Command::AddEntityCommand : public Command::AddItemCommand
+class Command::AddEntityCommand : public Command::ItemCommand
 {
 public:
     /**

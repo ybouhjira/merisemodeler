@@ -2,7 +2,7 @@
 
 using namespace Command;
 
-AddItemCommand::AddItemCommand(
+ItemCommand::ItemCommand(
         Model::McdModel* mcd,
         QGraphicsScene* scene,
         QString const& text,
@@ -12,9 +12,9 @@ AddItemCommand::AddItemCommand(
 {
 }
 
-AddItemCommand::~AddItemCommand() {
+ItemCommand::~ItemCommand() {
 }
 
-QGraphicsScene* AddItemCommand::scene() const {
+QGraphicsScene* ItemCommand::scene() const {
     return m_scene;
 }

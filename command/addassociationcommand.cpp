@@ -14,7 +14,7 @@ AddAssociationCommand::AddAssociationCommand(
         Model::McdModel* mcd,
         QGraphicsScene* scene,
         QUndoCommand* parent)
-    : AddItemCommand(mcd, scene, QObject::tr("Added an association"), parent)
+    : ItemCommand(mcd, scene, QObject::tr("Added an association"), parent)
 {
     // Recherche de nom similaire
     // si trouvé => modifier nameSuffix
@@ -55,13 +55,13 @@ AddAssociationCommand::~AddAssociationCommand() {
 }
 
 void AddAssociationCommand::undo() {
-    AddItemCommand::undo();
+    ItemCommand::undo();
     scene()->removeItem(m_association->graphicObject());
     mcd()->removeItem(m_association);
 }
 
 void AddAssociationCommand::redo() {
-    AddItemCommand::redo();
+    ItemCommand::redo();
     mcd()->addItem(m_association);
     scene()->addItem(m_association->graphicObject());
 }

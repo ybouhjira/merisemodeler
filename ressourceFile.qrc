@@ -3,5 +3,7 @@
         <file alias="assoc">ressources/association.svg</file>
         <file alias="entity">ressources/entity.svg</file>
         <file alias="inherit">ressources/inheritence.svg</file>
+        <file alias="cursor">ressources/cursor.png</file>
+        <file alias="erease">ressources/erease.png</file>
     </qresource>
 </RCC>

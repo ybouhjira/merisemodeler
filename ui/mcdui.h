@@ -38,6 +38,16 @@ public slots:
 
 private slots:
     /**
+     * @brief Appelé lorsque le bouton MOve est cliqué
+     */
+    void setMoveClickAction() const;
+
+    /**
+     * @brief setRemoveClickAction
+     */
+    void setRemoveClickAction() const;
+
+    /**
      * @brief Appelé lorsque le bouton Entity est cliqué
      */
     void setAddEntityClickAction() const ;
@@ -98,9 +108,11 @@ private:
     QActionGroup *m_actionGroup;
 
     QAction
-        *m_entityAction,         //!< @brief Ajoute une entité
-        *m_assocAction,    //!< @brief Ajoute une association
-        *m_inheriAction;    //!< @brief Ahoute une héritage
+    *m_moveAction,      //!< @brief Déplacement
+    *m_removeAction,    //! @brief Suppression
+    *m_entityAction,    //!< @brief Ajoute une entité
+    *m_assocAction,     //!< @brief Ajoute une association
+    *m_inheritAction;    //!< @brief Ahoute une héritage
 
     /**
      * @brief Widget qui edite l'entité

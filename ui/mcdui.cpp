@@ -34,22 +34,26 @@ McdUi* McdUi::getInstance() {
 
 McdUi::McdUi(QWidget *parent)
     : ModelUi(parent)
+    // MVC
     , m_model(nullptr)
     , m_scene(new QGraphicsScene)
     , m_controller(new Model::McdController(m_model, m_scene))
+    // Actions
     , m_actionGroup(new QActionGroup(this))
-    , m_entityAction(new QAction(QIcon(":/entity"), tr("Entity"),
-                                 m_actionGroup))
-    , m_assocAction(new QAction(QIcon(":/assoc"), tr("Association"),
-                                      m_actionGroup))
-    , m_inheriAction(new QAction(QIcon(":/inherit"), tr("Inheritance"),
-                                      m_actionGroup))
+    , m_moveAction(new QAction(QIcon(":/cursor"), tr("Move"), m_actionGroup))
+    , m_removeAction(new QAction(QIcon(":/erease"), tr("Remove"), m_actionGroup))
+    , m_entityAction(new QAction(QIcon(":/entity"), tr("Entity"), m_actionGroup))
+    , m_assocAction(new QAction(QIcon(":/assoc"), tr("Association"), m_actionGroup))
+    , m_inheritAction(new QAction(QIcon(":/inherit"), tr("Inheritance"), m_actionGroup))
+    // EditWidgets
     , m_entityWidget(new EntityEditWidget)
     , m_associationWidget(new AssociationEditWidget)
     , m_itemEditDock(new QDockWidget(tr("Item editing")))
 {
     // Barre d'outils
-    m_toolBar->addActions(m_actionGroup->actions());
+    m_toolBar->addActions(m_actionGroup->actions().mid(0,2));
+    m_toolBar->addSeparator();
+    m_toolBar->addActions(m_actionGroup->actions().mid(2));
     for(QAction* action : m_actionGroup->actions())
         action->setCheckable(true);
 
@@ -63,11 +67,15 @@ McdUi::McdUi(QWidget *parent)
 
     // Connections
     // Bouttons de la barre d'outils
+    connect(m_moveAction, SIGNAL(triggered()),
+            this, SLOT(setMoveClickAction()) );
+    connect(m_removeAction, SIGNAL(triggered()),
+            this, SLOT(setRemoveClickAction()) );
     connect(m_entityAction, SIGNAL(triggered()),
             this, SLOT(setAddEntityClickAction()) );
     connect(m_assocAction, SIGNAL(triggered()),
             this, SLOT(setAddAssociationClickAction()) );
-    connect(m_inheriAction, SIGNAL(triggered()),
+    connect(m_inheritAction, SIGNAL(triggered()),
             this, SLOT(setInheritencClickAction()) );
 
     // Mise à jour auto de la vues
@@ -107,16 +115,24 @@ Model::McdModel* McdUi::model() const {
     return m_model ;
 }
 
+void McdUi::setMoveClickAction() const {
+    m_controller->setClickAction(Model::McdController::Remove);
+}
+
+void McdUi::setRemoveClickAction() const {
+    m_controller->setClickAction(Model::McdController::Select);
+}
+
 void McdUi::setAddEntityClickAction() const {
     m_controller->setClickAction(Model::McdController::AddEntity);
 }
 
 void McdUi::setAddAssociationClickAction() const {
-     m_controller->setClickAction(Model::McdController::AddAssociation);
+    m_controller->setClickAction(Model::McdController::AddAssociation);
 }
 
 void McdUi::setInheritencClickAction() const {
-     m_controller->setClickAction(Model::McdController::Inheritence);
+    m_controller->setClickAction(Model::McdController::Inheritence);
 }
 
 void McdUi::sceneSelectionChanged() {
