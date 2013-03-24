@@ -1,6 +1,6 @@
 #include "uniqueconstraint.h"
 
-UniqueConstraint::UniqueConstraint(QList<Property *> properties)
+Logic::UniqueConstraint::UniqueConstraint(QList<Property *> properties)
 {
     for(int i= 0 ;i<properties.length();i++)
     {
@@ -8,22 +8,22 @@ UniqueConstraint::UniqueConstraint(QList<Property *> properties)
     }
 }
 
-UniqueConstraint::~UniqueConstraint()
+Logic::UniqueConstraint::~UniqueConstraint()
 {
 }
- QList<Property*> UniqueConstraint::properties()
+ QList<Logic::Property*> Logic::UniqueConstraint::properties()
  {
      return m_properties;
  }
-void UniqueConstraint::addProperty(Property *property)
+void Logic::UniqueConstraint::addProperty(Logic::Property *property)
 {
     m_properties.append(property);
 }
-void UniqueConstraint::removeProperty(int index)
+void Logic::UniqueConstraint::removeProperty(int index)
 {
     m_properties.removeAt(index);
 }
-void UniqueConstraint::removeProperty(Property *property)
+void Logic::UniqueConstraint::removeProperty(Logic::Property *property)
 {
     m_properties.removeOne(property);
 }

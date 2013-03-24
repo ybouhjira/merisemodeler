@@ -45,22 +45,15 @@ QList<Logic::Property*> Item::properties() {
     return m_properties;
 }
 
-xml_node Item::toXml()
-{
 
-}
-
-void Item::fromXml(xml_node entity)
-{
-}
 
 xml_node Item::writeProperties()
 {
     xml_node Xproperties;
-    Xproperties.set_name("properties");
     foreach (Property *Pte, properties()) {
-        xml_node Xpte;
-        Xpte.set_name("property");
+        xml_node Xpte = Xproperties.append_child("property");
+
+        //Récupération des données
         //test Si la proprieté est obligatoire
         QString Ob;
         if(Pte->isObligatory() == true)
@@ -73,32 +66,29 @@ xml_node Item::writeProperties()
             Id = "true";
         else
             Id = "false";
-        Xpte.append_attribute("name") = "name";
-        Xpte.append_attribute("value") = Pte->name().toStdString();
-        Xpte.append_attribute("identifier") = Id;
-        Xpte.append_attribute("obligatory") = Ob;
-        Xpte.append_attribute("check") = Pte->check().toStdString();
-        Xpte.append_attribute("default-value") = Pte->defaultValue().toStdString();
-        Xproperties.append_child(Xpte);
+
+        //Ajout des attributs
+        Xpte.append_attribute("name") = Pte->name().toStdString().c_str();
+        Xpte.append_attribute("identifier") = Id.toStdString().c_str();
+        Xpte.append_attribute("obligatory") = Ob.toStdString().c_str();
+        Xpte.append_attribute("check") = Pte->check().toStdString().c_str();
+        Xpte.append_attribute("default-value") = Pte->defaultValue().toStdString().c_str();
     }
+
     return Xproperties;
 }
 
 xml_node Item::writeUK(QList<UniqueConstraint *> uniqueConstraints)
 {
     xml_node Xuk;
-    Xuk.set_name("Unique-Constraints");
     foreach (UniqueConstraint *uk, uniqueConstraints) {
-        xml_node unique;
-        unique.set_name("Unique-Constraint");
+        xml_node unique = Xuk.append_child("Unique-Constraint");
+
         //Les propietés de chaque contrainte
         foreach (Property *p, uk->properties()) {
-            xml_node ukProperty;
-            ukProperty.set_name("Unique-Constraint-Property");
-            ukProperty.append_attribute("name") = p->name().toStdString();
-            unique.append_child(ukProperty);
+            xml_node ukProperty = unique.append_child("Unique-Constraint-Property");
+            ukProperty.append_attribute("name") = p->name().toStdString().c_str();
         }
-        Xuk.append_child(unique);
     }
     return Xuk;
 }

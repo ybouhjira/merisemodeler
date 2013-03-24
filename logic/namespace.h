@@ -17,5 +17,7 @@ namespace Logic {
  class TypeFactory;
  class InvalidTypeStringException;
 
+ class UniqueConstraint;
+
 }
 

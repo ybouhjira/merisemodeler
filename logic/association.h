@@ -17,7 +17,7 @@ typedef QPair<Logic::Link*, Logic::Link*> LinksPair;
 /**
  * @brief La classe Association decris le lien sémantique entre 2 entités
  */
-class Logic::Association : public Logic::Item , public serializable
+class Logic::Association : public Logic::Item , public Serializable
 {
 public:
     /**

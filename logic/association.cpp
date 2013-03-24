@@ -69,8 +69,10 @@ Entity* Association::entity2() const {
 }
 xml_node Association::toXml()
 {
-    xml_node node;
-    return node;
+    xml_node root;
+    root.set_name("association");
+    xml_node
+
 }
 void Association::fromXml(xml_node node)
 {

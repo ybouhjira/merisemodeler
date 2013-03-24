@@ -1,3 +1,6 @@
+#ifndef SERIALIZABLE_H
+#define SERIALIZABLE_H
+
 #include "pugixml/pugixml.hpp"
 using namespace pugi;
 
@@ -25,3 +28,5 @@ public:
      */
     virtual void fromXml() const = 0;
 };
+
+#endif // SERIALIZABLE_H

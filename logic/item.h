@@ -3,13 +3,14 @@
 
 #include "logic/namespace.h"
 #include "graphic/object.h"
-#include "xml/serializable.h"
 #include "logic/uniqueconstraint.h"
+#include "xml/serializable.h"
 
 // Qt
 #include <QString>
 #include <QList>
 #include <QObject>
+
 
 
 class Logic::Item : public QObject, public Serializable
@@ -39,6 +40,11 @@ public:
      * @brief Destroys the item
      */
     virtual ~Item();
+
+    //Reimplemented functions from Class Serializable
+    virtual void fromXml(xml_node entity){}
+    virtual xml_node toXml(){}
+
 
 public slots:
 
@@ -83,12 +89,6 @@ protected:
      */
     Item(QString const &Name);
 
-    /**
-     * @brief
-     * @return
-     */
-    xml_node toXml();
-    void fromXml(xml_node entity);
     /**
      * @brief writeProperties
      * @return

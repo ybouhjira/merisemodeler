@@ -96,6 +96,12 @@ public:
      */
     xml_node toXml();
 
+    /**
+     * @brief fromXml
+     * @param entity
+     */
+     void fromXml(xml_node entity);
+
     //ATTRIBUTS
 private:
     /**

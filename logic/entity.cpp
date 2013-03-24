@@ -71,21 +71,21 @@ xml_node Logic::Entity::toXml()
 {
     xml_node entity_node;
     entity_node.set_name("entity");
-    entity_node.append_attribute("name") = name().toStdString();
+    entity_node.append_attribute("name") = name().toStdString().c_str();
+
     //Parents node
-    xml_node EntityParents;
-    EntityParents.set_name("parents");
+    xml_node EntityParents = entity_node.append_child("parents");
     foreach (Entity *P, Logic::Entity::parents()) {
-        xml_node EntityParent;
-        EntityParent.set_name("parent");
-        EntityParent.append_attribute("name") = P->name();
-        EntityParents.append_child(EntityParent);
+        xml_node EntityParent = EntityParents.append_child("parent");
+        EntityParent.append_attribute("name") = P->name().toStdString().c_str();
     }
-    entity_node.append_child(EntityParents);
 
     //properties node
-    entity_node.append_child(Item::writeProperties());
-    entity_node.append_child(Item::writeUK(uniqueConstraints()));
+    writeProperties() = entity_node.append_child("Properties");
+
+    //Unique constraints node
+    writeUK(uniqueConstraints()) = entity_node.append_child("UniqueConstraints");
 
     return entity_node;
 }
+void Logic::Entity::fromXml(xml_node entity){}
