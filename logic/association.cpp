@@ -1,5 +1,6 @@
 #include "association.h"
 #include "associationlink.h"
+#include "logic/entity.h"
 
 using namespace Logic;
 
@@ -71,7 +72,13 @@ xml_node Association::toXml()
 {
     xml_node root;
     root.set_name("association");
-    xml_node
+    root.append_attribute("name") = name().toStdString().c_str();
+
+    //Ecriture de la premiére entité
+    Association::entity1()->toXml() = root.append_child("Entity1");
+
+    //Ecriture de la deuxiéme entité
+    Association::entity2()->toXml() = root.append_child("entity2");
 
 }
 void Association::fromXml(xml_node node)
