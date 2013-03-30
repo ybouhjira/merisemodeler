@@ -4,8 +4,8 @@ using namespace Logic;
 
 Entity::Entity(QString const &name
                , QList<Entity*> parents
-        , QList<UniqueConstraint *> uniqueConstraints
-        )
+               , QList<UniqueConstraint *> uniqueConstraints
+               )
     : Item(name)
     , m_parents(parents)
     , m_uniqueConstraints(uniqueConstraints)
@@ -67,16 +67,16 @@ void Logic::Entity::setGraphicObject(Graphic::Entity *gEntity) {
 }
 
 //Xml Functions
-xml_node Logic::Entity::toXml()
+pugi::xml_node Logic::Entity::toXml()
 {
-    xml_node entity_node;
+    pugi::xml_node entity_node;
     entity_node.set_name("entity");
     entity_node.append_attribute("name") = name().toStdString().c_str();
 
     //Parents node
-    xml_node EntityParents = entity_node.append_child("parents");
+    pugi::xml_node EntityParents = entity_node.append_child("parents");
     foreach (Entity *P, Logic::Entity::parents()) {
-        xml_node EntityParent = EntityParents.append_child("parent");
+        pugi::xml_node EntityParent = EntityParents.append_child("parent");
         EntityParent.append_attribute("name") = P->name().toStdString().c_str();
     }
 
@@ -86,6 +86,17 @@ xml_node Logic::Entity::toXml()
     //Unique constraints node
     writeUK(uniqueConstraints()) = entity_node.append_child("UniqueConstraints");
 
+    //Graphic properties
+    pugi::xml_node graphic = entity_node.append_child("graphic");
+    pugi::xml_node X = graphic.append_child("x");
+    X.set_value(QString::number(graphicObject()->x()).toStdString().c_str());
+    pugi::xml_node Y = graphic.append_child("y");
+    Y.set_value(QString::number(graphicObject()->y()).toStdString().c_str());
+    pugi::xml_node W = graphic.append_child("width");
+    W.set_value(QString::number(graphicObject()->width()).toStdString().c_str());
+    pugi::xml_node H = graphic.append_child("height");
+    H.set_value(QString::number(graphicObject()->height()).toStdString().c_str());
+
     return entity_node;
 }
-void Logic::Entity::fromXml(xml_node entity){}
+

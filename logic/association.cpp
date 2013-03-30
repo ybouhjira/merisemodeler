@@ -21,12 +21,12 @@ Association::Association(
         Link::Cardinality secondMax
         )
     : Association( //< Appel de l'autre constructeur
-          name,
-          QPair<Link*, Link*>(
-              new Link(first, firstMin, firstMax),
-              new Link(second, secondMin, secondMax )
-              )
-          )
+                   name,
+                   QPair<Link*, Link*>(
+                       new Link(first, firstMin, firstMax),
+                       new Link(second, secondMin, secondMax )
+                       )
+                   )
 {
 
 }
@@ -68,20 +68,34 @@ Entity* Association::entity2() const {
     else
         return nullptr;
 }
-xml_node Association::toXml()
+pugi::xml_node Association::toXml()
 {
-    xml_node root;
+    pugi::xml_node root;
     root.set_name("association");
     root.append_attribute("name") = name().toStdString().c_str();
 
+    //Ecriture des propriétés de l'association
+    writeProperties() = root.append_child("properties");
+
     //Ecriture de la premiére entité
-    Association::entity1()->toXml() = root.append_child("Entity1");
+    pugi::xml_node E1 = root.append_child("entity1");
+    E1.append_attribute("name") = entity1()->name().toStdString().c_str();
 
     //Ecriture de la deuxiéme entité
-    Association::entity2()->toXml() = root.append_child("entity2");
+    pugi::xml_node E2 = root.append_child("entity2");
+    E2.append_attribute("name") = entity2()->name().toStdString().c_str();
 
-}
-void Association::fromXml(xml_node node)
-{
+    //Graphic properties
+    pugi::xml_node GProperties = root.append_child("graphic");
+    pugi::xml_node X = GProperties.append_child("x");
+    X.append_attribute("x") = QString::number(graphicObject()->x()).toStdString().c_str();
+    pugi::xml_node Y = GProperties.append_child("y");
+    Y.append_attribute("y") = QString::number(graphicObject()->y()).toStdString().c_str();
+    pugi::xml_node W = GProperties.append_child("width");
+    W.append_attribute("width") = QString::number(graphicObject()->width()).toStdString().c_str();
+    pugi::xml_node H = GProperties.append_child("height");
+    H.append_attribute("height") = QString::number(graphicObject()->height()).toStdString().c_str();
 
+    return root;
 }
+

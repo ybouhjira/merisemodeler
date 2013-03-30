@@ -1,3 +1,4 @@
+#include <QFile>
 #include "mcdmodel.h"
 #include "logic/entity.h"
 #include "logic/association.h"
@@ -91,3 +92,13 @@ Association* McdModel::createAssociation(Entity *first, Entity *second) {
     addItem(association);
     return association;
 }
+void McdModel::saveXml(QString filename)
+{
+    pugi::xml_document doc;
+    pugi::xml_node root = doc.append_child("model");
+    foreach (Item *I, items()) {
+        I->toXml() = root.append_child(I->name().toStdString().c_str());
+    }
+    doc.save_file(filename.toStdString().c_str());
+}
+

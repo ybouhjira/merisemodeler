@@ -5,8 +5,7 @@
 #include "graphic/association.h"
 #include "associationlink.h"
 #include "logic/namespace.h"
-#include "xml/serializable.h"
-
+#include "pugixml/pugixml.hpp"
 // Qt
 #include <QPair>
 class QString;
@@ -17,7 +16,7 @@ typedef QPair<Logic::Link*, Logic::Link*> LinksPair;
 /**
  * @brief La classe Association decris le lien sémantique entre 2 entités
  */
-class Logic::Association : public Logic::Item , public Serializable
+class Logic::Association : public Logic::Item
 {
 public:
     /**
@@ -101,13 +100,12 @@ public:
      * @brief Serialiser un Item en un xml_node classe de la librrie
      * @return
      */
-    xml_node toXml();
+    pugi::xml_node toXml();
 
     /**
      * @brief Obtenir l'objet du XML
      * @param node
      */
-    void fromXml(xml_node node);
 
 
 private:

@@ -4,8 +4,7 @@
 #include "logic/namespace.h"
 #include "graphic/object.h"
 #include "logic/uniqueconstraint.h"
-#include "xml/serializable.h"
-
+#include "pugixml/pugixml.hpp"
 // Qt
 #include <QString>
 #include <QList>
@@ -13,7 +12,7 @@
 
 
 
-class Logic::Item : public QObject, public Serializable
+class Logic::Item : public QObject
 {
     Q_OBJECT
     //METHODS
@@ -42,8 +41,10 @@ public:
     virtual ~Item();
 
     //Reimplemented functions from Class Serializable
-    virtual void fromXml(xml_node entity){}
-    virtual xml_node toXml(){}
+    pugi::xml_node toXml(){
+        pugi::xml_node node;
+        return node;
+    }
 
 
 public slots:
@@ -93,13 +94,13 @@ protected:
      * @brief writeProperties
      * @return
      */
-    xml_node writeProperties();
+    pugi::xml_node writeProperties();
 
     /**
      * @brief writeUK
      * @return
      */
-    xml_node writeUK(QList<UniqueConstraint *> uniqueConstraints);
+    pugi::xml_node writeUK(QList<Logic::UniqueConstraint *> uniqueConstraints);
 
     //ATTRIBUTS
 private:

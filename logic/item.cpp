@@ -47,11 +47,11 @@ QList<Logic::Property*> Item::properties() {
 
 
 
-xml_node Item::writeProperties()
+pugi::xml_node Item::writeProperties()
 {
-    xml_node Xproperties;
+    pugi::xml_node Xproperties;
     foreach (Property *Pte, properties()) {
-        xml_node Xpte = Xproperties.append_child("property");
+        pugi::xml_node Xpte = Xproperties.append_child("property");
 
         //Récupération des données
         //test Si la proprieté est obligatoire
@@ -78,15 +78,15 @@ xml_node Item::writeProperties()
     return Xproperties;
 }
 
-xml_node Item::writeUK(QList<UniqueConstraint *> uniqueConstraints)
+pugi::xml_node Item::writeUK(QList<UniqueConstraint *> uniqueConstraints)
 {
-    xml_node Xuk;
+    pugi::xml_node Xuk;
     foreach (UniqueConstraint *uk, uniqueConstraints) {
-        xml_node unique = Xuk.append_child("Unique-Constraint");
+        pugi::xml_node unique = Xuk.append_child("Unique-Constraint");
 
         //Les propietés de chaque contrainte
         foreach (Property *p, uk->properties()) {
-            xml_node ukProperty = unique.append_child("Unique-Constraint-Property");
+            pugi::xml_node ukProperty = unique.append_child("Unique-Constraint-Property");
             ukProperty.append_attribute("name") = p->name().toStdString().c_str();
         }
     }

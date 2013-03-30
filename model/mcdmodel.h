@@ -3,6 +3,8 @@
 
 #include "namespace.h"
 #include "logic/namespace.h"
+#include "pugixml/pugixml.hpp"
+#include <QFile>
 
 // Qt
 #include <QObject>
@@ -75,6 +77,11 @@ public slots:
      * @return L'association creée
      */
     Logic::Association* createAssociation(Logic::Entity* first, Logic::Entity* second);
+
+    /**
+     * @brief sauvegarder le model sous format Xml
+     */
+    void saveXml(QString filename);
 
 signals:
     /**

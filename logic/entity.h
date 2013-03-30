@@ -5,8 +5,7 @@
 #include "item.h"
 #include "uniqueconstraint.h"
 #include "graphic/entity.h"
-#include "xml/serializable.h"
-
+#include "pugixml/pugixml.hpp"
 // Qt
 #include <QList>
 #include <QString>
@@ -94,13 +93,12 @@ public:
      * @brief retourne un objet xml_node representant une entité
      * @return xml_node
      */
-    xml_node toXml();
+    pugi::xml_node toXml();
 
     /**
      * @brief fromXml
      * @param entity
      */
-     void fromXml(xml_node entity);
 
     //ATTRIBUTS
 private:
