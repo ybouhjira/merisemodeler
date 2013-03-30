@@ -23,8 +23,7 @@ public:
      * @param name Nom de l'entité
      * @param uniqueConstraints Contraints de type UNIQUE
      */
-    Entity(
-            QString const &name,
+    Entity( QString const &name,
             QList<Entity*> parents = QList<Entity*>(),
             QList<Logic::UniqueConstraint*> uniqueConstraints = QList<UniqueConstraint*>()
             );
@@ -99,6 +98,7 @@ public:
      * @brief fromXml
      * @param entity
      */
+    Logic::Entity* fromXml(pugi::xml_node entity);
 
     //ATTRIBUTS
 private:

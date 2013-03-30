@@ -30,6 +30,10 @@ void Item::addProperty(Property *property)
     m_properties.append(property);
     emit propertiesEdited();
 }
+void Item::setProperties(QList<Property *> properties)
+{
+    m_properties.swap(properties);
+}
 
 void Item::removeProperty(int index)
 {
@@ -69,6 +73,7 @@ pugi::xml_node Item::writeProperties()
 
         //Ajout des attributs
         Xpte.append_attribute("name") = Pte->name().toStdString().c_str();
+        Xpte.append_attribute("type") = Pte->type().name().toStdString().c_str();
         Xpte.append_attribute("identifier") = Id.toStdString().c_str();
         Xpte.append_attribute("obligatory") = Ob.toStdString().c_str();
         Xpte.append_attribute("check") = Pte->check().toStdString().c_str();

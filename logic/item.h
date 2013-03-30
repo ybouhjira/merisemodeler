@@ -36,6 +36,12 @@ public:
     QList<Logic::Property*> properties();
 
     /**
+     * @brief Mutateur
+     * @return Les properiétés
+     */
+    void setProperties(QList<Logic::Property*> properties);
+
+    /**
      * @brief Destroys the item
      */
     virtual ~Item();
