@@ -6,5 +6,13 @@ namespace Command {
 
     class RemoveCommandFactory;
     class RemoveCommand;
-    class UnsopportedItemException;
+    class UnsupportedItemException;
+    class AbstractRemoveCommand;
+    class EntityRemoveCommand;
+    class InheritenceRemoveCommand;
+    class AssociationRemoveCommand;
+
+    class EntityRemoveCommandFactory;
+    class AssociationRemoveCommandFactory;
+    class InheritenceRemoveCommandFactory;
 }

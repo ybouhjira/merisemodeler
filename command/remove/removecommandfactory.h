@@ -1,8 +1,9 @@
 #ifndef REMOVECOMMANDFACTORY_H
 #define REMOVECOMMANDFACTORY_H
 
-#include "namespace.h"
+#include "../namespace.h"
 #include "model/namespace.h"
+#include "graphic/namespace.h"
 
 class QGraphicsItem;
 class QGraphicsScene;
@@ -25,15 +26,17 @@ public:
      * @throws UnsupportedItemException si la supression de l'element n'est pas
      * supporté par l'application
      */
-    static RemoveCommandFactory* createFactory(const QGraphicsItem* clickedItem);
+    static RemoveCommandFactory* createFactory(QGraphicsItem *clickedItem);
 
     /**
      * @brief Retourne une instance de Command::RemoveCommand
      * @param model model MCD
      * @param scene Scene representatif du model MCD
      */
-    virtual Command::RemoveCommand* create(Model::McdModel* model,
-                                   QGraphicsScene* scene) = 0;
+    virtual Command::RemoveCommand* create(
+            Graphic::Object* object,
+            Model::McdModel* model,
+            QGraphicsScene* scene) = 0;
 
 protected:
     RemoveCommandFactory(){}

@@ -3,8 +3,15 @@ SOURCES += \
     command/itemcommand.cpp \
     command/addentitycommand.cpp \
     command/addassociationcommand.cpp \
-    command/remove/unsopporteditemexception.cpp \
-    command/remove/removecommandfactory.cpp
+    command/remove/unsupporteditemexception.cpp \
+    command/remove/removecommandfactory.cpp \
+    command/remove/abstractremovecommand.cpp \
+    command/remove/inheritenceremovecommand.cpp \
+    command/remove/associationremovecommand.cpp \
+    command/remove/entityremovecommand.cpp \
+    command/remove/entityremovecommandfactory.cpp \
+    command/remove/associationremovecommandfactory.cpp \
+    command/remove/inheritenceremovecommandfactory.cpp
 
 HEADERS += \
     command/namespace.h \
@@ -12,5 +19,12 @@ HEADERS += \
     command/itemcommand.h \
     command/addentitycommand.h \
     command/addassociationcommand.h \
-    command/remove/unsopporteditemexception.h \
-    command/remove/removecommandfactory.h
+    command/remove/unsupporteditemexception.h \
+    command/remove/removecommandfactory.h \
+    command/remove/abstractremovecommand.h \
+    command/remove/inheritenceremovecommand.h \
+    command/remove/associationremovecommand.h \
+    command/remove/entityremovecommand.h \
+    command/remove/entityremovecommandfactory.h \
+    command/remove/associationremovecommandfactory.h \
+    command/remove/inheritenceremovecommandfactory.h

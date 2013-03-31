@@ -1,17 +1,17 @@
 #ifndef UNSOPPORTEDITEMEXCEPTION_H
 #define UNSOPPORTEDITEMEXCEPTION_H
 
-#include "namespace.h"
+#include "../namespace.h"
 
 // Qt
 class QGraphicsItem;
 // std
 #include <exception>
 
-class Command::UnsopportedItemException : public std::exception
+class Command::UnsupportedItemException : public std::exception
 {
 public:
-    explicit UnsopportedItemException(QGraphicsItem* item);
+    explicit UnsupportedItemException(QGraphicsItem* item);
 
     /**
      * @brief Mutateur
