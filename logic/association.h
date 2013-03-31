@@ -106,6 +106,7 @@ public:
      * @brief Obtenir l'objet du XML
      * @param node
      */
+    Logic::Association* fromXml(pugi::xml_node assoc);
 
 
 private:

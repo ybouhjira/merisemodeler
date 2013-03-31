@@ -99,6 +99,7 @@ pugi::xml_node Logic::Entity::toXml()
 
     return entity_node;
 }
+
 Logic::Entity* Entity::fromXml(pugi::xml_node entity)
 {
     //Reading entity name
@@ -151,5 +152,25 @@ Logic::Entity* Entity::fromXml(pugi::xml_node entity)
     //The entity
     Entity *E =  new Entity(Ename,QList<Entity*>(),UKList);
     E->setProperties(propertiesList);
+
+    //REading graphic parameters
+    pugi::xml_node G = entity.child("graphic");
+    //entity coordinates
+    QString xValue = G.child("x").value();
+    qreal x = xValue.toDouble();
+    QString yValue = G.child("y").value();
+    qreal y = yValue.toDouble();
+    //Entity width and height
+    QString wValue = G.child("width").value();
+    qreal width = wValue.toDouble();
+    QString hValue = G.child("height").value();
+    qreal height = hValue.toDouble();
+
+    //Modifying entity graphical parameters
+    E->graphicObject()->setX(x);
+    E->graphicObject()->setY(y);
+    E->graphicObject()->setWidth(width);
+    E->graphicObject()->setHeight(height);
+
     return E;
 }

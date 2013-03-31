@@ -80,6 +80,7 @@ pugi::xml_node Association::toXml()
     //Ecriture de la premiére entité
     pugi::xml_node E1 = root.append_child("entity1");
     E1.append_attribute("name") = entity1()->name().toStdString().c_str();
+    //
 
     //Ecriture de la deuxiéme entité
     pugi::xml_node E2 = root.append_child("entity2");
@@ -98,4 +99,34 @@ pugi::xml_node Association::toXml()
 
     return root;
 }
+Logic::Association* Association::fromXml(pugi::xml_node assoc)
+{
+    //association's name
+    QString AName = assoc.attribute("name").value();
+
+    //Reading association's properties
+    pugi::xml_node assocProperties = assoc.child("properties");
+    QList<Logic::Property*> propertiesList;
+    foreach (pugi::xml_node Xproperty, assocProperties.children("property")) {
+        //Property attributes
+        QString name = Xproperty.attribute("name").value();
+        QString type = Xproperty.attribute("type").value();
+        QString check = Xproperty.attribute("check").value();
+        QString defaultValue = Xproperty.attribute("default-value").value();
+        QString identifier = Xproperty.attribute("identifier").value();
+        QString obligatory = Xproperty.attribute("obligtory").value();
+        bool id = (identifier == "true")?true:false;
+        bool ob = (obligatory == "true")?true:false;
+        Type T(type);
+        //Appending property to the Property list
+        propertiesList.append(new Property(name,T,ob,check,defaultValue,id));
+    }
+
+    Association *association = new Association(AName,);
+    association->setProperties(propertiesList);
+
+    return association;
+}
+
+
 
