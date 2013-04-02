@@ -2,6 +2,7 @@
 #define INHERITENCEREMOVECOMMANDFACTORY_H
 
 #include "removecommandfactory.h"
+#include "inheritenceremovecommand.h"
 
 class Command::InheritenceRemoveCommandFactory : public Command::RemoveCommandFactory
 {

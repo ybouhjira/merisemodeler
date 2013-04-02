@@ -8,8 +8,8 @@ AssociationRemoveCommand* AssociationRemoveCommandFactory::create(
         Model::McdModel *model,
         QGraphicsScene *scene)
 {
-    return new Association(
-                static_cast<Graphic::Association*>(object)
+    return new AssociationRemoveCommand(
+                static_cast<Graphic::Association*>(object)->association()
                 , model
                 , scene);
 }

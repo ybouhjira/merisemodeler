@@ -6,6 +6,6 @@ AbstractRemoveCommand::AbstractRemoveCommand(
         Model::McdModel* model,
         QGraphicsScene* scene,
         QUndoCommand *parent)
-    : ItemCommand(mode, scene, parent)
+    : ItemCommand(model, scene, QObject::tr("Delete"), parent)
 {
 }

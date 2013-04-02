@@ -5,7 +5,6 @@ namespace Command {
     class AddAssociationCommand;
 
     class RemoveCommandFactory;
-    class RemoveCommand;
     class UnsupportedItemException;
     class AbstractRemoveCommand;
     class EntityRemoveCommand;

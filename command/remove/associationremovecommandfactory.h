@@ -2,6 +2,7 @@
 #define ASSOCIATIONREMOVECOMMANDFACTORY_H
 
 #include "removecommandfactory.h"
+#include "associationremovecommand.h"
 
 /**
  * @brief Commande de supression d'une association

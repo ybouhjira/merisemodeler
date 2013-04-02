@@ -7,7 +7,7 @@
 /**
  * @brief Commande de supression d'une association
  */
-class Command::AssociationRemoveCommand : Command::AbstractRemoveCommand
+class Command::AssociationRemoveCommand : public Command::AbstractRemoveCommand
 {
     // METHODES
 public:

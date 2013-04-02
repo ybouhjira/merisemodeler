@@ -33,7 +33,7 @@ public:
      * @param model model MCD
      * @param scene Scene representatif du model MCD
      */
-    virtual Command::RemoveCommand* create(
+    virtual Command::AbstractRemoveCommand* create(
             Graphic::Object* object,
             Model::McdModel* model,
             QGraphicsScene* scene) = 0;

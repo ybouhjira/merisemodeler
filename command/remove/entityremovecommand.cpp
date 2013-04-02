@@ -1,10 +1,14 @@
-#include "removeentitycommand.h"
 #include "associationremovecommand.h"
+#include "entityremovecommand.h"
 #include "inheritenceremovecommand.h"
+// Model
 #include "model/mcdmodel.h"
-#include "logic/entity.h"
+// Graphic
 #include "graphic/inheritencearrowobject.h"
-
+// Logic
+#include "logic/entity.h"
+#include "logic/association.h"
+// Qt
 #include <QGraphicsScene>
 
 using namespace Command;

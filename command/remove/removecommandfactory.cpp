@@ -4,6 +4,10 @@
 #include "graphic/association.h"
 #include "graphic/inheritencearrowobject.h"
 
+#include "entityremovecommandfactory.h"
+#include "associationremovecommandfactory.h"
+#include "inheritenceremovecommandfactory.h"
+
 
 using namespace Command;
 

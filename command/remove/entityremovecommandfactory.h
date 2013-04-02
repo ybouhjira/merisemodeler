@@ -2,6 +2,7 @@
 #define ENTITYREMOVECOMMANDFACTORY_H
 
 #include "removecommandfactory.h"
+#include "entityremovecommand.h"
 
 class Command::EntityRemoveCommandFactory : public Command::RemoveCommandFactory
 {
