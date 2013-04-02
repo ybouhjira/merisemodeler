@@ -5,5 +5,7 @@
         <file alias="inherit">ressources/inheritence.svg</file>
         <file alias="cursor">ressources/cursor.png</file>
         <file alias="erease">ressources/erease.png</file>
+        <file alias="redo">ressources/redo.png</file>
+        <file alias="undo">ressources/undo.png</file>
     </qresource>
 </RCC>

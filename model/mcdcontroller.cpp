@@ -16,60 +16,35 @@ using namespace Command;
 McdController::McdController(McdModel *model, QGraphicsScene *scene)
     : m_model(model)
     , m_scene(scene)
-    , m_undoStack(new QUndoStack(this))
+    , m_stack(new QUndoStack(this))
 {
 }
 
 void McdController::viewClicked(qreal x, qreal y) const {
-
-    // Enregistre les entités cliqué pour pouvoir les lié
-    // avec 2 appels de cet fonction
-    static QList<Logic::Entity*> clickedEntities;
+    // Save the entities to link, between method calls
+    static QList<Logic::Entity*> entsToLink;
 
     switch(m_clickAction) {
     case AddEntity:
-        createEntity(x, y);
+        m_stack->push(new AddEntityCommand(x, y, m_model, m_scene ));
         break;
     case AddAssociation: {
-        auto clickedItem = m_scene->itemAt(x,y, QTransform());
-        auto gEnt = dynamic_cast<Graphic::Entity*>(clickedItem);
-        if(gEnt != nullptr) {
-            clickedEntities << gEnt->entity() ;
-            if(clickedEntities.count() >= 2) {
-                createAssociation(clickedEntities[0], clickedEntities[1]);
-                clickedEntities.clear();
+        auto clickedGraphicEntity = dynamic_cast<Graphic::Entity*>(m_scene->itemAt(x,y, QTransform()));
+        if (clickedGraphicEntity != nullptr) {
+            entsToLink << clickedGraphicEntity->entity() ;
+            if (entsToLink.count() >= 2) {
+                m_stack->push(new AddAssociationCommand(entsToLink[0], entsToLink[1], m_model, m_scene));
+                entsToLink.clear();
             }
         }
         break;
     }
     case Inheritence: {
-        /*
-         auto clickedItem = m_scene->itemAt(x,y, QTransform());
-         auto gEnt = dynamic_cast<Graphic::Entity*>(clickedItem);
-        if(gEnt != nullptr) {
-            clickedEntities << gEnt->entity() ;
-            if(clickedEntities.count() >= 2) {
-                createInheritence(clickedEntities[0], clickedEntities[1]);
-                clickedEntities.clear();
-            }
-        }*/
+        // TODO : add InheritenceLink
         break;
     }
 
     }
-}
-
-void McdController::createEntity(qreal x, qreal y) const {
-    m_undoStack->push(new AddEntityCommand(x, y, m_model, m_scene ));
-}
-
-void McdController::createAssociation (
-        Logic::Entity *entity1,
-        Logic::Entity *entity2
-        ) const
-{
-    auto cmd = new AddAssociationCommand(entity1, entity2, m_model, m_scene);
-    m_undoStack->push(cmd);
 }
 
 void McdController::setClickAction(ClickAction action) {
@@ -94,4 +69,17 @@ void McdController::setModel(McdModel *model) {
 
 void McdController::setScene(QGraphicsScene* scene) {
     m_scene = scene;
+}
+
+
+void McdController::undo() {
+    m_stack->undo();
+}
+
+void McdController::redo() {
+    m_stack->redo();
+}
+
+QUndoStack* McdController::stack() {
+    return m_stack;
 }

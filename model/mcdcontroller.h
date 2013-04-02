@@ -62,17 +62,6 @@ public slots:
      */
     void viewClicked(qreal x, qreal y) const ;
 
-    /**
-     * @brief Cree une nouvelle entité dans les coordonnées x et y
-     */
-    void createEntity(qreal x, qreal y) const ;
-
-    /**
-     * @brief Cree une nouvelle association dans les coordonnées x et y
-     */
-    void createAssociation(Logic::Entity *entity1,
-                           Logic::Entity *entity2) const ;
-
     // Mutateurs
     /**
      * @brief Mutateur
@@ -83,6 +72,21 @@ public slots:
      * @brief Mutateur
      */
     void setScene(QGraphicsScene* scene);
+
+    /**
+     * @brief Undo
+     **/
+    void undo();
+
+    /**
+     * @brief Redo
+     */
+    void redo();
+
+    /**
+     * @return La pile de commande
+     */
+    QUndoStack* stack();
 
     // ATTRIBUTS
 private:
@@ -99,7 +103,7 @@ private:
     /**
      * @brief Pile des commandes de type QUndoCommand
      */
-    QUndoStack *m_undoStack;
+    QUndoStack *m_stack;
 
     /**
      * @brief m_clickAction

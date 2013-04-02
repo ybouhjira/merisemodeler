@@ -13,6 +13,9 @@
 #include "itemeditors/entityeditwidget.h"
 #include "itemeditors/associationeditwidget.h"
 
+#include "exporter/exporterfactory.h"
+#include "exporter/graphicssceneexporter.h"
+
 // Qt
 #include <QToolBar>
 #include <QAction>
@@ -22,6 +25,9 @@
 #include <QUndoStack>
 #include <QGraphicsScene>
 #include <QActionGroup>
+#include <QFileDialog>
+#include <QMenu>
+#include <QUndoView>
 
 using namespace Ui;
 
@@ -33,13 +39,15 @@ McdUi* McdUi::getInstance() {
 }
 
 McdUi::McdUi(QWidget *parent)
-    : ModelUi(parent)
+    : QMainWindow(parent)
     // MVC
     , m_model(nullptr)
     , m_scene(new QGraphicsScene)
     , m_controller(new Model::McdController(m_model, m_scene))
     // Actions
     , m_actionGroup(new QActionGroup(this))
+    , m_undoAction(new QAction(QIcon(":/undo"), tr("Undo"), m_actionGroup))
+    , m_redoAction(new QAction(QIcon(":/redo"), tr("Redo"), m_actionGroup))
     , m_moveAction(new QAction(QIcon(":/cursor"), tr("Move"), m_actionGroup))
     , m_removeAction(new QAction(QIcon(":/erease"), tr("Remove"), m_actionGroup))
     , m_entityAction(new QAction(QIcon(":/entity"), tr("Entity"), m_actionGroup))
@@ -49,13 +57,23 @@ McdUi::McdUi(QWidget *parent)
     , m_entityWidget(new EntityEditWidget)
     , m_associationWidget(new AssociationEditWidget)
     , m_itemEditDock(new QDockWidget(tr("Item editing")))
+    // ---
+    , m_graphicsView(new Model::ModelView)
+    , m_toolBar(new QToolBar("Barre d'outils"))
+    , m_exportAction(new QAction(tr("Export"), this))
+    , m_undoView(new QUndoView)
 {
+    setCentralWidget(m_graphicsView);
+    addToolBar(Qt::LeftToolBarArea, m_toolBar);
+    m_toolBar->setMovable(false);
     // Barre d'outils
     m_toolBar->addActions(m_actionGroup->actions().mid(0,2));
     m_toolBar->addSeparator();
-    m_toolBar->addActions(m_actionGroup->actions().mid(2));
-    for(QAction* action : m_actionGroup->actions())
-        action->setCheckable(true);
+    m_toolBar->addActions(m_actionGroup->actions().mid(2,5));
+    m_toolBar->addSeparator();
+    m_toolBar->addActions(m_actionGroup->actions().mid(5));
+    for(int i=2; i<m_actionGroup->actions().size(); i++)
+        m_actionGroup->actions()[i]->setCheckable(true);
 
     // DockWidget
     addDockWidget(Qt::BottomDockWidgetArea, m_itemEditDock);
@@ -65,38 +83,46 @@ McdUi::McdUi(QWidget *parent)
     m_graphicsView->setDragMode(QGraphicsView::RubberBandDrag);
     m_graphicsView->setInteractive(true);
 
-    // Connections
+    // Ajout de l'action exporter dans MainWindow
+    QMenu* fileMenu = MainWindow::getInstance()->fileMenu();
+    QAction* sep = fileMenu->insertSeparator(fileMenu->actions().last());
+    fileMenu->insertAction(sep, m_exportAction);
+    fileMenu->insertSeparator(m_exportAction);
+
+    // Undo view
+    auto undoDock = new QDockWidget(tr("History"), this);
+    addDockWidget(Qt::RightDockWidgetArea, undoDock);
+    undoDock->setWidget(m_undoView);
+    m_undoView->setStack(m_controller->stack());
+
+    // CONNETIONS
+    // export
+    connect(m_exportAction, &QAction::triggered, this, &McdUi::showExportDialog);
+
     // Bouttons de la barre d'outils
-    connect(m_moveAction, SIGNAL(triggered()),
-            this, SLOT(setMoveClickAction()) );
-    connect(m_removeAction, SIGNAL(triggered()),
-            this, SLOT(setRemoveClickAction()) );
-    connect(m_entityAction, SIGNAL(triggered()),
-            this, SLOT(setAddEntityClickAction()) );
-    connect(m_assocAction, SIGNAL(triggered()),
-            this, SLOT(setAddAssociationClickAction()) );
-    connect(m_inheritAction, SIGNAL(triggered()),
-            this, SLOT(setInheritencClickAction()) );
+    connect(m_moveAction, SIGNAL(triggered()), this, SLOT(setMoveClickAction()) );
+    connect(m_removeAction, SIGNAL(triggered()), this, SLOT(setRemoveClickAction()) );
+    connect(m_entityAction, SIGNAL(triggered()), this, SLOT(setAddEntityClickAction()) );
+    connect(m_assocAction, SIGNAL(triggered()), this, SLOT(setAddAssociationClickAction()) );
+    connect(m_inheritAction, SIGNAL(triggered()), this, SLOT(setInheritencClickAction()) );
 
     // Mise à jour auto de la vues
-    auto updateFunc = [=](){
-        m_graphicsView->viewport()->update();
-    };
+    auto updateFunc = [=](){ m_graphicsView->viewport()->update(); };
     connect(m_entityWidget, &ItemEditWidget::itemEdited, updateFunc);
     connect(m_associationWidget, &ItemEditWidget::itemEdited, updateFunc);
 
     // connection de la vue avec le controlleur
-    connect(m_graphicsView, SIGNAL(clicked(qreal,qreal)),
-            m_controller, SLOT(viewClicked(qreal, qreal)));
+    connect(m_graphicsView, SIGNAL(clicked(qreal,qreal)), m_controller, SLOT(viewClicked(qreal, qreal)));
 
+    // undo & redo
+    connect(m_undoAction, SIGNAL(triggered()), m_controller, SLOT(undo()));
+    connect(m_redoAction, SIGNAL(triggered()), m_controller, SLOT(redo()));
 }
 
 void McdUi::setModel(Model::McdModel *mcd, QGraphicsScene* scene) {
     // Deconnections de l'ancienne McdGraphicsScene
-    if(m_model != nullptr && m_scene != nullptr) {
-        disconnect(m_scene, &QGraphicsScene::selectionChanged,
-                   this, &McdUi::sceneSelectionChanged );
-    }
+    if(m_model != nullptr && m_scene != nullptr)
+        disconnect(m_scene, &QGraphicsScene::selectionChanged, this, &McdUi::sceneSelectionChanged );
 
     m_model = mcd ;
     m_scene = scene;
@@ -105,9 +131,7 @@ void McdUi::setModel(Model::McdModel *mcd, QGraphicsScene* scene) {
     m_graphicsView->setScene(scene);
 
     // Connections
-    connect(m_scene, &QGraphicsScene::selectionChanged,
-            this, &McdUi::sceneSelectionChanged );
-
+    connect(m_scene, &QGraphicsScene::selectionChanged, this, &McdUi::sceneSelectionChanged );
     emit modelChanged(mcd);
 }
 
@@ -155,4 +179,14 @@ void McdUi::sceneSelectionChanged() {
             }
         }
     }
+}
+
+void McdUi::showExportDialog() {
+    QString format;
+    QString path = QFileDialog::getSaveFileName(this, tr("Export Model"), "", "PDF(*.pdf);;SVG(*.svg)", &format);
+    if(path.isEmpty())
+        return;
+    Exporter::SceneExporter* exporter = ExporterFactory::create(format);
+    exporter->exportScene(m_scene, path);
+    delete exporter;
 }

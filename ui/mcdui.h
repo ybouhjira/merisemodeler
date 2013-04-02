@@ -3,16 +3,17 @@
 
 #include "namespace.h"
 #include "model/namespace.h"
-#include "modelui.h"
 
 // Qt
 class QGraphicsScene;
 class QActionGroup;
+class QUndoView;
+#include <QMainWindow>
 
 /**
  * @brief L'interface graphique du MCD
  */
-class Ui::McdUi : public Ui::ModelUi
+class Ui::McdUi : public QMainWindow
 {
     Q_OBJECT
     // METHODES
@@ -67,6 +68,11 @@ private slots:
      */
     void sceneSelectionChanged();
 
+    /**
+     * @brief Affiche une boite de dialogue pour exporter le model
+     */
+    void showExportDialog();
+
 signals:
     /**
      * @reimp
@@ -108,11 +114,13 @@ private:
     QActionGroup *m_actionGroup;
 
     QAction
+    *m_undoAction,      //!< @brief Undo action
+    *m_redoAction,      //!< @brief Redo action
     *m_moveAction,      //!< @brief Déplacement
     *m_removeAction,    //! @brief Suppression
     *m_entityAction,    //!< @brief Ajoute une entité
     *m_assocAction,     //!< @brief Ajoute une association
-    *m_inheritAction;    //!< @brief Ahoute une héritage
+    *m_inheritAction;   //!< @brief Ahoute une héritage
 
     /**
      * @brief Widget qui edite l'entité
@@ -129,6 +137,26 @@ private:
      * d'éditer les entités et associaotions
      */
     QDockWidget *m_itemEditDock;
+
+    /**
+      * @brief Le widget qui affiche le diagram
+      */
+    Model::ModelView *m_graphicsView;
+
+    /**
+      * @brief Barre d'outils
+      */
+    QToolBar *m_toolBar;
+
+    /**
+     * @brief Action pour exporter le model en PDF, SVG ou autre
+     */
+    QAction *m_exportAction;
+
+    /**
+     * @bried Undo List view
+     **/
+    QUndoView* m_undoView;
 
 };
 

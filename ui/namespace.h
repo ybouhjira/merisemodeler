@@ -3,7 +3,6 @@
 
 namespace  Ui {
 class MultiPropertyConstraint;
-class ModelUi;
 class ModelsTabWidget;
 class McdUi;
 class MainWindow;
