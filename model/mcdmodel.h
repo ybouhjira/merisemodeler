@@ -83,6 +83,13 @@ public slots:
      */
     void saveXml(QString filename);
 
+    /**
+     * @brief Ouvrir un model
+     * @param fileName
+     * @return
+     */
+    QList<Logic::Item*> fromXml(QString fileName);
+
 signals:
     /**
      * @brief Emit lors de l'ajout d'un element

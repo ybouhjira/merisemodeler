@@ -1,6 +1,7 @@
 #include "association.h"
 #include "associationlink.h"
 #include "logic/entity.h"
+#include "pugixml/pugixml.hpp"
 
 using namespace Logic;
 

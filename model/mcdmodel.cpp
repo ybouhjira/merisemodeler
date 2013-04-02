@@ -101,4 +101,24 @@ void McdModel::saveXml(QString filename)
     }
     doc.save_file(filename.toStdString().c_str());
 }
+QList<Logic::Item*> McdModel::fromXml(QString fileName)
+{
+    pugi::xml_document doc;
+    QList<Logic::Item*> items;
+    pugi::xml_node entity;
+    while(entity = doc.child("entity"))
+    {
+        Entity *E;
+        E = E->fromXml(entity);
+        items.append(E);
+    }
+    pugi::xml_node assoc;
+    while(assoc = doc.child("association"))
+    {
+        Association *A;
+        A = A->fromXml(assoc);
+        items.append(A);
+    }
+    return items;
+}
 
