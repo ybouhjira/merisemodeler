@@ -1,13 +1,10 @@
-#ifndef ADDASSOCIATIONCOMMAND_H
-#define ADDASSOCIATIONCOMMAND_H
+#ifndef INHERITENCEADDCOMMAND_H
+#define INHERITENCEADDCOMMAND_H
 
 #include "itemcommand.h"
-#include "logic/association.h"
+#include "graphic/namespace.h"
 
-/**
- * @brief Commande d'ajout d'une association
- */
-class Command::AddAssociationCommand : public Command::ItemCommand
+class Command::InheritenceAddCommand : public Command::ItemCommand
 {
     // METHODES
 public:
@@ -18,7 +15,7 @@ public:
      * @param mcd Modèle cible
      * @param parent Command mère
      */
-    AddAssociationCommand(
+    InheritenceAddCommand(
             Logic::Entity* entity1,
             Logic::Entity* entity2,
             Model::McdModel* mcd,
@@ -26,11 +23,7 @@ public:
             QUndoCommand* parent = nullptr
             );
 
-    /**
-     * @brief Destructeur
-     */
-    ~AddAssociationCommand();
-
+    ~InheritenceAddCommand();
     // Redéfinitions
     /**
      * @reimp
@@ -47,7 +40,10 @@ private:
     /**
      * @brief Associatrion ajoutée
      */
-    Logic::Association* m_association;
+    Graphic::InheritenceArrowObject* m_arrow;
+
+    Logic::Entity *m_entity1, *m_entity2;
+    
 };
 
-#endif // ADDASSOCIATIONCOMMAND_H
+#endif // INHERITENCEADDCOMMAND_H

@@ -122,7 +122,7 @@ McdUi::McdUi(QWidget *parent)
 void McdUi::setModel(Model::McdModel *mcd, QGraphicsScene* scene) {
     // Deconnections de l'ancienne McdGraphicsScene
     if(m_model != nullptr && m_scene != nullptr)
-        disconnect(m_scene, &QGraphicsScene::selectionChanged, this, &McdUi::sceneSelectionChanged );
+        disconnect(m_scene, SIGNAL(selectionChanged()), this, SLOT(sceneSelectionChanged()) );
 
     m_model = mcd ;
     m_scene = scene;
@@ -131,7 +131,7 @@ void McdUi::setModel(Model::McdModel *mcd, QGraphicsScene* scene) {
     m_graphicsView->setScene(scene);
 
     // Connections
-    connect(m_scene, &QGraphicsScene::selectionChanged, this, &McdUi::sceneSelectionChanged );
+    connect(m_scene, SIGNAL(selectionChanged()), this, SLOT(sceneSelectionChanged()));
     emit modelChanged(mcd);
 }
 

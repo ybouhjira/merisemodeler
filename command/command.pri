@@ -11,7 +11,8 @@ SOURCES += \
     command/remove/entityremovecommand.cpp \
     command/remove/entityremovecommandfactory.cpp \
     command/remove/associationremovecommandfactory.cpp \
-    command/remove/inheritenceremovecommandfactory.cpp
+    command/remove/inheritenceremovecommandfactory.cpp \
+    command/inheritenceaddcommand.cpp
 
 HEADERS += \
     command/namespace.h \
@@ -27,4 +28,5 @@ HEADERS += \
     command/remove/entityremovecommand.h \
     command/remove/entityremovecommandfactory.h \
     command/remove/associationremovecommandfactory.h \
-    command/remove/inheritenceremovecommandfactory.h
+    command/remove/inheritenceremovecommandfactory.h \
+    command/inheritenceaddcommand.h

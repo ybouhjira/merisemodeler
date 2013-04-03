@@ -14,4 +14,6 @@ namespace Command {
     class EntityRemoveCommandFactory;
     class AssociationRemoveCommandFactory;
     class InheritenceRemoveCommandFactory;
+
+    class InheritenceAddCommand;
 }

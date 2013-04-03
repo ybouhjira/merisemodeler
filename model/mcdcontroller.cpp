@@ -3,6 +3,7 @@
 #include "graphic/entity.h"
 #include "command/addentitycommand.h"
 #include "command/addassociationcommand.h"
+#include "command/inheritenceaddcommand.h"
 
 // Qt
 #include <QGraphicsSceneMouseEvent>
@@ -32,15 +33,26 @@ void McdController::viewClicked(qreal x, qreal y) const {
         auto clickedGraphicEntity = dynamic_cast<Graphic::Entity*>(m_scene->itemAt(x,y, QTransform()));
         if (clickedGraphicEntity != nullptr) {
             entsToLink << clickedGraphicEntity->entity() ;
-            if (entsToLink.count() >= 2) {
+            if (entsToLink.count() >= 2 && entsToLink[0] != entsToLink[1]) {
                 m_stack->push(new AddAssociationCommand(entsToLink[0], entsToLink[1], m_model, m_scene));
+                entsToLink.clear();
+            }else if(entsToLink.count() >= 2) {
                 entsToLink.clear();
             }
         }
         break;
     }
     case Inheritence: {
-        // TODO : add InheritenceLink
+        auto clickedGraphicEntity = dynamic_cast<Graphic::Entity*>(m_scene->itemAt(x,y, QTransform()));
+        if (clickedGraphicEntity != nullptr) {
+            entsToLink << clickedGraphicEntity->entity() ;
+            if (entsToLink.count() >= 2 && entsToLink[0] != entsToLink[1]) {
+                m_stack->push(new InheritenceAddCommand(entsToLink[0], entsToLink[1], m_model, m_scene));
+                entsToLink.clear();
+            } else if(entsToLink.count() >= 2) {
+                entsToLink.clear();
+            }
+        }
         break;
     }
 

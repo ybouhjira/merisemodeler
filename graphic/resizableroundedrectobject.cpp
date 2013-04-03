@@ -21,6 +21,7 @@ ResizableRoundedRectObject::ResizableRoundedRectObject(
     , m_grabingPoint()
 {
     setAcceptHoverEvents(true);
+    setFlag(QGraphicsItem::ItemIsSelectable);
 }
 
 void ResizableRoundedRectObject::hoverMoveEvent(QGraphicsSceneHoverEvent *event) {
