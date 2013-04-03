@@ -23,23 +23,27 @@ EntityRemoveCommand::EntityRemoveCommand(
     // Supprimer les asssociations
     for(int i=0; i<model->items().size(); i++) {
         auto assoc = dynamic_cast<Logic::Association*>(model->items()[i]);
-        if(assoc != nullptr) {
+        if(assoc != nullptr && (assoc->entity1() == entity || assoc->entity2() == entity)
+                && assoc->graphicObject()->scene() == entity->graphicObject()->scene())
             new AssociationRemoveCommand(assoc, model, scene, this);
-        }
     }
 
 
     // SUpprimer les fléches d'héritage
     for(int i=0; i<scene->items().size(); i++) {
         auto arrow = dynamic_cast<Graphic::InheritenceArrowObject*>(scene->items()[i]);
-        if(arrow != nullptr) {
-            new InheritenceRemoveCommand(arrow, model, scene, parent);
+        if(arrow != nullptr
+                && static_cast<Graphic::Entity*>(arrow->source())->entity() == entity
+                && arrow->scene() == entity->graphicObject()->scene()
+                )
+        {
+            new InheritenceRemoveCommand(arrow, model, scene, this);
         }
     }
 }
 
 EntityRemoveCommand::~EntityRemoveCommand() {
-    if(!isApplied()) {
+    if(isApplied()) {
         delete m_entity->graphicObject();
         delete m_entity;
     }

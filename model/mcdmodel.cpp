@@ -16,6 +16,8 @@ McdModel::McdModel(QObject *parent)
 }
 
 McdModel::~McdModel() {
+    for(Item* item : m_items)
+        delete item;
 }
 
 QList<Item*> McdModel::items() const {
@@ -23,7 +25,6 @@ QList<Item*> McdModel::items() const {
 }
 
 void McdModel::addItem(Item *item) {
-    item->setParent(this);
     m_items.append(item);
 }
 

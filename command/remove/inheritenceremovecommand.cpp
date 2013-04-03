@@ -18,7 +18,7 @@ InheritenceRemoveCommand::InheritenceRemoveCommand(
 }
 
 InheritenceRemoveCommand::~InheritenceRemoveCommand() {
-    if(!isApplied()) {
+    if(isApplied()) {
         delete m_arrow;
     }
 }
