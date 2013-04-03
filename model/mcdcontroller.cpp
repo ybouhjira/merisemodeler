@@ -1,9 +1,13 @@
 #include "mcdcontroller.h"
 #include "model/mcdmodel.h"
 #include "graphic/entity.h"
+
 #include "command/addentitycommand.h"
 #include "command/addassociationcommand.h"
 #include "command/inheritenceaddcommand.h"
+#include "command/remove/removecommandfactory.h"
+#include "command/remove/abstractremovecommand.h"
+#include "command/remove/unsupporteditemexception.h"
 
 // Qt
 #include <QGraphicsSceneMouseEvent>
@@ -54,6 +58,17 @@ void McdController::viewClicked(qreal x, qreal y) const {
             }
         }
         break;
+    } case Remove: {
+        try {
+            QGraphicsItem* item = m_scene->itemAt(x, y, QTransform());
+            if(item == nullptr)
+                return;
+            RemoveCommandFactory* factory = Command::RemoveCommandFactory::createFactory(item);
+            m_stack->push(factory->create(static_cast<Graphic::Object*>(item), m_model, m_scene));
+            delete factory;
+        } catch(Command::UnsupportedItemException) {
+
+        }
     }
 
     }

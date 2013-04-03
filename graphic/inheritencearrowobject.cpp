@@ -15,6 +15,7 @@ InheritenceArrowObject::InheritenceArrowObject (
         qreal positionOnDestination)
     : Arrow(source, destination, positionOnSource, positionOnDestination)
 {
+    setFlag(QGraphicsItem::ItemIsSelectable);
 }
 
 void InheritenceArrowObject::paint
@@ -32,7 +33,7 @@ void InheritenceArrowObject::paint
     qreal angle = acos(line.dx() / line.length());
     if (line.dy() >= 0)
             angle = (M_PI * 2) - angle;
-    qreal arrowSize = 20;
+    qreal arrowSize = 15;
 
     // Construire le triangle
     QPointF p1 = dest + QPointF(sin(angle + M_PI / 3) * arrowSize,

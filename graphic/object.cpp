@@ -35,6 +35,6 @@ void Object::paint(QPainter *painter,
 
     // Selection
     if(isSelected()) {
-        painter->setBrush(m_style->brush().color().darker());
+        painter->setPen(QPen(QBrush(Qt::blue),2, Qt::DashLine));
     }
 }

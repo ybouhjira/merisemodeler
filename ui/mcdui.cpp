@@ -140,11 +140,11 @@ Model::McdModel* McdUi::model() const {
 }
 
 void McdUi::setMoveClickAction() const {
-    m_controller->setClickAction(Model::McdController::Remove);
+    m_controller->setClickAction(Model::McdController::Select);
 }
 
 void McdUi::setRemoveClickAction() const {
-    m_controller->setClickAction(Model::McdController::Select);
+    m_controller->setClickAction(Model::McdController::Remove);
 }
 
 void McdUi::setAddEntityClickAction() const {
