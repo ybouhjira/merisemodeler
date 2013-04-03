@@ -95,6 +95,15 @@ McdUi::McdUi(QWidget *parent)
     undoDock->setWidget(m_undoView);
     m_undoView->setStack(m_controller->stack());
 
+    // CHORTCUTS
+    m_undoAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z));
+    m_redoAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Y));
+    m_moveAction->setShortcut(QKeySequence(Qt::Key_M));
+    m_entityAction->setShortcut(QKeySequence(Qt::Key_E));
+    m_assocAction->setShortcut(QKeySequence(Qt::Key_A));
+    m_removeAction->setShortcut(QKeySequence(Qt::Key_R));
+    m_inheritAction->setShortcut(QKeySequence(Qt::Key_I));
+
     // CONNETIONS
     // export
     connect(m_exportAction, &QAction::triggered, this, &McdUi::showExportDialog);
