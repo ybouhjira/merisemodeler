@@ -32,19 +32,6 @@ public:
      */
     virtual QAbstractItemModel* propertiesModel() const = 0 ;
 
-public slots:
-    /**
-     * @brief Ajoute une propriété à l'élément
-     * @remarks Vous devez emettre le signal itemEdited() si l'element à été
-     * édité avec succés
-     */
-    virtual void addProperty() = 0;
-
-    /**
-     * @brief Supprime les propriétés selectionnées
-     */
-    virtual void removeSelectedProperties() = 0;
-
     // Méthodes concretes
 protected:
     QLineEdit* nameLineEdit() const;
