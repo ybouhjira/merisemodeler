@@ -3,6 +3,7 @@
 #include "logic/typefactory.h"
 #include "associationtablemodel.h"
 #include "logic/entity.h"
+#include "logic/property.h"
 
 // Qt
 #include <QFormLayout>
@@ -23,8 +24,8 @@ AssociationEditWidget::AssociationEditWidget(Logic::Association *assoc ,
     , m_page1Widget(new QWidget)
     , m_page2Widget(new QWidget)
     , m_tabWidget(new QTabWidget)
-    , m_addButton(new QPushButton(tr("Add")))
-    , m_removeButton(new QPushButton(tr("Remove")))
+    , m_addButton(new QPushButton(QIcon(":/add"), tr("Add")))
+    , m_removeButton(new QPushButton(QIcon(":/remove"), tr("Remove")))
     , m_tableView(new QTableView)
     , m_entity1Box(new QGroupBox)
     , m_entity2Box(new QGroupBox)
@@ -60,6 +61,8 @@ AssociationEditWidget::AssociationEditWidget(Logic::Association *assoc ,
     // table des propriétés
     m_page1Widget->layout()->addWidget(m_tableView);
     m_tableView->setModel(m_tableModel);
+    m_tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    m_tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 
     // ONGLET CARDINALITES
     // =========================
@@ -92,13 +95,20 @@ AssociationEditWidget::AssociationEditWidget(Logic::Association *assoc ,
 
     // CONNECTIONS
     //============
-    connect(m_addButton, SIGNAL(clicked()), this, SLOT(addProperty()) );
-    connect(m_removeButton, SIGNAL(clicked()),
-            this, SLOT(removeSelectedProperties()));
+    connect(m_addButton, &QPushButton::clicked, [this](){
+        m_tableModel->addProperty(new Logic::Property("property",Logic::Type("int")));
+        emit itemEdited();
+    });
 
     // update
     connect(m_tableModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SIGNAL(itemEdited()) );
+
+    // Bouton supprimer
+    connect(m_removeButton, &QPushButton::clicked, [=](){
+        m_tableModel->removeProperty(m_tableView->selectionModel()->currentIndex().row());
+        emit itemEdited();
+    });
 
     // applications des cardinalités
     connect(m_ent1minComboBox, SIGNAL(currentIndexChanged(int)),
@@ -121,10 +131,6 @@ void AssociationEditWidget::addProperty() {
                                   "property",
                                   Logic::TypeFactory().buildType()));
     emit itemEdited();
-}
-
-void AssociationEditWidget::removeSelectedProperties() {
-    qWarning("Not yet implemented");
 }
 
 Ui::AssociationTableModel* AssociationEditWidget::propertiesModel() const {

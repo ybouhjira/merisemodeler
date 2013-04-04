@@ -1,6 +1,5 @@
 HEADERS += \
     ui/namespace.h \
-    ui/modelui.h \
     ui/modelstabwidget.h \
     ui/mcdui.h \
     ui/mainwindow.h \
@@ -13,7 +12,6 @@ HEADERS += \
     ui/itemeditors/associationeditwidget.h
 
 SOURCES += \
-    ui/modelui.cpp \
     ui/modelstabwidget.cpp \
     ui/mcdui.cpp \
     ui/mainwindow.cpp \

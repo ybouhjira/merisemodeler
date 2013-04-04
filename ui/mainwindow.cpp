@@ -11,6 +11,7 @@
 #include <QTabBar>
 #include <QVBoxLayout>
 #include <QStatusBar>
+#include <QGraphicsScene>
 
 using namespace Ui;
 void MainWindow::showAboutDialog() {
@@ -31,9 +32,9 @@ MainWindow* MainWindow::getInstance() {
 MainWindow::MainWindow()
     : QMainWindow(nullptr)
     , m_tabWidget(new ModelsTabWidget(this))
-    , m_fileMenu(new QMenu(tr("File")))
+    , m_fileMenu(new QMenu(tr("&File")))
     , m_newFileMenu(new QMenu(tr("New")))
-    , m_helpMenu(new QMenu(tr("Help")))
+    , m_helpMenu(new QMenu(tr("&Help")))
     , m_aboutAction(new QAction(tr("About"),this))
     , m_newMcdAction(new QAction(QIcon(":/mcd"),"MCD",this))
     , m_quitAction(new QAction(tr("Quit"),this))
@@ -66,7 +67,7 @@ MainWindow::MainWindow()
 }
 
 void MainWindow::createNewMcd() const{
-    m_tabWidget->addModel(tr("unamed"), new Model::McdModel);
+    m_tabWidget->addModel(tr("unamed"), new Model::McdModel, new QGraphicsScene);
 }
 
 QMenu* MainWindow::fileMenu() {

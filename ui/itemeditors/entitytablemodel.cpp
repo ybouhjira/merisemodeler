@@ -59,10 +59,9 @@ void EntityTableModel::setEntity(Entity *entity) {
 Qt::ItemFlags EntityTableModel::flags(const QModelIndex &i) const {
     switch(i.column()) {
     case 0: //< Nom
-        return Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
+        return Qt::ItemIsEnabled | Qt::ItemIsUserCheckable | Qt::ItemIsSelectable;
     default:
-        auto newIndex = createIndex(i.row(), i.column()-1, i.internalPointer());
-        return ItemTableModel::flags(newIndex);
+        return ItemTableModel::flags(createIndex(i.row(), i.column() - 1, i.internalPointer()));
     }
 }
 

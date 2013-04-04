@@ -3,12 +3,17 @@
 
 #include "namespace.h"
 #include "model/namespace.h"
-#include "modelui.h"
+
+// Qt
+class QGraphicsScene;
+class QActionGroup;
+class QUndoView;
+#include <QMainWindow>
 
 /**
  * @brief L'interface graphique du MCD
  */
-class Ui::McdUi : public Ui::ModelUi
+class Ui::McdUi : public QMainWindow
 {
     Q_OBJECT
     // METHODES
@@ -30,31 +35,43 @@ public slots:
      * @brief Mutateur
      * @param mcd Model MCD
      */
-    void setModel(Model::McdModel* mcd) ;
+    void setModel(Model::McdModel* mcd, QGraphicsScene *scene) ;
 
 private slots:
     /**
-     * @brief Appelé lorsque le bouton Entity est cliqué, met la scene en Mode
-     * McdModelScene::AddEntity
+     * @brief Appelé lorsque le bouton MOve est cliqué
      */
-    void setAddEntityModeOnScene() const ;
+    void setMoveClickAction() const;
 
     /**
-     * @brief Appelé lorsque le bouton Association est cliqué, met la scene
-     * en Mode McdModelScene::AddAssociation
+     * @brief setRemoveClickAction
      */
-    void setAddAssocModeOnScene() const ;
+    void setRemoveClickAction() const;
 
     /**
-     * @brief Appelé lorsque le bouton Association est cliqué, met la scene
-     * en Mode McdModelScene::Enheritence
+     * @brief Appelé lorsque le bouton Entity est cliqué
      */
-    void setInheritenceModeOnScene() const;
+    void setAddEntityClickAction() const ;
+
+    /**
+     * @brief Appelé lorsque le bouton Association est cliqué
+     */
+    void setAddAssociationClickAction() const ;
+
+    /**
+     * @brief Appelé lorsque le bouton Association est cliqué
+     */
+    void setInheritencClickAction() const;
 
     /**
      * @brief Change l'element affiché dans le panneau selon la selection
      */
     void sceneSelectionChanged();
+
+    /**
+     * @brief Affiche une boite de dialogue pour exporter le model
+     */
+    void showExportDialog();
 
 signals:
     /**
@@ -82,19 +99,28 @@ private:
     Model::McdModel *m_model;
 
     /**
-     * @brief QAction qui ajoute une entité
+     * @brief La representation du modéle MCD
      */
-    QAction *m_entityAction;
+    QGraphicsScene *m_scene;
 
     /**
-      * @brief QAction qui ajoute une Associations
-      */
-    QAction *m_associationAction;
+     * @brief Controleur
+     */
+    Model::McdController* m_controller;
 
     /**
-      * @brief QAction qui Ajoute un relation d'hériatge entre deux entités
-      */
-    QAction *m_inheritanceAction;
+     * @brief Groupe les objets de type QAction
+     */
+    QActionGroup *m_actionGroup;
+
+    QAction
+    *m_undoAction,      //!< @brief Undo action
+    *m_redoAction,      //!< @brief Redo action
+    *m_moveAction,      //!< @brief Déplacement
+    *m_removeAction,    //! @brief Suppression
+    *m_entityAction,    //!< @brief Ajoute une entité
+    *m_assocAction,     //!< @brief Ajoute une association
+    *m_inheritAction;   //!< @brief Ahoute une héritage
 
     /**
      * @brief Widget qui edite l'entité
@@ -111,6 +137,26 @@ private:
      * d'éditer les entités et associaotions
      */
     QDockWidget *m_itemEditDock;
+
+    /**
+      * @brief Le widget qui affiche le diagram
+      */
+    Model::ModelView *m_graphicsView;
+
+    /**
+      * @brief Barre d'outils
+      */
+    QToolBar *m_toolBar;
+
+    /**
+     * @brief Action pour exporter le model en PDF, SVG ou autre
+     */
+    QAction *m_exportAction;
+
+    /**
+     * @bried Undo List view
+     **/
+    QUndoView* m_undoView;
 
 };
 

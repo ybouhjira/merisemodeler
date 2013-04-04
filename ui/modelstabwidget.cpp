@@ -21,7 +21,10 @@ ModelsTabWidget::ModelsTabWidget(QWidget *parent)
             this, SLOT(removeModel(int)) );
 }
 
-void ModelsTabWidget::addModel(const QString &label, Model::McdModel *model) {
+void ModelsTabWidget::addModel(
+        const QString &label,
+        Model::McdModel *model,
+        QGraphicsScene* scene) {
     m_models.append(model);
     if(layout()->count() > 1)
         layout()->removeItem(layout()->itemAt(layout()->count() - 1));
@@ -29,7 +32,7 @@ void ModelsTabWidget::addModel(const QString &label, Model::McdModel *model) {
     // Ajout de l'interface
     McdUi* ui = McdUi::getInstance();
     layout()->addWidget(ui);
-    ui->setModel(model);
+    ui->setModel(model, scene);
 
     // Ajout du model dans la liste
     m_models.append(model);

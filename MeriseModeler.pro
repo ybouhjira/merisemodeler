@@ -29,12 +29,12 @@ TEMPLATE = app
 RESOURCES += ressourceFile.qrc
 
 # Indiquer les fichier sources et headers
-SOURCES += \
-    main.cpp
+SOURCES += main.cpp
 
 include(logic/logic.pri)
 include(graphic/graphic.pri)
 include(ui/ui.pri)
 include(pugixml/pugixml.pri)
 include(exporter/exporter.pri)
+include(command/command.pri)
 include(model/model.pri)

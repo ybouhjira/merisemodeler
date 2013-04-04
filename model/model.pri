@@ -1,8 +1,10 @@
 HEADERS += \
     model/mcdmodel.h \
     model/namespace.h \
-    model/mcdscene.h
+    model/mcdcontroller.h \
+    model/modelview.h
 
 SOURCES += \
     model/mcdmodel.cpp \
-    model/mcdscene.cpp
+    model/mcdcontroller.cpp \
+    model/modelview.cpp

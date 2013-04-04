@@ -22,8 +22,8 @@ EntityEditWidget::EntityEditWidget(Logic::Entity *entity, QWidget *parent)
     , m_tabWidget(new QTabWidget)
     , m_tableView(new QTableView)
     , m_tableModel(new EntityTableModel(m_entity, this))
-    , m_addButton(new QPushButton(tr("Add")))
-    , m_removeButton(new QPushButton(tr("Remove")))
+    , m_addButton(new QPushButton(QIcon(":/add"), tr("Add")))
+    , m_removeButton(new QPushButton(QIcon(":/remove"), tr("Remove")))
 {
     setLayout(new QVBoxLayout);
     layout()->addWidget(m_tabWidget);
@@ -46,15 +46,21 @@ EntityEditWidget::EntityEditWidget(Logic::Entity *entity, QWidget *parent)
     // Table des propriétés
     page1Layout->addWidget(m_tableView);
     m_tableView->setModel(m_tableModel);
-    m_tableView->setItemDelegateForColumn(2, new ComboBoxDelegate(m_tableView));
+    m_tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    m_tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 
     // Connections
     // Bouton ajouter
     connect(m_addButton, SIGNAL(clicked()), this, SLOT(addProperty()) );
 
+    // Bouton supprimer
+    connect(m_removeButton, &QPushButton::clicked, [=](){
+        m_tableModel->removeProperty(m_tableView->selectionModel()->currentIndex().row());
+        emit itemEdited();
+    });
+
     // connection avec le model
-    connect(propertiesModel(), &QAbstractItemModel::dataChanged,
-            this, &ItemEditWidget::itemEdited);
+    connect(propertiesModel(), &QAbstractItemModel::dataChanged, this, &ItemEditWidget::itemEdited);
 }
 
 void EntityEditWidget::setEntity(Logic::Entity *entity) {
@@ -72,16 +78,10 @@ Logic::Entity* EntityEditWidget::item() const {
 }
 
 void EntityEditWidget::addProperty() {
-    m_tableModel->addProperty(
-                new Logic::Property(tr("property"),
-                                    Logic::TypeFactory().buildType()));
+    m_tableModel->addProperty(new Logic::Property(tr("property"), Logic::TypeFactory().buildType()));
     emit itemEdited();
 }
 
 EntityTableModel* EntityEditWidget::propertiesModel() const {
     return m_tableModel;
-}
-
-void EntityEditWidget::removeSelectedProperties() {
-    qWarning("EntityEditWidget::removeSelectedProperties() not yet implemented");
 }

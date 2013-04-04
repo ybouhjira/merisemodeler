@@ -35,8 +35,6 @@ public:
 
     void addProperty();
 
-    void removeSelectedProperties();
-
 public slots:
     /**
      * @brief Mutateur

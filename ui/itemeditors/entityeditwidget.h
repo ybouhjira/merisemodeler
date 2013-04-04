@@ -36,11 +36,6 @@ public:
      * @reimp
      */
     Ui::EntityTableModel* propertiesModel() const;
-
-    /**
-     * @reimp
-     */
-    void removeSelectedProperties();
     
 public slots:
     /**
