@@ -41,12 +41,7 @@ void RoundedRectObject::paint
 
 QRectF RoundedRectObject::boundingRect() const {
     int penWidth = style()->pen().width() ;
-    return QRectF(
-                0 - penWidth,
-                0 - penWidth,
-                m_width + penWidth,
-                m_height + penWidth
-                );
+    return QRectF(0 - penWidth, 0 - penWidth, m_width + penWidth, m_height + penWidth);
 }
 
 qreal RoundedRectObject::height() const {

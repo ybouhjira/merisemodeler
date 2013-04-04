@@ -14,6 +14,8 @@ public:
     
     QColor color() const ;
 signals:
+    void colorEdited(QColor const& color);
+
     void colorChanged(QColor const& color);
 
 public slots:

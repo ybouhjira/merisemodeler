@@ -17,8 +17,6 @@
 #include "exporter/exporterfactory.h"
 #include "exporter/graphicssceneexporter.h"
 
-
-
 // Qt
 #include <QToolBar>
 #include <QAction>
@@ -126,9 +124,10 @@ McdUi::McdUi(QWidget *parent)
     connect(m_inheritAction, SIGNAL(triggered()), this, SLOT(setInheritencClickAction()) );
 
     // Mise à jour auto de la vues
-    auto updateFunc = [=](){ m_graphicsView->viewport()->update(); };
+    auto updateFunc = [this](){ m_graphicsView->viewport()->update(); };
     connect(m_entityWidget, &ItemEditWidget::itemEdited, updateFunc);
     connect(m_associationWidget, &ItemEditWidget::itemEdited, updateFunc);
+    connect(m_styleWidget, &StyleWidget::styleEdited, updateFunc);
 
     // connection de la vue avec le controlleur
     connect(m_graphicsView, SIGNAL(clicked(qreal,qreal)), m_controller, SLOT(viewClicked(qreal, qreal)));
@@ -136,6 +135,8 @@ McdUi::McdUi(QWidget *parent)
     // undo & redo
     connect(m_undoAction, SIGNAL(triggered()), m_controller, SLOT(undo()));
     connect(m_redoAction, SIGNAL(triggered()), m_controller, SLOT(redo()));
+
+    connect(m_styleWidget, SIGNAL(clickedApply(Graphic::Style*)), m_controller, SLOT(ApplyStyle(Graphic::Style*)));
 }
 
 void McdUi::setModel(Model::McdModel *mcd, QGraphicsScene* scene) {

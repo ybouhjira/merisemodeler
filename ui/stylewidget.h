@@ -21,12 +21,22 @@ public:
 signals:
     void styleEdited();
 
+    void clickedApply(Graphic::Style*);
+
 private slots:
     void setBackgroundColor(QColor const& color);
 
     void setLineColor(QColor const& color);
 
     void setLineWidth(qreal width);
+
+    void setFont(QFont const& font);
+
+    void removeSelectedStyle();
+
+    void applyClicked();
+
+    void updateWidgets();
 
     // HELPER FUNCTIONS
 private:

@@ -110,3 +110,13 @@ void McdController::redo() {
 QUndoStack* McdController::stack() {
     return m_stack;
 }
+
+void McdController::ApplyStyle(Graphic::Style *style) {
+    QList<QGraphicsItem*> items = m_scene->selectedItems();
+
+    for(auto item : items) {
+        auto object = dynamic_cast<Graphic::Object*>(item);
+        if(object != nullptr)
+            object->setStyle(style);
+    }
+}

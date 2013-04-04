@@ -69,12 +69,17 @@ public slots:
      */
     void setStyle(Graphic::Style* style);
 
+    /**
+     * @brief setDefaultStyle
+     */
+    void setDefaultStyle();
+
     // ATTRIBUTS
 private:
     /**
      * @brief Style graphique
      */
-    Graphic::Style *m_style;
+    mutable Graphic::Style *m_style;
 
 };
 

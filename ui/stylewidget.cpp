@@ -43,18 +43,31 @@ StyleWidget::StyleWidget(QWidget *parent) : QWidget(parent)
     formLayout->addRow(tr("Line color"), m_lineColorButton);
     formLayout->addRow(tr("Line width"), m_spinBox);
     m_spinBox->setMinimum(0.01);
+    m_spinBox->setValue(1);
     m_spinBox->setMaximum(3);
 
     // CONNECTIONS
+    // add, remove, apply
+    connect(m_addButton, SIGNAL(clicked()), m_model, SLOT(addStyle()));
+    connect(m_removeButton, SIGNAL(clicked()), this,  SLOT(removeSelectedStyle()));
+    connect(m_applyButton, SIGNAL(clicked()), this, SLOT(applyClicked()));
+
+    // edit
     connect(m_backgroundColorButton, SIGNAL(colorChanged(QColor)), this, SLOT(setBackgroundColor(QColor)) );
     connect(m_lineColorButton, SIGNAL(colorChanged(QColor)), this, SLOT(setLineColor(QColor)) );
     connect(m_spinBox, SIGNAL(valueChanged(double)), this, SLOT(setLineWidth(qreal)) );
+    connect(m_fontComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(setFont(QFont)) );
+
+    // update
+    connect(m_listView, SIGNAL(clicked(QModelIndex)), this, SLOT(updateWidgets()));
 }
 
 void StyleWidget::setBackgroundColor(const QColor &color) {
     Graphic::Style* style = currentStyle();
-    if(style != nullptr)
+    if(style != nullptr) {
         style->setBrush(color);
+        emit styleEdited();
+    }
 }
 
 void StyleWidget::setLineColor(const QColor &color) {
@@ -63,6 +76,7 @@ void StyleWidget::setLineColor(const QColor &color) {
         QPen pen = style->pen() ;
         pen.setBrush(color);
         style->setPen(pen);
+        emit styleEdited();
     }
 }
 
@@ -73,6 +87,15 @@ void StyleWidget::setLineWidth(qreal width) {
         QPen pen = style->pen() ;
         pen.setWidth(width);
         style->setPen(pen);
+        emit styleEdited();
+    }
+}
+
+void StyleWidget::setFont(const QFont &font) {
+    Graphic::Style* style = currentStyle();
+    if(style != nullptr) {
+        style->setFont(font);
+        emit styleEdited();
     }
 }
 
@@ -82,4 +105,24 @@ Graphic::Style* StyleWidget::currentStyle() const {
         return m_model->styleAt(currentIndex.row());
     else
         return nullptr;
+}
+
+void StyleWidget::removeSelectedStyle() {
+    m_model->removeStyle(m_listView->currentIndex().row());
+}
+
+void StyleWidget::applyClicked() {
+    if(currentStyle() != nullptr)
+        emit clickedApply(currentStyle());
+}
+
+
+void StyleWidget::updateWidgets() {
+    auto style = currentStyle();
+    if(style != nullptr) {
+        m_fontComboBox->setCurrentFont(style->font());
+        m_lineColorButton->setColor(style->pen().color());
+        m_backgroundColorButton->setColor(style->brush().color());
+        m_spinBox->setValue(style->pen().width());
+    }
 }

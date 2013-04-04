@@ -3,6 +3,7 @@
 
 #include "namespace.h"
 #include "mcdmodel.h"
+#include "graphic/style.h"
 
 class QGraphicsSceneMouseEvent;
 class QUndoStack;
@@ -87,6 +88,12 @@ public slots:
      * @return La pile de commande
      */
     QUndoStack* stack();
+
+    /**
+     * @brief ApplyStyle
+     * @param style
+     */
+    void ApplyStyle(Graphic::Style* style);
 
     // ATTRIBUTS
 private:
