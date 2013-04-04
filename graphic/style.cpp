@@ -6,7 +6,10 @@ Style* Style::m_defaultStyle = nullptr ;
 
 Style* Style::getDefaultStyle() {
     if(m_defaultStyle == nullptr) {
-        m_defaultStyle = new Style(QBrush(Qt::white), QPen(QBrush(Qt::black), 1 ), QFont("Arial"));
+        m_defaultStyle = new Style(
+                    QBrush(Qt::white),
+                    QPen(QBrush(Qt::black), 1, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin ),
+                    QFont("Arial"));
         m_defaultStyle->setName("default");
     }
     return m_defaultStyle;

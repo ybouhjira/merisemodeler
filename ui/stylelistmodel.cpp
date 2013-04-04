@@ -19,3 +19,8 @@ QVariant StyleListModel::data(const QModelIndex &index, int role) const {
     else
         return QVariant();
 }
+
+
+Graphic::Style* StyleListModel::styleAt(int index) const {
+    return m_styles[index];
+}

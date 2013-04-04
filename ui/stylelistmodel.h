@@ -19,6 +19,8 @@ public:
     int rowCount(const QModelIndex&) const;
 
     QVariant data(const QModelIndex &index, int role) const;
+
+    Graphic::Style* styleAt(int index) const ;
     
 private:
     QList<Graphic::Style*> m_styles;

@@ -9,5 +9,6 @@
         <file alias="undo">ressources/undo.png</file>
         <file alias="add">ressources/add.png</file>
         <file alias="remove">ressources/remove.png</file>
+        <file alias="apply">ressources/apply.png</file>
     </qresource>
 </RCC>
