@@ -97,7 +97,7 @@ void McdModel::saveXml(QString filename)
     pugi::xml_document doc;
     pugi::xml_node root = doc.append_child("model");
     foreach (Item *I, items()) {
-        I->toXml() = root.append_child(I->name().toStdString().c_str());
+        I->toXml() = root.append_child("");
     }
     doc.save_file(filename.toStdString().c_str());
 }
@@ -113,8 +113,8 @@ QList<Logic::Item*> McdModel::fromXml(QString fileName)
     foreach (pugi::xml_node entity , doc.children("entity")) {
         Entity *E;
         entities.append(E->fromXml(entity));
-        items.append(E->fromXml(entity));
     }
+
     //fixing parents
     foreach (pugi::xml_node en, doc.children("entity")) {
         pugi::xml_node parents = en.child("parents");
@@ -132,6 +132,7 @@ QList<Logic::Item*> McdModel::fromXml(QString fileName)
                         if(parentsList.at(j) == entities.at(k)->name())
                         {
                             entities.at(i)->addParent(entities.at(k));
+                            items.append(entities.at(i));
                         }
                     }
                 }
@@ -140,20 +141,70 @@ QList<Logic::Item*> McdModel::fromXml(QString fileName)
     }
 
 
-    for (int i = 0; i < entities.length(); ++i) {
-        for (int j = 0; j < entities.length(); ++j) {
-            if(parentsList.at(i) == items.at(j)->name())
+    //Reading the associations
+    foreach (pugi::xml_node assoc, doc.children("association")) {
+        QString Aname = assoc.attribute("name").value();
+
+        pugi::xml_node assocProperties = assoc.child("properties");
+        QList<Logic::Property*> propertiesList;
+        foreach (pugi::xml_node Xproperty, assocProperties.children("property")) {
+            //Property attributes
+            QString name = Xproperty.attribute("name").value();
+            QString type = Xproperty.attribute("type").value();
+            QString check = Xproperty.attribute("check").value();
+            QString defaultValue = Xproperty.attribute("default-value").value();
+            QString identifier = Xproperty.attribute("identifier").value();
+            QString obligatory = Xproperty.attribute("obligtory").value();
+            bool id = (identifier == "true")?true:false;
+            bool ob = (obligatory == "true")?true:false;
+            Type T(type);
+            //Appending property to the Property list
+            propertiesList.append(new Property(name,T,ob,check,defaultValue,id));
+        }
+
+        Logic::Link *L1;
+        pugi::xml_node En1 = assoc.child("entity1");
+        QString En1_name = En1.attribute("name").value();
+        //The entity
+        for (int i = 0; i < entities.length(); ++i) {
+            if(En1_name == entities.at(i)->name())
             {
-                E->addParent((Logic::Entity*)items.at(j));
+                L1->setEntity((Entity*)entities.at(i));
             }
         }
-    }
 
-    //Reading the associations
-    QList<Logic::Association*> associations;
-    foreach (pugi::xml_node assoc, doc.children("association")) {
-        Association *A;
-        associations.append(A->fromXml(assoc));
+        //The cardinalities
+        QString max1 = En1.attribute("max").value();
+        QString min1 = En1.attribute("min").value();
+        L1->setMax(Logic::Link::stringToCardinality(max1));
+        L1->setMin(Logic::Link::stringToCardinality(min1));
+
+        //The second Entity
+        Logic::Link *L2;
+        pugi::xml_node En2 = assoc.child("entity2");
+        QString En2_name = En2.attribute("name").value();
+        //The entity
+        for (int i = 0; i < entities.length(); ++i) {
+            if (En2_name == entities.at(i)->name()) {
+                L2->setEntity((Entity*)entities.at(i));
+            }
+        }
+        //The Cardinalities
+        QString max2 = En2.attribute("max").value();
+        QString min2 = En2.attribute("min").value();
+        L2->setMax(Logic::Link::stringToCardinality(max2));
+        L2->setMin(Logic::Link::stringToCardinality(min2));
+
+
+        //Entities Pair
+        QPair<Link*,Link*> entitiesLinks;
+        entitiesLinks.first = L1;
+        entitiesLinks.second = L2;
+
+        Association *association = new Association(Aname,entitiesLinks);
+        association->setProperties(propertiesList);
+
+        items.append(association);
     }
 
     return items;

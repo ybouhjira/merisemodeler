@@ -57,6 +57,7 @@ QString Link::cardinalityToString(Cardinality c)
         break;
     }
 }
+
 Link::Cardinality Link::stringToCardinality(QString c)
 {
     if(c == "zero")
