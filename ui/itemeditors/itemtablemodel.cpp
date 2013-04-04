@@ -6,14 +6,9 @@
 using namespace Logic;
 using namespace Ui;
 
-ItemTableModel::ItemTableModel( QObject* parent)
-    : QAbstractTableModel(parent)
-{
-}
+ItemTableModel::ItemTableModel( QObject* parent) : QAbstractTableModel(parent) { }
 
-ItemTableModel::~ItemTableModel() {
-
-}
+ItemTableModel::~ItemTableModel() { }
 
 QVariant ItemTableModel::data(const QModelIndex &index, int role) const {
     if(item() != nullptr) {
@@ -94,33 +89,22 @@ QVariant ItemTableModel::headerData
     }
 }
 
-void ItemTableModel::addProperty(Property *property) {
-    if(item() != nullptr) {
-        beginResetModel();
-        item()->addProperty(property);
-        endResetModel();
-    }
-}
-
 Qt::ItemFlags ItemTableModel::flags(const QModelIndex &index) const {
     switch(index.column()) {
     case 0: //< Nom
     case 1: //< Type
     case 4: //< Default
-        return Qt::ItemIsEditable | Qt::ItemIsEnabled;
+        return Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable;
         break;
     case 2: //< oblig
-        return Qt::ItemIsEnabled
-                | Qt::ItemIsUserCheckable;
+        return Qt::ItemIsEnabled | Qt::ItemIsUserCheckable | Qt::ItemIsSelectable ;
         break;
     default:
-        return Qt::NoItemFlags;
+        return Qt::ItemIsSelectable;
     }
 }
 
-bool ItemTableModel::setData
-(const QModelIndex &index, const QVariant &value, int role)
-{
+bool ItemTableModel::setData (const QModelIndex &index, const QVariant &value, int role) {
     try {
         // La properiété à changer
         Property* property = item()->properties()[index.row()] ;
@@ -154,5 +138,21 @@ bool ItemTableModel::setData
         return false;
     } catch (Logic::InvalidTypeStringException &) {
         return false;
+    }
+}
+
+void ItemTableModel::addProperty(Property *property) {
+    if(item() != nullptr) {
+        beginResetModel();
+        item()->addProperty(property);
+        endResetModel();
+    }
+}
+
+void ItemTableModel::removeProperty(int index) {
+    if(item()!= nullptr) {
+        beginResetModel();
+        item()->removeProperty(index);
+        endResetModel();
     }
 }

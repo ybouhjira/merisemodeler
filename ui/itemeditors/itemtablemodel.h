@@ -46,8 +46,7 @@ public:
      * @reimp
      * @brief Renvoie les titres des colonnes et les nombre des lignes
      */
-    QVariant headerData(int section,
-                        Qt::Orientation orientation, int role) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
     /**
      * @reimp
@@ -61,7 +60,6 @@ public:
      */
     bool setData(const QModelIndex &index, const QVariant &value, int role);
 
-
 public slots:
 
     /**
@@ -69,6 +67,12 @@ public slots:
      * @param pty Properiété
      */
     void addProperty(Logic::Property* property);
+
+    /**
+     * @brief Remove Supprime une proprièté
+     * @param index indice
+     */
+    void removeProperty(int index);
 
 };
 
