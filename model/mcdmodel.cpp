@@ -104,6 +104,8 @@ void McdModel::saveXml(QString filename)
 QList<Logic::Item*> McdModel::fromXml(QString fileName)
 {
     pugi::xml_document doc;
+    doc.load_file(fileName.toStdString().c_str());
+
     QList<Logic::Item*> items;
 
     //Reading the entities
@@ -112,6 +114,39 @@ QList<Logic::Item*> McdModel::fromXml(QString fileName)
         Entity *E;
         entities.append(E->fromXml(entity));
         items.append(E->fromXml(entity));
+    }
+    //fixing parents
+    foreach (pugi::xml_node en, doc.children("entity")) {
+        pugi::xml_node parents = en.child("parents");
+        //Parents names
+        QList<QString> parentsList;
+        foreach (pugi::xml_node parent, parents.children()) {
+            parentsList.append(parent.attribute("name").value());
+        }
+        //appending the parents
+        for (int i = 0; i < entities.length(); ++i) {
+            if(entities.at(i)->name().toStdString().c_str() == en.attribute("name").value())
+            {
+                for (int j = 0; j < parentsList.length(); ++j) {
+                    for (int k = 0; k < entities.length(); ++k) {
+                        if(parentsList.at(j) == entities.at(k)->name())
+                        {
+                            entities.at(i)->addParent(entities.at(k));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    for (int i = 0; i < entities.length(); ++i) {
+        for (int j = 0; j < entities.length(); ++j) {
+            if(parentsList.at(i) == items.at(j)->name())
+            {
+                E->addParent((Logic::Entity*)items.at(j));
+            }
+        }
     }
 
     //Reading the associations
