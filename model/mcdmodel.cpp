@@ -105,20 +105,22 @@ QList<Logic::Item*> McdModel::fromXml(QString fileName)
 {
     pugi::xml_document doc;
     QList<Logic::Item*> items;
-    pugi::xml_node entity;
-    while(entity = doc.child("entity"))
-    {
+
+    //Reading the entities
+    QList<Logic::Entity*> entities;
+    foreach (pugi::xml_node entity , doc.children("entity")) {
         Entity *E;
-        E = E->fromXml(entity);
-        items.append(E);
+        entities.append(E->fromXml(entity));
+        items.append(E->fromXml(entity));
     }
-    pugi::xml_node assoc;
-    while(assoc = doc.child("association"))
-    {
+
+    //Reading the associations
+    QList<Logic::Association*> associations;
+    foreach (pugi::xml_node assoc, doc.children("association")) {
         Association *A;
-        A = A->fromXml(assoc);
-        items.append(A);
+        associations.append(A->fromXml(assoc));
     }
+
     return items;
 }
 
