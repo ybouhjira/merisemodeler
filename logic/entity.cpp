@@ -1,8 +1,6 @@
 #include "entity.h"
 
-using namespace Logic;
-
-Entity::Entity(QString const &name
+Logic::Entity::Entity(QString const &name
                , QList<Entity*> parents
                , QList<UniqueConstraint *> uniqueConstraints
                )
@@ -12,53 +10,53 @@ Entity::Entity(QString const &name
 {
 }
 
-Entity::~Entity()
+Logic::Entity::~Entity()
 {
 }
 
-void Entity::addParent(Entity *parent)
+void Logic::Entity::addParent(Entity *parent)
 {
     m_parents.append(parent);
 }
 
-void Entity::addUniqueConstraint(UniqueConstraint *uniqueConstraint)
+void Logic::Entity::addUniqueConstraint(Logic::UniqueConstraint *uniqueConstraint)
 {
     m_uniqueConstraints.append(uniqueConstraint);
 }
 
 //ACCESSORS
-QList<Entity*> Entity::parents()
+QList<Logic::Entity*> Logic::Entity::parents()
 {
     return m_parents;
 }
 
-QList<UniqueConstraint*> Entity::uniqueConstraints()
+QList<Logic::UniqueConstraint*> Logic::Entity::uniqueConstraints()
 {
     return m_uniqueConstraints;
 }
 
 //REMOVERS
-void Entity::removeParent(Entity *parent)
+void Logic::Entity::removeParent(Entity *parent)
 {
     m_parents.removeOne(parent);
 }
 
-void Entity::removeParent(int index)
+void Logic::Entity::removeParent(int index)
 {
     m_parents.removeAt(index);
 }
 
-void Entity::removeUniqueConstraint(int index)
+void Logic::Entity::removeUniqueConstraint(int index)
 {
     m_uniqueConstraints.removeAt(index);
 }
 
-void Entity::removeUniqueConstraint(UniqueConstraint *uniqueConstraint)
+void Logic::Entity::removeUniqueConstraint(Logic::UniqueConstraint *uniqueConstraint)
 {
     m_uniqueConstraints.removeOne(uniqueConstraint);
 }
 
-Graphic::Entity* Entity::graphicObject() const {
+Graphic::Entity* Logic::Entity::graphicObject() const {
     return m_graphicEntity ;
 }
 
@@ -100,7 +98,7 @@ pugi::xml_node Logic::Entity::toXml()
     return entity_node;
 }
 
-Logic::Entity* Entity::fromXml(pugi::xml_node entity)
+Logic::Entity* Logic::Entity::fromXml(pugi::xml_node entity, QList<Logic::Item *> items)
 {
     //Reading entity name
     QString Ename = entity.attribute("name").value();
@@ -150,8 +148,18 @@ Logic::Entity* Entity::fromXml(pugi::xml_node entity)
     }
 
     //The entity
-    Entity *E =  new Entity(Ename,QList<Entity*>(),UKList);
+    Logic::Entity *E =  new Entity(Ename,QList<Entity*>(),UKList);
     E->setProperties(propertiesList);
+
+    //Modifying the entity's parents
+    for (int i = 0; i < parentsList.length(); ++i) {
+        for (int j = 0; j < items.length(); ++j) {
+            if(parentsList.at(i) == items.at(j)->name())
+            {
+                E->addParent((Logic::Entity*)items.at(j));
+            }
+        }
+    }
 
     //REading graphic parameters
     pugi::xml_node G = entity.child("graphic");

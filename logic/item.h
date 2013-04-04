@@ -51,6 +51,11 @@ public:
         pugi::xml_node node;
         return node;
     }
+    Item* fromXml(pugi::xml_node item, QList<Item*> items)
+    {
+        if(item.empty())
+            return items.at(0);
+    }
 
 
 public slots:
@@ -65,7 +70,7 @@ public slots:
      * @brief Add a property to the item
      * @param property : pointer of the property
      */
-    void addProperty(Property* property);
+    void addProperty(Logic::Property* property);
 
     /**
      * @brief  remove a property from the item
@@ -77,7 +82,7 @@ public slots:
      * @brief remove a property from the item
      * @param property : pointer of the property
      */
-    void removeProperty(Property* property);
+    void removeProperty(Logic::Property* property);
 
 signals:
     /**

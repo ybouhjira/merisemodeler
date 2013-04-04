@@ -81,11 +81,18 @@ pugi::xml_node Association::toXml()
     //Ecriture de la premiére entité
     pugi::xml_node E1 = root.append_child("entity1");
     E1.append_attribute("name") = entity1()->name().toStdString().c_str();
-    //
+    QString max1 = Logic::Link::cardinalityToString(links().first->max());
+    E1.append_attribute("max") = max1.toStdString().c_str();
+    QString min1 = Logic::Link::cardinalityToString(links().first->min());
+    E1.append_attribute("min") = min1.toStdString().c_str();
 
     //Ecriture de la deuxiéme entité
     pugi::xml_node E2 = root.append_child("entity2");
     E2.append_attribute("name") = entity2()->name().toStdString().c_str();
+    QString max2 = Logic::Link::cardinalityToString(links().second->max());
+    E2.append_attribute("max") = max2.toStdString().c_str();
+    QString min2 = Logic::Link::cardinalityToString(links().second->min());
+    E2.append_attribute("min") = min2.toStdString().c_str();
 
     //Graphic properties
     pugi::xml_node GProperties = root.append_child("graphic");
@@ -100,7 +107,7 @@ pugi::xml_node Association::toXml()
 
     return root;
 }
-Logic::Association* Association::fromXml(pugi::xml_node assoc)
+Logic::Association* Association::fromXml(pugi::xml_node assoc, QList<Item *> items)
 {
     //association's name
     QString AName = assoc.attribute("name").value();
@@ -123,7 +130,46 @@ Logic::Association* Association::fromXml(pugi::xml_node assoc)
         propertiesList.append(new Property(name,T,ob,check,defaultValue,id));
     }
 
-    Association *association = new Association(AName,);
+    //***Reading the two entities
+    //The first entity
+    Logic::Link *L1;
+    pugi::xml_node En1 = assoc.child("entity1");
+    QString En1_name = En1.attribute("name").value();
+    //The entity
+    for (int i = 0; i < items.length(); ++i) {
+        if(En1_name == items.at(i)->name())
+        {
+            L1->setEntity((Entity*)items.at(i));
+        }
+    }
+    //The cardinalities
+    QString max1 = En1.attribute("max").value();
+    QString min1 = En1.attribute("min").value();
+    L1->setMax(Logic::Link::stringToCardinality(max1));
+    L1->setMin(Logic::Link::stringToCardinality(min1));
+
+    //The second Entity
+    Logic::Link *L2;
+    pugi::xml_node En2 = assoc.child("entity2");
+    QString En2_name = En2.attribute("name").value();
+    //The entity
+    for (int i = 0; i < items.length(); ++i) {
+        if (En2_name == items.at(i)->name()) {
+            L2->setEntity((Entity*)items.at(i));
+        }
+    }
+    //The Cardinalities
+    QString max2 = En2.attribute("max").value();
+    QString min2 = En2.attribute("min").value();
+    L2->setMax(Logic::Link::stringToCardinality(max2));
+    L2->setMin(Logic::Link::stringToCardinality(min2));
+
+    //Entities Pair
+    QPair<Link*,Link*> entitiesLinks;
+    entitiesLinks.first = L1;
+    entitiesLinks.second = L2;
+
+    Association *association = new Association(AName,entitiesLinks);
     association->setProperties(propertiesList);
 
     return association;

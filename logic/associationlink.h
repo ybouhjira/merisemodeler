@@ -2,6 +2,7 @@
 #define CARDINALITY_H
 
 #include "logic/namespace.h"
+#include <QString>
 
 /**
  * @brief Cette classe représente un lien uniderictionel entre une association
@@ -72,6 +73,10 @@ public:
      * @param entity L'entité
      */
     void setEntity(Logic::Entity* entity);
+
+    static QString cardinalityToString(Cardinality c);
+    static Cardinality stringToCardinality(QString c);
+
 
     //ATTRIBUTS
 private:

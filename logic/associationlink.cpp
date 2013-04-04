@@ -41,4 +41,28 @@ void Link::setEntity(Entity *entity)
 {
     m_entity = entity;
 }
-
+QString Link::cardinalityToString(Cardinality c)
+{
+    switch (c) {
+    case Zero:
+        return "zero";
+        break;
+    case One:
+        return "one";
+        break;
+    case N:
+        return "n";
+        break;
+    default:
+        break;
+    }
+}
+Link::Cardinality Link::stringToCardinality(QString c)
+{
+    if(c == "zero")
+        return Zero;
+    if(c == "one")
+        return One;
+    if(c == "n")
+        return N;
+}

@@ -40,8 +40,8 @@ public:
      */
     Association(
             QString const &name,
-            Entity *first,
-            Entity *second,
+            Logic::Entity *first,
+            Logic::Entity *second,
             Logic::Link::Cardinality firstMin = Logic::Link::Zero,
             Logic::Link::Cardinality firstMax = Logic::Link::N,
             Logic::Link::Cardinality secondMin = Logic::Link::Zero,
@@ -106,7 +106,7 @@ public:
      * @brief Obtenir l'objet du XML
      * @param node
      */
-    Logic::Association* fromXml(pugi::xml_node assoc);
+    Logic::Association* fromXml(pugi::xml_node assoc, QList<Item*> items);
 
 
 private:
