@@ -98,7 +98,7 @@ public:
      * @brief fromXml
      * @param entity
      */
-    Logic::Entity* fromXml(pugi::xml_node entity, QList<Item*> items);
+    Logic::Entity* fromXml(pugi::xml_node entity);
 
     //ATTRIBUTS
 private:

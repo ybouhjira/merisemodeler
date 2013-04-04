@@ -107,7 +107,7 @@ pugi::xml_node Association::toXml()
 
     return root;
 }
-Logic::Association* Association::fromXml(pugi::xml_node assoc, QList<Item *> items)
+Logic::Association* Association::fromXml(pugi::xml_node assoc)
 {
     //association's name
     QString AName = assoc.attribute("name").value();
@@ -132,6 +132,7 @@ Logic::Association* Association::fromXml(pugi::xml_node assoc, QList<Item *> ite
 
     //***Reading the two entities
     //The first entity
+    /*
     Logic::Link *L1;
     pugi::xml_node En1 = assoc.child("entity1");
     QString En1_name = En1.attribute("name").value();
@@ -163,11 +164,13 @@ Logic::Association* Association::fromXml(pugi::xml_node assoc, QList<Item *> ite
     QString min2 = En2.attribute("min").value();
     L2->setMax(Logic::Link::stringToCardinality(max2));
     L2->setMin(Logic::Link::stringToCardinality(min2));
+    */
 
     //Entities Pair
     QPair<Link*,Link*> entitiesLinks;
-    entitiesLinks.first = L1;
-    entitiesLinks.second = L2;
+    /*entitiesLinks.first = L1;
+    entitiesLinks.second = L2;*/
+
 
     Association *association = new Association(AName,entitiesLinks);
     association->setProperties(propertiesList);

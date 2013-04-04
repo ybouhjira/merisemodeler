@@ -98,7 +98,7 @@ pugi::xml_node Logic::Entity::toXml()
     return entity_node;
 }
 
-Logic::Entity* Logic::Entity::fromXml(pugi::xml_node entity, QList<Logic::Item *> items)
+Logic::Entity* Logic::Entity::fromXml(pugi::xml_node entity)
 {
     //Reading entity name
     QString Ename = entity.attribute("name").value();
@@ -152,6 +152,7 @@ Logic::Entity* Logic::Entity::fromXml(pugi::xml_node entity, QList<Logic::Item *
     E->setProperties(propertiesList);
 
     //Modifying the entity's parents
+    /*
     for (int i = 0; i < parentsList.length(); ++i) {
         for (int j = 0; j < items.length(); ++j) {
             if(parentsList.at(i) == items.at(j)->name())
@@ -159,7 +160,7 @@ Logic::Entity* Logic::Entity::fromXml(pugi::xml_node entity, QList<Logic::Item *
                 E->addParent((Logic::Entity*)items.at(j));
             }
         }
-    }
+    }*/
 
     //REading graphic parameters
     pugi::xml_node G = entity.child("graphic");

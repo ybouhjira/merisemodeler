@@ -51,10 +51,13 @@ public:
         pugi::xml_node node;
         return node;
     }
-    Item* fromXml(pugi::xml_node item, QList<Item*> items)
+    Item* fromXml(pugi::xml_node item)
     {
         if(item.empty())
-            return items.at(0);
+        {
+            Logic::Item *i;
+            return i;
+        }
     }
 
 

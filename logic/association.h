@@ -106,7 +106,7 @@ public:
      * @brief Obtenir l'objet du XML
      * @param node
      */
-    Logic::Association* fromXml(pugi::xml_node assoc, QList<Item*> items);
+    Logic::Association* fromXml(pugi::xml_node assoc);
 
 
 private:
