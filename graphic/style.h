@@ -54,6 +54,12 @@ public:
      */
     QPen pen() const;
 
+    /**
+     * @brief name
+     * @return
+     */
+    QString name() const;
+
 signals:
     /**
      * @brief Emit lorsque la police change
@@ -89,12 +95,20 @@ public slots:
      */
     void setBrush(QBrush const& brush) ;
 
+    /**
+     * @brief setName
+     * @param name
+     */
+    void setName(QString const& name);
+
     // ATTRIBUTS
 private:
     // static
     static Style *m_defaultStyle;
 
     // non static
+    QString m_name;
+
     /**
      * @brief remplissage
      */

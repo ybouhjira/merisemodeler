@@ -1,5 +1,6 @@
 #include "mcdui.h"
 #include "mainwindow.h"
+#include "stylewidget.h"
 
 #include "logic/entity.h"
 
@@ -15,6 +16,8 @@
 
 #include "exporter/exporterfactory.h"
 #include "exporter/graphicssceneexporter.h"
+
+
 
 // Qt
 #include <QToolBar>
@@ -62,6 +65,7 @@ McdUi::McdUi(QWidget *parent)
     , m_toolBar(new QToolBar("Barre d'outils"))
     , m_exportAction(new QAction(tr("Export"), this))
     , m_undoView(new QUndoView)
+    , m_styleWidget(new StyleWidget)
 {
     setCentralWidget(m_graphicsView);
     addToolBar(Qt::LeftToolBarArea, m_toolBar);
@@ -75,11 +79,22 @@ McdUi::McdUi(QWidget *parent)
     for(int i=2; i<m_actionGroup->actions().size(); i++)
         m_actionGroup->actions()[i]->setCheckable(true);
 
-    // DockWidget
+    // DOCKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     addDockWidget(Qt::BottomDockWidgetArea, m_itemEditDock);
     m_itemEditDock->setWidget(m_entityWidget);
 
-    // Activation de la selection
+    // Style
+    auto styleDock = new QDockWidget(tr("Styles"));
+    styleDock->setWidget(m_styleWidget);
+
+    // Undo view
+    auto undoDock = new QDockWidget(tr("History"), this);
+    addDockWidget(Qt::RightDockWidgetArea, undoDock);
+    undoDock->setWidget(m_undoView);
+    m_undoView->setStack(m_controller->stack());
+    tabifyDockWidget(undoDock, styleDock);
+
+    // QGRAPHICSVIEW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     m_graphicsView->setDragMode(QGraphicsView::RubberBandDrag);
     m_graphicsView->setInteractive(true);
 
@@ -89,13 +104,8 @@ McdUi::McdUi(QWidget *parent)
     fileMenu->insertAction(sep, m_exportAction);
     fileMenu->insertSeparator(m_exportAction);
 
-    // Undo view
-    auto undoDock = new QDockWidget(tr("History"), this);
-    addDockWidget(Qt::RightDockWidgetArea, undoDock);
-    undoDock->setWidget(m_undoView);
-    m_undoView->setStack(m_controller->stack());
 
-    // CHORTCUTS
+    // CHORTCUTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     m_undoAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z));
     m_redoAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Y));
     m_moveAction->setShortcut(QKeySequence(Qt::Key_M));
@@ -104,7 +114,7 @@ McdUi::McdUi(QWidget *parent)
     m_removeAction->setShortcut(QKeySequence(Qt::Key_R));
     m_inheritAction->setShortcut(QKeySequence(Qt::Key_I));
 
-    // CONNETIONS
+    // CONNETIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     // export
     connect(m_exportAction, &QAction::triggered, this, &McdUi::showExportDialog);
 

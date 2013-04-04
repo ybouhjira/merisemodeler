@@ -13,5 +13,8 @@ class ItemEditWidget;
 class AssociationEditWidget;
 class ItemTableModel;
 class AssociationTableModel;
+class StyleListModel;
+class StyleWidget;
+class ColorButton;
 }
 #endif // NAMESPACE_H

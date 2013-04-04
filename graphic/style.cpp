@@ -5,12 +5,10 @@ using namespace Graphic;
 Style* Style::m_defaultStyle = nullptr ;
 
 Style* Style::getDefaultStyle() {
-    if(m_defaultStyle == nullptr)
-        m_defaultStyle = new Style(
-                    QBrush(Qt::white),
-                    QPen(QBrush(Qt::black), 1 ),
-                    QFont("Arial")
-                    );
+    if(m_defaultStyle == nullptr) {
+        m_defaultStyle = new Style(QBrush(Qt::white), QPen(QBrush(Qt::black), 1 ), QFont("Arial"));
+        m_defaultStyle->setName("default");
+    }
     return m_defaultStyle;
 }
 
@@ -57,3 +55,10 @@ QPen Style::pen() const {
     return m_pen;
 }
 
+QString Style::name() const {
+    return m_name;
+}
+
+void Style::setName(const QString &name) {
+    m_name = name;
+}

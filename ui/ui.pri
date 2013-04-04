@@ -9,7 +9,10 @@ HEADERS += \
     ui/itemeditors/entityeditwidget.h \
     ui/itemeditors/comboboxdelegate.h \
     ui/itemeditors/associationtablemodel.h \
-    ui/itemeditors/associationeditwidget.h
+    ui/itemeditors/associationeditwidget.h \
+    ui/stylelistmodel.h \
+    ui/stylewidget.h \
+    ui/colorbutton.h
 
 SOURCES += \
     ui/modelstabwidget.cpp \
@@ -21,4 +24,7 @@ SOURCES += \
     ui/itemeditors/entityeditwidget.cpp \
     ui/itemeditors/comboboxdelegate.cpp \
     ui/itemeditors/associationtablemodel.cpp \
-    ui/itemeditors/associationeditwidget.cpp
+    ui/itemeditors/associationeditwidget.cpp \
+    ui/stylelistmodel.cpp \
+    ui/stylewidget.cpp \
+    ui/colorbutton.cpp

@@ -158,6 +158,11 @@ private:
      **/
     QUndoView* m_undoView;
 
+    /**
+     * @brief Widget pour editer les styles
+     */
+    Ui::StyleWidget* m_styleWidget;
+
 };
 
 #endif // MCDUI_H
