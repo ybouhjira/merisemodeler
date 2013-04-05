@@ -96,7 +96,7 @@ AssociationEditWidget::AssociationEditWidget(Logic::Association *assoc ,
     // CONNECTIONS
     //============
     connect(m_addButton, &QPushButton::clicked, [this](){
-        m_tableModel->addProperty(new Logic::Property("property",Logic::Type("int")));
+        m_tableModel->addProperty(new Logic::Property("property","INT"));
         emit itemEdited();
     });
 
@@ -127,9 +127,7 @@ Logic::Association* AssociationEditWidget::item() const {
 }
 
 void AssociationEditWidget::addProperty() {
-    m_tableModel->addProperty(new Logic::Property(
-                                  "property",
-                                  Logic::TypeFactory().buildType()));
+    m_tableModel->addProperty(new Logic::Property("property","INT"));
     emit itemEdited();
 }
 

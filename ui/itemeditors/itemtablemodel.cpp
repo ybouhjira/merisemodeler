@@ -20,7 +20,7 @@ QVariant ItemTableModel::data(const QModelIndex &index, int role) const {
                 return pty->name();
                 break;
             case 1:
-                return pty->type().name();
+                return pty->type();
                 break;
             case 4:
                 return pty->defaultValue();
@@ -119,7 +119,7 @@ bool ItemTableModel::setData (const QModelIndex &index, const QVariant &value, i
             }
             break;
         case 1:
-            property->setType(Logic::TypeFactory(value.toString()).buildType());
+            property->setType(value.toString());
             return true;
             break;
         case 2:

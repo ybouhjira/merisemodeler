@@ -29,6 +29,7 @@
 #include <QFileDialog>
 #include <QMenu>
 #include <QUndoView>
+#include "logic/property.h"
 
 using namespace Ui;
 
@@ -64,6 +65,7 @@ McdUi::McdUi(QWidget *parent)
     , m_exportAction(new QAction(tr("Export"), this))
     , m_undoView(new QUndoView)
     , m_styleWidget(new StyleWidget)
+    , m_sqlAction(new QAction(tr("export to SQL"), this))
 {
     setCentralWidget(m_graphicsView);
     addToolBar(Qt::LeftToolBarArea, m_toolBar);
@@ -100,6 +102,7 @@ McdUi::McdUi(QWidget *parent)
     QMenu* fileMenu = MainWindow::getInstance()->fileMenu();
     QAction* sep = fileMenu->insertSeparator(fileMenu->actions().last());
     fileMenu->insertAction(sep, m_exportAction);
+    fileMenu->insertAction(m_exportAction, m_sqlAction);
     fileMenu->insertSeparator(m_exportAction);
 
 
@@ -135,8 +138,9 @@ McdUi::McdUi(QWidget *parent)
     // undo & redo
     connect(m_undoAction, SIGNAL(triggered()), m_controller, SLOT(undo()));
     connect(m_redoAction, SIGNAL(triggered()), m_controller, SLOT(redo()));
-
     connect(m_styleWidget, SIGNAL(clickedApply(Graphic::Style*)), m_controller, SLOT(ApplyStyle(Graphic::Style*)));
+
+    connect(m_sqlAction, SIGNAL(triggered()), this, SLOT(exportSql()));
 }
 
 void McdUi::setModel(Model::McdModel *mcd, QGraphicsScene* scene) {
@@ -209,4 +213,35 @@ void McdUi::showExportDialog() {
     Exporter::SceneExporter* exporter = ExporterFactory::create(format);
     exporter->exportScene(m_scene, path);
     delete exporter;
+}
+
+#include <QFile>
+
+void McdUi::exportSql() {
+    QString fileName = QFileDialog::getSaveFileName(this,"");
+    QString content = "";
+    if(!fileName.isEmpty()) {
+        for(auto item : m_model->items()) {
+            auto entity = dynamic_cast<Logic::Entity*>(item);
+            if (entity != nullptr) {
+                content += "CREATE TABLE ";
+                content += entity->name() + " (";
+                for(int i=0; i<entity->properties().size(); i++) {
+                    auto pty = entity->properties()[i];
+                    content += pty->name() + " ";
+                    content += pty->type() + " ";
+                    if(pty->isIdentifier())
+                        content += "PRIMARY KEY ";
+                    if(pty->isObligatory())
+                        content += "NOT NULL ";
+                    content += "";
+                }
+                content += ");";
+            }
+        }
+        QFile fichier(fileName);
+        if(fichier.open(QIODevice::ReadWrite)) {
+            fichier.write(content.toStdString().c_str());
+        }
+    }
 }

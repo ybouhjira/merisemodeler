@@ -3,7 +3,7 @@
 using namespace Logic;
 
 Property::Property ( QString const &name
-                   , Type type
+                   , QString const& type
                    , bool obligatory
                    , QString const &check
                    , QString const &defaultVal
@@ -62,12 +62,12 @@ void Property::setDefaultValue(QString const &DefaultValue)
     m_defaultValue = DefaultValue;
 }
 
-Type Property::type()
+QString Property::type()
 {
     return m_type;
 }
 
-void Property::setType(Type T)
+void Property::setType(const QString &T)
 {
     m_type = T;
 }

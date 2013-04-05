@@ -78,7 +78,7 @@ Logic::Entity* EntityEditWidget::item() const {
 }
 
 void EntityEditWidget::addProperty() {
-    m_tableModel->addProperty(new Logic::Property(tr("property"), Logic::TypeFactory().buildType()));
+    m_tableModel->addProperty(new Logic::Property(tr("property"), "INT"));
     emit itemEdited();
 }
 

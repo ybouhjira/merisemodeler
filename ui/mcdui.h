@@ -37,6 +37,9 @@ public slots:
      */
     void setModel(Model::McdModel* mcd, QGraphicsScene *scene) ;
 
+
+    void exportSql();
+
 private slots:
     /**
      * @brief Appelé lorsque le bouton MOve est cliqué
@@ -162,6 +165,8 @@ private:
      * @brief Widget pour editer les styles
      */
     Ui::StyleWidget* m_styleWidget;
+
+    QAction *m_sqlAction;
 
 };
 

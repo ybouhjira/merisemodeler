@@ -33,6 +33,8 @@ public:
 
     bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
+    Qt::ItemFlags flags(const QModelIndex &) const;
+
 public slots:
     /**
      * @brief Ajoute un style

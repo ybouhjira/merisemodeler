@@ -2,7 +2,6 @@
 #define PROPERTY_H
 
 #include "logic/namespace.h"
-#include "type.h"
 
 #include <QString>
 
@@ -22,7 +21,7 @@ public:
      * @param type Type
      */
     Property(QString const &name,
-             Type type,
+             const QString &type,
              bool isObligatory = false,
              QString const &check = "",
              QString const &defaultValue = "",
@@ -91,12 +90,12 @@ public:
     /**
      * @brief returns the type of the property
      */
-    Type type();
+    QString type();
 
     /**
      * @brief Modifies the type of the property
      */
-    void setType(Type type);
+    void setType(QString const& type);
 
     //ATTRIBUTS
 private:
@@ -108,7 +107,7 @@ private:
     /**
      * @brief Type
      */
-    Logic::Type m_type;
+    QString m_type;
 
     /**
      * @brief Obligatoire

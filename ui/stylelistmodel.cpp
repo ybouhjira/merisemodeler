@@ -51,3 +51,7 @@ void StyleListModel::removeStyle(int index) {
     }
     endResetModel();
 }
+
+Qt::ItemFlags StyleListModel::flags(const QModelIndex &) const {
+    return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled;
+}
